@@ -34,4 +34,4 @@ def index():
 def start():
     application = default_app()
     from paste import httpserver
-    httpserver.serve(application, host=settings.ip, port=80)
+    httpserver.serve(application, host=settings.ip, port=8000)
