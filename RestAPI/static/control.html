@@ -21,6 +21,7 @@
 </style>
 <head>
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/modernizr/2.8.3/modernizr.js"></script>
     <meta charset="UTF-8">
     <title>Beer2D2 Control</title>
 </head>
@@ -53,7 +54,7 @@ if (Modernizr.touch === true) {
     endEventType   = 'touchend';
 }
 
-fwd_l.startEventType(function(){
+fwd_l.on(startEventType, function(){
     fwd_l_timeout = setInterval(function(){
         fwd_l.css('background-color', '#00ff00');
         $.ajax({
@@ -64,7 +65,7 @@ fwd_l.startEventType(function(){
     return false;
 });
 
-fwd_r.startEventType(function(){
+fwd_r.on(startEventType, function(){
     fwd_r_timeout = setInterval(function(){
         fwd_r.css('background-color', '#00ff00');
         $.ajax({
@@ -75,7 +76,7 @@ fwd_r.startEventType(function(){
     return false;
 });
 
-bwd_l.startEventType(function(){
+bwd_l.on(startEventType, function(){
     bwd_l_timeout = setInterval(function(){
         bwd_l.css('background-color', '#00ff00');
         $.ajax({
@@ -86,7 +87,7 @@ bwd_l.startEventType(function(){
     return false;
 });
 
-bwd_r.startEventType(function(){
+bwd_r.on(startEventType, function(){
     bwd_r_timeout = setInterval(function(){
         bwd_r.css('background-color', '#00ff00');
         $.ajax({
@@ -97,7 +98,7 @@ bwd_r.startEventType(function(){
     return false;
 });
 
-fwd_l.endEventType(function(){
+fwd_l.on(endEventType, function(){
     clearInterval(fwd_l_timeout);
     fwd_l.css('background-color', 'orange');
     $.ajax({
@@ -107,7 +108,7 @@ fwd_l.endEventType(function(){
     return false;
 });
 
-fwd_r.endEventType(function(){
+fwd_r.on(endEventType, function(){
     clearInterval(fwd_r_timeout);
     fwd_r.css('background-color', 'orange');
     $.ajax({
@@ -118,7 +119,7 @@ fwd_r.endEventType(function(){
 });
 
 
-bwd_l.endEventType(function(){
+bwd_l.on(endEventType, function(){
     clearInterval(bwd_l_timeout);
     bwd_l.css('background-color', 'orange');
     $.ajax({
@@ -128,7 +129,7 @@ bwd_l.endEventType(function(){
     return false;
 });
 
-bwd_r.endEventType(function(){
+bwd_r.on(endEventType, function(){
     clearInterval(bwd_r_timeout);
     bwd_r.css('background-color', 'orange');
     $.ajax({
