@@ -34,4 +34,7 @@ def index():
 def start():
     application = default_app()
     from paste import httpserver
-    httpserver.serve(application, host=settings.ip, port=8000)
+    if settings.localhost:
+        httpserver.serve(application, host="127.0.0.1", port=8000)
+    else:
+        httpserver.serve(application, host=settings.ip, port=8000)

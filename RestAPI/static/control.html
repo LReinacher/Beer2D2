@@ -45,7 +45,15 @@ var bwd_l_timeout, bwd_l = $('#bwd_l');
 var bwd_r_timeout, bwd_r = $('#bwd_r');
 var count = 0;
 
-fwd_l.mousedown(function(){
+var startEventType = 'mousedown',
+    endEventType   = 'mouseup';
+
+if (Modernizr.touch === true) {
+    startEventType = 'touchstart';
+    endEventType   = 'touchend';
+}
+
+fwd_l.startEventType(function(){
     fwd_l_timeout = setInterval(function(){
         fwd_l.css('background-color', '#00ff00');
         $.ajax({
@@ -56,7 +64,7 @@ fwd_l.mousedown(function(){
     return false;
 });
 
-fwd_r.mousedown(function(){
+fwd_r.startEventType(function(){
     fwd_r_timeout = setInterval(function(){
         fwd_r.css('background-color', '#00ff00');
         $.ajax({
@@ -67,7 +75,7 @@ fwd_r.mousedown(function(){
     return false;
 });
 
-bwd_l.mousedown(function(){
+bwd_l.startEventType(function(){
     bwd_l_timeout = setInterval(function(){
         bwd_l.css('background-color', '#00ff00');
         $.ajax({
@@ -78,7 +86,7 @@ bwd_l.mousedown(function(){
     return false;
 });
 
-bwd_r.mousedown(function(){
+bwd_r.startEventType(function(){
     bwd_r_timeout = setInterval(function(){
         bwd_r.css('background-color', '#00ff00');
         $.ajax({
@@ -89,7 +97,7 @@ bwd_r.mousedown(function(){
     return false;
 });
 
-fwd_l.mouseup(function(){
+fwd_l.endEventType(function(){
     clearInterval(fwd_l_timeout);
     fwd_l.css('background-color', 'orange');
     $.ajax({
@@ -99,7 +107,7 @@ fwd_l.mouseup(function(){
     return false;
 });
 
-fwd_r.mouseup(function(){
+fwd_r.endEventType(function(){
     clearInterval(fwd_r_timeout);
     fwd_r.css('background-color', 'orange');
     $.ajax({
@@ -110,7 +118,7 @@ fwd_r.mouseup(function(){
 });
 
 
-bwd_l.mouseup(function(){
+bwd_l.endEventType(function(){
     clearInterval(bwd_l_timeout);
     bwd_l.css('background-color', 'orange');
     $.ajax({
@@ -120,7 +128,7 @@ bwd_l.mouseup(function(){
     return false;
 });
 
-bwd_r.mouseup(function(){
+bwd_r.endEventType(function(){
     clearInterval(bwd_r_timeout);
     bwd_r.css('background-color', 'orange');
     $.ajax({

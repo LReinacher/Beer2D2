@@ -1,5 +1,5 @@
-#from GPIOEmulator.EmulatorGUI import GPIO as GPIO
-import RPi.GPIO as GPIO
+from GPIOEmulator.EmulatorGUI import GPIO as GPIO
+#import RPi.GPIO as GPIO
 import time
 
 class MotorControl(object):
