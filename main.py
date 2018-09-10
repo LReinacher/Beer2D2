@@ -8,6 +8,8 @@ import glob_vars
 if __name__ == "__main__":
     glob_vars.motorControlInstance = MotorControl.MotorControl()
 
+    print("INIT")
+
     SlackBot_thread = Thread(target=SlackBot.main, args=(glob_vars.motorControlInstance,), name="SlackBot", daemon=True)
     SlackBot_thread.start()
 
