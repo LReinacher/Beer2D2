@@ -1,6 +1,4 @@
 from slackclient import SlackClient
-import time
-
 
 class slackCommunication(object):
     def __init__(self):

@@ -1,0 +1,132 @@
+<!DOCTYPE html>
+<html lang="en">
+<style>
+    #fwd_l, #fwd_r, #bwd_l, #bwd_r  {
+    width: 20vw;
+    height: 20vw;
+    margin: 4vw;
+
+    background: orange;
+    color: #fff;
+    font-size: 24px;
+    font-weight: bold;
+    font-family: Arial, sans-serif;
+    text-align: center;
+}
+
+.wrapper  {
+    float: left;
+}
+
+</style>
+<head>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+    <meta charset="UTF-8">
+    <title>Beer2D2 Control</title>
+</head>
+<body>
+    <div class="wrapper">
+        <div id="fwd_l"></div>
+        <div id="bwd_l"></div>
+    </div>
+    <div class="wrapper">
+        <div id="fwd_r"></div>
+        <div id="bwd_r"></div>
+    </div>
+</body>
+</html>
+
+
+<script>
+var fwd_l_timeout, fwd_l = $('#fwd_l');
+var fwd_r_timeout, fwd_r = $('#fwd_r');
+
+var bwd_l_timeout, bwd_l = $('#bwd_l');
+var bwd_r_timeout, bwd_r = $('#bwd_r');
+var count = 0;
+
+fwd_l.mousedown(function(){
+    fwd_l_timeout = setInterval(function(){
+        fwd_l.css('background-color', '#00ff00');
+        $.ajax({
+            type: "POST",
+            url: "/direct?motor=left&command=forwards",
+        });
+    }, 500);
+    return false;
+});
+
+fwd_r.mousedown(function(){
+    fwd_r_timeout = setInterval(function(){
+        fwd_r.css('background-color', '#00ff00');
+        $.ajax({
+            type: "POST",
+            url: "/direct?motor=right&command=forwards",
+        });
+    }, 500);
+    return false;
+});
+
+bwd_l.mousedown(function(){
+    bwd_l_timeout = setInterval(function(){
+        bwd_l.css('background-color', '#00ff00');
+        $.ajax({
+            type: "POST",
+            url: "/direct?motor=left&command=backwards",
+        });
+    }, 500);
+    return false;
+});
+
+bwd_r.mousedown(function(){
+    bwd_r_timeout = setInterval(function(){
+        bwd_r.css('background-color', '#00ff00');
+        $.ajax({
+            type: "POST",
+            url: "/direct?motor=right&command=backwards",
+        });
+    }, 500);
+    return false;
+});
+
+fwd_l.mouseup(function(){
+    clearInterval(fwd_l_timeout);
+    fwd_l.css('background-color', 'orange');
+    $.ajax({
+            type: "POST",
+            url: "/direct?motor=left&command=stop",
+        });
+    return false;
+});
+
+fwd_r.mouseup(function(){
+    clearInterval(fwd_r_timeout);
+    fwd_r.css('background-color', 'orange');
+    $.ajax({
+            type: "POST",
+            url: "/direct?motor=right&command=stop",
+        });
+    return false;
+});
+
+
+bwd_l.mouseup(function(){
+    clearInterval(bwd_l_timeout);
+    bwd_l.css('background-color', 'orange');
+    $.ajax({
+            type: "POST",
+            url: "/direct?motor=left&command=stop",
+        });
+    return false;
+});
+
+bwd_r.mouseup(function(){
+    clearInterval(bwd_r_timeout);
+    bwd_r.css('background-color', 'orange');
+    $.ajax({
+            type: "POST",
+            url: "/direct?motor=right&command=stop",
+        });
+    return false;
+});
+</script>
