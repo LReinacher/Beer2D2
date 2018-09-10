@@ -7,9 +7,9 @@ def main():
     slackCommunication = SlackBot.slackCommunication()
     motor = MotorControl.MotorControl()
 
-    botid = slackCommunication.getBotID("bot")
-
     slackCommunication.slackConnect()
+
+    botid = slackCommunication.getBotID("bot")
 
     slackCommunication.writeToSlack("DCPB13DMX", "Beer2D2 Ready for your order!")["ok"]
 
@@ -21,6 +21,7 @@ def main():
                 if communication[0]['type'] == 'message' and communication[0]['user'] != botid:
                     message = communication[0]['text']
                     print(message)
+                    response = None
                     if message == 'Forwards':
                         motor.forwards()
                         response = 'Going Forwards'
@@ -38,13 +39,18 @@ def main():
                         response = 'Standing Still'
                     elif message == 'Shut Down':
                         response = 'Shutting Down'
+                    elif message == 'Command not found! Available Commands: Forwards, Backwards, Left, Right, Stop':
+                        pass
+                    elif message == 'Beer2D2 Ready for your order!':
+                        pass
                     else:
                         response = 'Command not found! Available Commands: Forwards, Backwards, Left, Right, Stop'
-                    slackCommunication.writeToSlack(communication[0]['user'], response)["ok"]
+                    if response is not None:
+                        slackCommunication.writeToSlack(communication[0]['user'], response)["ok"]
 
-            except:
+            except Exception as e:
                 print('ERROR')
-        time.sleep(1)
+        time.sleep(0.5)
 
 
 
