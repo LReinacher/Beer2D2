@@ -7,11 +7,11 @@ else:
 
 class MotorControl(object):
     def __init__(self):
-        self.Motor_Left_Power_Pin = 17
-        self.Motor_Left_Gear_pin = 18
+        self.Motor_Left_Power_Pin = 22
+        self.Motor_Left_Gear_pin = 23
 
-        self.Motor_Right_Power_Pin = 22
-        self.Motor_Right_Gear_pin = 23
+        self.Motor_Right_Power_Pin = 17
+        self.Motor_Right_Gear_pin = 18
 
         GPIO.setmode(GPIO.BCM)
         GPIO.setwarnings(False)
