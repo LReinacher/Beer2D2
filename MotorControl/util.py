@@ -1,6 +1,9 @@
-#from GPIOEmulator.EmulatorGUI import GPIO as GPIO
-import RPi.GPIO as GPIO
+import settings
 import time
+if settings.localhost:
+    from GPIOEmulator.EmulatorGUI import GPIO as GPIO
+else:
+    import RPi.GPIO as GPIO
 
 class MotorControl(object):
     def __init__(self):
