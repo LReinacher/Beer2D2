@@ -14,7 +14,7 @@ def main(motor):
 
     while True:
         communication = slackCommunication.slackReadRTM()
-        print(communication)
+        #print(communication)
         if len(communication) > 0:
             try:
                 if communication[0]['type'] == 'message' and communication[0]['user'] != bot_user_id:

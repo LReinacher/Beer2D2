@@ -3,6 +3,7 @@ import RestAPI.main as RestAPI
 import SlackBot.main as SlackBot
 import MotorControl.util as MotorControl
 import glob_vars
+import BarCodeRecognition.util as BarCodeRecognition
 
 
 if __name__ == "__main__":
@@ -15,3 +16,6 @@ if __name__ == "__main__":
 
     api_thread = Thread(target=RestAPI.start, args=(), name="API", daemon=False)
     api_thread.start()
+
+    BarCode_thread = Thread(target=BarCodeRecognition.main, args=(), name="BarCodeScanner",daemon=False)
+    BarCode_thread.start()
