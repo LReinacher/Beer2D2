@@ -38,14 +38,14 @@ def main():
 
             # draw the barcode data and barcode type on the image
             text = "{} ({})".format(barcodeData, barcodeType)
-            cv2.putText(frame, text, (x, y - 10),
+            cv2.putText(qr_frame, text, (x, y - 10),
                         cv2.FONT_HERSHEY_SIMPLEX, 0.5, (0, 0, 255), 2)
 
             handler.found_barcode(barcodeData)
 
         # Crop the image
 
-        crop_img = frame[60:120, 0:160]
+        crop_img = frame[60:220, 0:160]
 
         # Convert to grayscale
 
