@@ -3,8 +3,7 @@ import RestAPI.main as RestAPI
 import SlackBot.main as SlackBot
 import MotorControl.util as MotorControl
 import glob_vars
-import BarCodeRecognition.util as BarCodeRecognition
-
+import WebcamHandler.line_qr_tracker as WebCamHandler
 
 if __name__ == "__main__":
     glob_vars.motorControlInstance = MotorControl.MotorControl()
@@ -17,5 +16,6 @@ if __name__ == "__main__":
     api_thread = Thread(target=RestAPI.start, args=(), name="API", daemon=False)
     api_thread.start()
 
-    BarCode_thread = Thread(target=BarCodeRecognition.main, args=(), name="BarCodeScanner",daemon=False)
-    BarCode_thread.start()
+    WebCam_Thread = Thread(target=WebCamHandler.main, args=(), name="WebCamHandler", daemon=False)
+    WebCam_Thread.start()
+

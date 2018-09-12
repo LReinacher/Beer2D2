@@ -1,5 +1,7 @@
 import settings
 import time
+import glob_vars
+import MotorControl.configuration as configuration
 if settings.localhost:
     from GPIOEmulator.EmulatorGUI import GPIO as GPIO
 else:
@@ -90,6 +92,52 @@ class MotorControl(object):
         if duration is not None:
             time.sleep(duration)
             self.stop()
+
+    def execute_qr_directive(self, directive):
+        if glob_vars.remote_system_motor_override is False:
+            current_state_left_motor, current_state_right_motor = glob_vars.current_motor_state
+            glob_vars.qr_system_motor_override = True
+            left_cmd, right_cmd, duration = configuration.commandIdentifiers[directive]
+            glob_vars.current_motor_state = left_cmd, right_cmd
+            self.motor("left", left_cmd)
+            self.motor("right", right_cmd)
+            if duration is not None:
+                time.sleep(duration)
+                if configuration.stop_after_qr_directive:
+                    self.motor("left", 'stop')
+                    self.motor("right", 'stop')
+                    glob_vars.current_motor_state = 'stop', 'stop'
+                else:
+                    glob_vars.current_motor_state = current_state_left_motor, current_state_right_motor
+                    self.motor("left", current_state_left_motor)
+                    self.motor("right", current_state_right_motor)
+            glob_vars.qr_system_motor_override = False
+        else:
+            print("QR-Directive Remote Override!")
+
+    def execute_linetracker_directive(self, directive):
+        if glob_vars.remote_system_motor_override is False:
+            if glob_vars.qr_system_motor_override is False:
+                current_state_left_motor, current_state_right_motor = glob_vars.current_motor_state
+                left_cmd, right_cmd, duration = configuration.commandIdentifiers[directive]
+                glob_vars.current_motor_state = left_cmd, right_cmd
+                self.motor("left", left_cmd)
+                self.motor("right", right_cmd)
+                if duration is not None:
+                    time.sleep(duration)
+                    if configuration.stop_after_linetracker_directive:
+                        self.motor("left", 'stop')
+                        self.motor("right", 'stop')
+                        glob_vars.current_motor_state = 'stop', 'stop'
+                    else:
+                        glob_vars.current_motor_state = current_state_left_motor, current_state_right_motor
+                        self.motor("left", current_state_left_motor)
+                        self.motor("right", current_state_right_motor)
+                glob_vars.qr_system_motor_override = False
+            else:
+                print("Line Tracker QR-Directive Override!")
+        else:
+            print("Line Tracker Remote Override!")
 
 
 
