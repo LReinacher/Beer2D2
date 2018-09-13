@@ -83,9 +83,9 @@ class DisplayHandler(object):
 
                 self.draw.text((self.x, self.top), "SSID: " + str(SSID.decode('UTF-8')), font=self.font, fill=255)
                 self.draw.text((self.x, self.top + 10), "IP: " + str(IP.decode('UTF-8')), font=self.font, fill=255)
-                self.draw.text((self.x, self.top + 22), "Mode: " + str(mode), font=self.font, fill=255)
-                self.draw.text((self.x, self.top + 34), "Dest: " + str(glob_vars.current_destination), font=self.font, fill=255)
-                self.draw.text((self.x, self.top + 46), "Motors: " + str(m1) + " - " + str(m2), font=self.font, fill=255)
+                self.draw.text((self.x, self.top + 25), "Mode: " + str(mode), font=self.font, fill=255)
+                self.draw.text((self.x, self.top + 37), "Dest: " + str(glob_vars.current_destination), font=self.font, fill=255)
+                self.draw.text((self.x, self.top + 52), "Motors: " + str(m1) + " - " + str(m2), font=self.font, fill=255)
 
                 # Display image.
                 self.disp.image(self.image)
