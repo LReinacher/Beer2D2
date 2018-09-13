@@ -16,6 +16,6 @@ if __name__ == "__main__":
     api_thread = Thread(target=RestAPI.start, args=(), name="API", daemon=False)
     api_thread.start()
 
-    WebCam_Thread = Thread(target=WebCamHandler.main, args=(), name="WebCamHandler", daemon=False)
-    WebCam_Thread.start()
+    #WebCam_Thread = Thread(target=WebCamHandler.main, args=(), name="WebCamHandler", daemon=False)
+    #WebCam_Thread.start()
 
