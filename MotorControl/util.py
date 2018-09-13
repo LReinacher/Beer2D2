@@ -25,9 +25,11 @@ class MotorControl(object):
 
     def motor(self, motor, command):
         if motor == "left":
+            glob_vars.current_motor_state[0] = command
             power_pin = self.Motor_Left_Power_Pin
             gear_pin = self.Motor_Left_Gear_pin
         elif motor == "right":
+            glob_vars.current_motor_state[1] = command
             power_pin = self.Motor_Right_Power_Pin
             gear_pin = self.Motor_Right_Gear_pin
         else:
@@ -120,7 +122,6 @@ class MotorControl(object):
             if glob_vars.qr_system_motor_override is False:
                 current_state_left_motor, current_state_right_motor = glob_vars.current_motor_state
                 left_cmd, right_cmd, duration = configuration.commandIdentifiers[directive]
-                glob_vars.current_motor_state = left_cmd, right_cmd
                 self.motor("left", left_cmd)
                 self.motor("right", right_cmd)
                 if duration is not None:
@@ -128,9 +129,7 @@ class MotorControl(object):
                     if configuration.stop_after_linetracker_directive:
                         self.motor("left", 'stop')
                         self.motor("right", 'stop')
-                        glob_vars.current_motor_state = 'stop', 'stop'
                     else:
-                        glob_vars.current_motor_state = current_state_left_motor, current_state_right_motor
                         self.motor("left", current_state_left_motor)
                         self.motor("right", current_state_right_motor)
                 glob_vars.qr_system_motor_override = False
