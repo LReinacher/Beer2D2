@@ -43,7 +43,7 @@ class DisplayHandler(object):
         #self.font = ImageFont.load_default()
 
         self.font = ImageFont.truetype("font/arial.ttf", 10)  # Schriftart, Schriftgröße
-        self.font_b = ImageFont.truetype("font/arial.ttf", 18)
+        self.font_b = ImageFont.truetype("font/arial.ttf", 12)
         self.font_c = ImageFont.truetype("font/arial.ttf", 14)
 
     def main(self):
@@ -97,11 +97,11 @@ class DisplayHandler(object):
 
         self.draw.rectangle((0, 0, self.width, self.height), outline=0, fill=0)
 
-        top_offset = 10
+        top_offset = 0
 
-        self.draw.text((self.x, self.top + top_offset), str(line1), font=self.font_b, fill=255)
-        self.draw.text((self.x, self.top + top_offset + 18), str(line2), font=self.font_c, fill=255)
-        self.draw.text((self.x, self.top + top_offset + 28), str(line3), font=self.font_c, fill=255)
+        self.draw.text((self.x, self.top + top_offset), str(line1), font=self.font_c, fill=255)
+        self.draw.text((self.x, self.top + top_offset + 18), str(line2), font=self.font_b, fill=255)
+        self.draw.text((self.x, self.top + top_offset + 28), str(line3), font=self.font_b, fill=255)
 
         # Display image.
         self.disp.image(self.image)
