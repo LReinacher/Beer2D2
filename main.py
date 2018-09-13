@@ -5,7 +5,7 @@ import MotorControl.util as MotorControl
 import glob_vars
 import settings
 #import WebcamHandler.line_qr_tracker as WebCamHandler
-import OLEDDisplay.main as OLEDDisplay
+import DisplayHandler.main as DisplayHandler
 
 if __name__ == "__main__":
     glob_vars.motorControlInstance = MotorControl.MotorControl()
@@ -18,8 +18,10 @@ if __name__ == "__main__":
     api_thread = Thread(target=RestAPI.start, args=(), name="API", daemon=False)
     api_thread.start()
 
+    glob_vars.DisplayHandlerInstance = DisplayHandler.DisplayHandler()
+
     if settings.localhost is False:
-        display_thread = Thread(target=OLEDDisplay.main, args=(), name="Display", daemon=False)
+        display_thread = Thread(target=glob_vars.DisplayHandlerInstance.main, args=(), name="Display", daemon=False)
         display_thread.start()
 
     #WebCam_Thread = Thread(target=WebCamHandler.main, args=(), name="WebCamHandler", daemon=False)

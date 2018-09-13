@@ -1,8 +1,10 @@
 import SlackBot.util as SlackBot
 import time
-
+import glob_vars
 
 def main(motor):
+    DisplayHandler = glob_vars.DisplayHandlerInstance
+
     slack_duration_identifier = ":"
     bot_user_id = "UCQ3C8M5K"
 
@@ -20,8 +22,10 @@ def main(motor):
                 if communication[0]['type'] == 'message' and communication[0]['user'] != bot_user_id:
                     message = communication[0]['text']
                     print(message)
+                    DisplayHandler.show_temp_text('SlackMessage', message, '', 1.5)
                     response = None
                     if 'Forwards' in message:
+                        glob_vars.executing_slack_direct = True
                         if slack_duration_identifier in message:
                             split = message.split(slack_duration_identifier)
                             try:
@@ -35,6 +39,7 @@ def main(motor):
                             motor.forwards()
                             response = 'Going Forwards'
                     elif 'Backwards' in message:
+                        glob_vars.executing_slack_direct = True
                         if slack_duration_identifier in message:
                             split = message.split(slack_duration_identifier)
                             try:
@@ -48,6 +53,7 @@ def main(motor):
                             motor.backwards()
                             response = 'Going Backwards'
                     elif 'Spin Left' in message:
+                        glob_vars.executing_slack_direct = True
                         if slack_duration_identifier in message:
                             split = message.split(slack_duration_identifier)
                             try:
@@ -61,6 +67,7 @@ def main(motor):
                             motor.spin_left()
                             response = 'Spinning Left'
                     elif 'Spin Right' in message:
+                        glob_vars.executing_slack_direct = True
                         if slack_duration_identifier in message:
                             split = message.split(slack_duration_identifier)
                             try:
@@ -74,6 +81,7 @@ def main(motor):
                             motor.spin_right()
                             response = 'Spinning Right'
                     elif 'Turn Left' in message:
+                        glob_vars.executing_slack_direct = True
                         if slack_duration_identifier in message:
                             split = message.split(slack_duration_identifier)
                             try:
@@ -87,6 +95,7 @@ def main(motor):
                             motor.turn_left()
                             response = 'Turning Left'
                     elif 'Turn Right' in message:
+                        glob_vars.executing_slack_direct = True
                         if slack_duration_identifier in message:
                             split = message.split(slack_duration_identifier)
                             try:
@@ -109,6 +118,8 @@ def main(motor):
                     if response is not None:
                         slackCommunication.writeToSlack(communication[0]['user'], response)["ok"]
 
+                    if response is not 'Command not found! Available Commands: Forwards, Backwards, Turn Left, Turn Right, Spin Left, Spin Right, Stop + (:TimeInSecounds)':
+                        glob_vars.executing_slack_direct = False
             except Exception as e:
                 print('ERROR')
         time.sleep(0.5)
