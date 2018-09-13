@@ -2,8 +2,7 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="994662ca-e502-45b2-80b9-36f7f04e1061" name="Default" comment="">
-      <change beforePath="$PROJECT_DIR$/DisplayHandler/main.py" beforeDir="false" afterPath="$PROJECT_DIR$/DisplayHandler/main.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/SlackBot/main.py" beforeDir="false" afterPath="$PROJECT_DIR$/SlackBot/main.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/MotorControl/util.py" beforeDir="false" afterPath="$PROJECT_DIR$/MotorControl/util.py" afterDir="false" />
     </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="TRACKING_ENABLED" value="true" />
@@ -29,8 +28,8 @@
       <file leaf-file-name="main.py" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/DisplayHandler/main.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="368">
-              <caret line="114" lean-forward="true" selection-start-line="114" selection-end-line="114" />
+            <state relative-caret-position="249">
+              <caret line="62" column="53" selection-start-line="62" selection-start-column="31" selection-end-line="62" selection-end-column="53" />
               <folding>
                 <element signature="e#0#15#0" expanded="true" />
               </folding>
@@ -50,11 +49,11 @@
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="main.py" pinned="false" current-in-tab="true">
+      <file leaf-file-name="main.py" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/SlackBot/main.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="102">
-              <caret line="24" column="50" selection-start-line="24" selection-start-column="50" selection-end-line="24" selection-end-column="50" />
+            <state relative-caret-position="480">
+              <caret line="119" selection-start-line="119" selection-end-line="119" />
               <folding>
                 <element signature="e#0#32#0" expanded="true" />
               </folding>
@@ -71,11 +70,11 @@
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="util.py" pinned="false" current-in-tab="false">
+      <file leaf-file-name="util.py" pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/MotorControl/util.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="136">
-              <caret line="8" selection-end-line="142" />
+            <state relative-caret-position="323">
+              <caret line="52" column="48" selection-start-line="52" selection-start-column="48" selection-end-line="52" selection-end-column="48" />
               <folding>
                 <element signature="e#0#15#0" expanded="true" />
               </folding>
@@ -150,13 +149,13 @@
         <option value="$PROJECT_DIR$/MotorControl/configuration.py" />
         <option value="$PROJECT_DIR$/handler.py" />
         <option value="$PROJECT_DIR$/WebcamHandler/line_qr_tracker.py" />
-        <option value="$PROJECT_DIR$/MotorControl/util.py" />
         <option value="$PROJECT_DIR$/settings.py" />
         <option value="$PROJECT_DIR$/OLEDDisplay/main.py" />
         <option value="$PROJECT_DIR$/glob_vars.py" />
         <option value="$PROJECT_DIR$/main.py" />
         <option value="$PROJECT_DIR$/DisplayHandler/main.py" />
         <option value="$PROJECT_DIR$/SlackBot/main.py" />
+        <option value="$PROJECT_DIR$/MotorControl/util.py" />
       </list>
     </option>
   </component>
@@ -663,16 +662,6 @@
     <entry file="file://$PROJECT_DIR$/MotorControl/configuration.py">
       <provider selected="true" editor-type-id="text-editor" />
     </entry>
-    <entry file="file://$PROJECT_DIR$/MotorControl/util.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="136">
-          <caret line="8" selection-end-line="142" />
-          <folding>
-            <element signature="e#0#15#0" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/DisplayHandler/main_safe.py">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="446">
@@ -723,8 +712,8 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/DisplayHandler/main.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="368">
-          <caret line="114" lean-forward="true" selection-start-line="114" selection-end-line="114" />
+        <state relative-caret-position="249">
+          <caret line="62" column="53" selection-start-line="62" selection-start-column="31" selection-end-line="62" selection-end-column="53" />
           <folding>
             <element signature="e#0#15#0" expanded="true" />
           </folding>
@@ -733,10 +722,20 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/SlackBot/main.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="102">
-          <caret line="24" column="50" selection-start-line="24" selection-start-column="50" selection-end-line="24" selection-end-column="50" />
+        <state relative-caret-position="480">
+          <caret line="119" selection-start-line="119" selection-end-line="119" />
           <folding>
             <element signature="e#0#32#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/MotorControl/util.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="323">
+          <caret line="52" column="48" selection-start-line="52" selection-start-column="48" selection-end-line="52" selection-end-column="48" />
+          <folding>
+            <element signature="e#0#15#0" expanded="true" />
           </folding>
         </state>
       </provider>

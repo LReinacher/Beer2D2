@@ -50,6 +50,7 @@ class MotorControl(object):
         return 0
 
     def stop(self):
+        glob_vars.executing_slack_direct = False
         self.motor("left", "stop")
         self.motor("right", "stop")
 

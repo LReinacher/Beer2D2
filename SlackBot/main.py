@@ -118,8 +118,6 @@ def main(motor):
                     if response is not None:
                         slackCommunication.writeToSlack(communication[0]['user'], response)["ok"]
 
-                    if response is not 'Command not found! Available Commands: Forwards, Backwards, Turn Left, Turn Right, Spin Left, Spin Right, Stop + (:TimeInSecounds)':
-                        glob_vars.executing_slack_direct = False
             except Exception as e:
                 print(e)
         time.sleep(0.5)
