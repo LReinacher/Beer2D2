@@ -55,16 +55,16 @@ def main():
             mode = "LineTracking"
 
         m1, m2 = glob_vars.current_motor_state
-        if m1 == "Forwards":
+        if m1 == "forwards":
             m1 = "Fwd"
-        elif m1 == "Backwards":
+        elif m1 == "backwards":
             m1 = "Bwd"
         else:
             m1 = "Stp"
 
-        if m2 == "Forwards":
+        if m2 == "forwards":
             m2 = "Fwd"
-        elif m2 == "Backwards":
+        elif m2 == "backwards":
             m2 = "Bwd"
         else:
             m2 = "Stp"
