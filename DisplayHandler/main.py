@@ -42,7 +42,7 @@ class DisplayHandler(object):
 
         #self.font = ImageFont.load_default()
 
-        self.font = ImageFont.truetype("DisplayHandler/font/segoeuib.ttf", 10)  # Schriftart, Schriftgröße
+        self.font = ImageFont.truetype("DisplayHandler/font/segoeuib.ttf", 11)  # Schriftart, Schriftgröße
         self.font_b = ImageFont.truetype("DisplayHandler/font/segoeuib.ttf", 12)
         self.font_c = ImageFont.truetype("DisplayHandler/font/segoeuib.ttf", 18)
 
@@ -82,10 +82,10 @@ class DisplayHandler(object):
                 # Write two lines of text.
 
                 self.draw.text((self.x, self.top), "SSID: " + str(SSID.decode('UTF-8')), font=self.font, fill=255)
-                self.draw.text((self.x, self.top + 8), "IP: " + str(IP.decode('UTF-8')), font=self.font, fill=255)
-                self.draw.text((self.x, self.top + 20), "Mode: " + str(mode), font=self.font, fill=255)
-                self.draw.text((self.x, self.top + 28), "Dest: " + str(glob_vars.current_destination), font=self.font, fill=255)
-                self.draw.text((self.x, self.top + 38), "Motors: " + str(m1) + " - " + str(m2), font=self.font, fill=255)
+                self.draw.text((self.x, self.top + 10), "IP: " + str(IP.decode('UTF-8')), font=self.font, fill=255)
+                self.draw.text((self.x, self.top + 22), "Mode: " + str(mode), font=self.font, fill=255)
+                self.draw.text((self.x, self.top + 34), "Dest: " + str(glob_vars.current_destination), font=self.font, fill=255)
+                self.draw.text((self.x, self.top + 46), "Motors: " + str(m1) + " - " + str(m2), font=self.font, fill=255)
 
                 # Display image.
                 self.disp.image(self.image)
@@ -101,7 +101,7 @@ class DisplayHandler(object):
         top_offset = 10
 
         self.draw.text((self.x, self.top + top_offset), str(line1), font=self.font_c, fill=255)
-        self.draw.text((self.x, self.top + top_offset + 18), str(line2), font=self.font_b, fill=255)
+        self.draw.text((self.x, self.top + top_offset + 20), str(line2), font=self.font_b, fill=255)
         self.draw.text((self.x, self.top + top_offset + 28), str(line3), font=self.font_b, fill=255)
 
         # Display image.
