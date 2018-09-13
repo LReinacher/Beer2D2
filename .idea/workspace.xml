@@ -2,6 +2,7 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="994662ca-e502-45b2-80b9-36f7f04e1061" name="Default" comment="">
+      <change beforePath="$PROJECT_DIR$/OLEDDisplay/main.py" beforeDir="false" afterPath="$PROJECT_DIR$/OLEDDisplay/main.py" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/main.py" beforeDir="false" afterPath="$PROJECT_DIR$/main.py" afterDir="false" />
     </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
@@ -13,11 +14,11 @@
   </component>
   <component name="FileEditorManager">
     <leaf SIDE_TABS_SIZE_LIMIT_KEY="300">
-      <file leaf-file-name="main.py" pinned="false" current-in-tab="false">
+      <file leaf-file-name="main.py" pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/main.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="323">
-              <caret line="19" column="5" selection-start-line="19" selection-start-column="5" selection-end-line="19" selection-end-column="5" />
+            <state relative-caret-position="204">
+              <caret line="12" column="17" lean-forward="true" selection-start-line="12" selection-start-column="17" selection-end-line="12" selection-end-column="17" />
               <folding>
                 <element signature="e#0#28#0" expanded="true" />
               </folding>
@@ -25,11 +26,11 @@
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="main.py" pinned="false" current-in-tab="true">
+      <file leaf-file-name="main.py" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/OLEDDisplay/main.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="298">
-              <caret line="33" column="23" lean-forward="true" selection-start-line="33" selection-start-column="23" selection-end-line="33" selection-end-column="23" />
+            <state relative-caret-position="986">
+              <caret line="58" column="18" lean-forward="true" selection-start-line="58" selection-start-column="18" selection-end-line="58" selection-end-column="18" />
               <folding>
                 <element signature="e#0#11#0" expanded="true" />
               </folding>
@@ -49,7 +50,7 @@
       <file leaf-file-name="line_qr_tracker.py" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/WebcamHandler/line_qr_tracker.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="1326">
+            <state relative-caret-position="332">
               <caret line="78" selection-start-line="78" selection-end-line="78" />
               <folding>
                 <element signature="e#0#10#0" expanded="true" />
@@ -70,6 +71,11 @@
           </provider>
         </entry>
       </file>
+      <file leaf-file-name="configuration.py" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/MotorControl/configuration.py">
+          <provider selected="true" editor-type-id="text-editor" />
+        </entry>
+      </file>
       <file leaf-file-name="handler.py" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/handler.py">
           <provider selected="true" editor-type-id="text-editor">
@@ -78,6 +84,15 @@
               <folding>
                 <element signature="e#0#16#0" expanded="true" />
               </folding>
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="settings.py" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/settings.py">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="17">
+              <caret line="1" column="16" selection-start-line="1" selection-start-column="16" selection-end-line="1" selection-end-column="16" />
             </state>
           </provider>
         </entry>
@@ -94,8 +109,8 @@
       <file leaf-file-name="glob_vars.py" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/glob_vars.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="34">
-              <caret line="2" column="24" selection-start-line="2" selection-start-column="24" selection-end-line="2" selection-end-column="24" />
+            <state relative-caret-position="119">
+              <caret line="7" column="19" selection-start-line="7" selection-end-line="7" selection-end-column="19" />
             </state>
           </provider>
         </entry>
@@ -125,7 +140,6 @@
         <option value="$PROJECT_DIR$/RestAPI/main.py" />
         <option value="$PROJECT_DIR$/SlackBot/main.py" />
         <option value="$PROJECT_DIR$/configuration.py" />
-        <option value="$PROJECT_DIR$/glob_vars.py" />
         <option value="$PROJECT_DIR$/routes.py" />
         <option value="$PROJECT_DIR$/LineFollower/Utils.py" />
         <option value="$PROJECT_DIR$/LineFollower/Main.py" />
@@ -138,6 +152,7 @@
         <option value="$PROJECT_DIR$/MotorControl/util.py" />
         <option value="$PROJECT_DIR$/handler.py" />
         <option value="$PROJECT_DIR$/WebcamHandler/line_qr_tracker.py" />
+        <option value="$PROJECT_DIR$/glob_vars.py" />
         <option value="$PROJECT_DIR$/OLEDDisplay/main.py" />
         <option value="$PROJECT_DIR$/main.py" />
       </list>
@@ -161,6 +176,11 @@
             <path>
               <item name="Beer2D2" type="b2602c69:ProjectViewProjectNode" />
               <item name="Beer2D2" type="462c0819:PsiDirectoryNode" />
+            </path>
+            <path>
+              <item name="Beer2D2" type="b2602c69:ProjectViewProjectNode" />
+              <item name="Beer2D2" type="462c0819:PsiDirectoryNode" />
+              <item name="GPIOEmulator" type="462c0819:PsiDirectoryNode" />
             </path>
             <path>
               <item name="Beer2D2" type="b2602c69:ProjectViewProjectNode" />
@@ -620,32 +640,23 @@
       </provider>
     </entry>
     <entry file="file://C:/Python36/Lib/site-packages/imutils/convenience.py" />
-    <entry file="file://$PROJECT_DIR$/settings.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="17">
-          <caret line="1" column="16" selection-start-line="1" selection-start-column="16" selection-end-line="1" selection-end-column="16" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/glob_vars.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="34">
-          <caret line="2" column="24" selection-start-line="2" selection-start-column="24" selection-end-line="2" selection-end-column="24" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/routes.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="68">
-          <caret line="4" column="5" selection-start-line="4" selection-start-column="5" selection-end-line="4" selection-end-column="5" />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/LineFollower/Image.py" />
     <entry file="file://$PROJECT_DIR$/LineFollower/Utils.py" />
     <entry file="file://$PROJECT_DIR$/LineFollower/Main.py" />
     <entry file="file://$PROJECT_DIR$/WebcamHandler/main.py" />
     <entry file="file://$PROJECT_DIR$/WebcamHandler/line_qr_tracker_safe.py" />
+    <entry file="file://$PROJECT_DIR$/WebcamHandler/barcodetracker.py" />
+    <entry file="file://$PROJECT_DIR$/WebcamHandler/linetracker.py" />
+    <entry file="file://$PROJECT_DIR$/SlackBot/main.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="153">
+          <caret line="10" column="37" selection-start-line="10" selection-start-column="37" selection-end-line="10" selection-end-column="37" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/MotorControl/configuration.py">
+      <provider selected="true" editor-type-id="text-editor" />
+    </entry>
     <entry file="file://$PROJECT_DIR$/MotorControl/util.py">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="2431">
@@ -656,9 +667,16 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/WebcamHandler/barcodetracker.py" />
-    <entry file="file://$PROJECT_DIR$/MotorControl/configuration.py" />
-    <entry file="file://$PROJECT_DIR$/WebcamHandler/linetracker.py" />
+    <entry file="file://$PROJECT_DIR$/WebcamHandler/line_qr_tracker.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="332">
+          <caret line="78" selection-start-line="78" selection-end-line="78" />
+          <folding>
+            <element signature="e#0#10#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
     <entry file="file://$PROJECT_DIR$/handler.py">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="204">
@@ -669,39 +687,43 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/WebcamHandler/line_qr_tracker.py">
+    <entry file="file://$PROJECT_DIR$/routes.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="1326">
-          <caret line="78" selection-start-line="78" selection-end-line="78" />
-          <folding>
-            <element signature="e#0#10#0" expanded="true" />
-          </folding>
+        <state relative-caret-position="68">
+          <caret line="4" column="5" selection-start-line="4" selection-start-column="5" selection-end-line="4" selection-end-column="5" />
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/SlackBot/main.py">
+    <entry file="file://$PROJECT_DIR$/glob_vars.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="153">
-          <caret line="10" column="37" selection-start-line="10" selection-start-column="37" selection-end-line="10" selection-end-column="37" />
+        <state relative-caret-position="119">
+          <caret line="7" column="19" selection-start-line="7" selection-end-line="7" selection-end-column="19" />
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/main.py">
+    <entry file="file://$PROJECT_DIR$/settings.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="323">
-          <caret line="19" column="5" selection-start-line="19" selection-start-column="5" selection-end-line="19" selection-end-column="5" />
-          <folding>
-            <element signature="e#0#28#0" expanded="true" />
-          </folding>
+        <state relative-caret-position="17">
+          <caret line="1" column="16" selection-start-line="1" selection-start-column="16" selection-end-line="1" selection-end-column="16" />
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/OLEDDisplay/main.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="298">
-          <caret line="33" column="23" lean-forward="true" selection-start-line="33" selection-start-column="23" selection-end-line="33" selection-end-column="23" />
+        <state relative-caret-position="986">
+          <caret line="58" column="18" lean-forward="true" selection-start-line="58" selection-start-column="18" selection-end-line="58" selection-end-column="18" />
           <folding>
             <element signature="e#0#11#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/main.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="204">
+          <caret line="12" column="17" lean-forward="true" selection-start-line="12" selection-start-column="17" selection-end-line="12" selection-end-column="17" />
+          <folding>
+            <element signature="e#0#28#0" expanded="true" />
           </folding>
         </state>
       </provider>
