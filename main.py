@@ -9,6 +9,7 @@ import DisplayHandler.main as DisplayHandler
 
 if __name__ == "__main__":
     glob_vars.motorControlInstance = MotorControl.MotorControl()
+    glob_vars.DisplayHandlerInstance = DisplayHandler.DisplayHandler()
 
     print("INIT")
 
@@ -17,8 +18,6 @@ if __name__ == "__main__":
 
     api_thread = Thread(target=RestAPI.start, args=(), name="API", daemon=False)
     api_thread.start()
-
-    glob_vars.DisplayHandlerInstance = DisplayHandler.DisplayHandler()
 
     if settings.localhost is False:
         display_thread = Thread(target=glob_vars.DisplayHandlerInstance.main, args=(), name="Display", daemon=False)
