@@ -1,5 +1,6 @@
 import subprocess
 import time
+from threading import Thread
 
 import Adafruit_GPIO.SPI as SPI
 import Adafruit_SSD1306
@@ -42,7 +43,7 @@ class DisplayHandler(object):
 
         #self.font = ImageFont.load_default()
 
-        self.font = ImageFont.truetype("DisplayHandler/font/segoeuib.ttf", 11)  # Schriftart, Schriftgröße
+        self.font = ImageFont.truetype("DisplayHandler/font/segoeui.ttf", 11)  # Schriftart, Schriftgröße
         self.font_b = ImageFont.truetype("DisplayHandler/font/segoeuib.ttf", 12)
         self.font_c = ImageFont.truetype("DisplayHandler/font/segoeuib.ttf", 18)
 
@@ -111,3 +112,7 @@ class DisplayHandler(object):
 
         self.temp_text_override = False
 
+
+def show_temp_text(line1, line2, line3, duration):
+    temp_text_thread = Thread(target=glob_vars.DisplayHandlerInstance.show_temp_text, args=(line1, line2, line3, duration,), name="Display", daemon=False)
+    temp_text_thread.start()

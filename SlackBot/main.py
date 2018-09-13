@@ -1,9 +1,9 @@
 import SlackBot.util as SlackBot
 import time
 import glob_vars
+import DisplayHandler.main as DisplayHandler
 
 def main(motor):
-    DisplayHandler = glob_vars.DisplayHandlerInstance
 
     slack_duration_identifier = ":"
     bot_user_id = "UCQ3C8M5K"
