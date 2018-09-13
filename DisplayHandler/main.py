@@ -91,7 +91,7 @@ class DisplayHandler(object):
                 # Display image.
                 self.disp.image(self.image)
                 self.disp.display()
-                time.sleep(.1)
+            time.sleep(.1)
 
     def show_temp_text(self, line1, line2, line3, duration):
         self.temp_text_override = True
