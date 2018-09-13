@@ -3,9 +3,6 @@
   <component name="ChangeListManager">
     <list default="true" id="994662ca-e502-45b2-80b9-36f7f04e1061" name="Default" comment="">
       <change beforePath="$PROJECT_DIR$/DisplayHandler/main.py" beforeDir="false" afterPath="$PROJECT_DIR$/DisplayHandler/main.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/font/Gotham Thin Regular.otf" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/font/arial.ttf" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/font/ufonts.com_gotham-thin.ttf" beforeDir="false" />
     </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="TRACKING_ENABLED" value="true" />
@@ -31,8 +28,8 @@
       <file leaf-file-name="main.py" pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/DisplayHandler/main.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="113">
-              <caret line="46" column="69" selection-start-line="46" selection-start-column="69" selection-end-line="46" selection-end-column="69" />
+            <state relative-caret-position="-601">
+              <caret line="46" column="79" selection-start-line="46" selection-start-column="79" selection-end-line="46" selection-end-column="79" />
               <folding>
                 <element signature="e#0#15#0" expanded="true" />
               </folding>
@@ -735,8 +732,8 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/DisplayHandler/main.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="113">
-          <caret line="46" column="69" selection-start-line="46" selection-start-column="69" selection-end-line="46" selection-end-column="69" />
+        <state relative-caret-position="-601">
+          <caret line="46" column="79" selection-start-line="46" selection-start-column="79" selection-end-line="46" selection-end-column="79" />
           <folding>
             <element signature="e#0#15#0" expanded="true" />
           </folding>

@@ -42,13 +42,12 @@ class DisplayHandler(object):
 
         #self.font = ImageFont.load_default()
 
-        self.font = ImageFont.truetype("DisplayHandler/font/segoeui.ttf", 10)  # Schriftart, Schriftgröße
-        self.font_b = ImageFont.truetype("DisplayHandler/font/segoeui.ttf", 12)
-        self.font_c = ImageFont.truetype("DisplayHandler/font/segoeui.ttf", 14)
+        self.font = ImageFont.truetype("DisplayHandler/font/segoeuib.ttf", 10)  # Schriftart, Schriftgröße
+        self.font_b = ImageFont.truetype("DisplayHandler/font/segoeuib.ttf", 12)
+        self.font_c = ImageFont.truetype("DisplayHandler/font/segoeuib.ttf", 18)
 
     def main(self):
         while True:
-            print("Making Default Display")
             if self.temp_text_override is False:
                 self.draw.rectangle((0, 0, self.width, self.height), outline=0, fill=0)
 
@@ -96,11 +95,10 @@ class DisplayHandler(object):
     def show_temp_text(self, line1, line2, line3, duration):
         self.temp_text_override = True
 
-        time.sleep(0.1)
-        print("Making Temp Display")
+        time.sleep(0.2)
         self.draw.rectangle((0, 0, self.width, self.height), outline=0, fill=0)
 
-        top_offset = 0
+        top_offset = 10
 
         self.draw.text((self.x, self.top + top_offset), str(line1), font=self.font_c, fill=255)
         self.draw.text((self.x, self.top + top_offset + 18), str(line2), font=self.font_b, fill=255)
