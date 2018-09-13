@@ -42,9 +42,9 @@ class DisplayHandler(object):
 
         #self.font = ImageFont.load_default()
 
-        self.font = ImageFont.truetype("font/arial.ttf", 12)  # Schriftart, Schriftgröße
-        self.font_b = ImageFont.truetype("font/arial.ttf", 18)
-        self.font_c = ImageFont.truetype("font/arial.ttf", 14)
+        self.font = ImageFont.truetype(ImageFont.load_default(), 12)  # Schriftart, Schriftgröße
+        self.font_b = ImageFont.truetype(ImageFont.load_default(), 18)
+        self.font_c = ImageFont.truetype(ImageFont.load_default(), 14)
 
     def main(self):
         while True:
