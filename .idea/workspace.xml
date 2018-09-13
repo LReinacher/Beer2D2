@@ -2,13 +2,7 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="994662ca-e502-45b2-80b9-36f7f04e1061" name="Default" comment="">
-      <change afterPath="$PROJECT_DIR$/DisplayHandler/main.py" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/DisplayHandler/main_safe.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/OLEDDisplay/main.py" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/SlackBot/main.py" beforeDir="false" afterPath="$PROJECT_DIR$/SlackBot/main.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/glob_vars.py" beforeDir="false" afterPath="$PROJECT_DIR$/glob_vars.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/main.py" beforeDir="false" afterPath="$PROJECT_DIR$/main.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/DisplayHandler/main.py" beforeDir="false" afterPath="$PROJECT_DIR$/DisplayHandler/main.py" afterDir="false" />
     </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="TRACKING_ENABLED" value="true" />
@@ -31,11 +25,11 @@
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="main.py" pinned="false" current-in-tab="false">
+      <file leaf-file-name="main.py" pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/DisplayHandler/main.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="1598">
-              <caret line="94" column="22" selection-start-line="94" selection-start-column="8" selection-end-line="94" selection-end-column="22" />
+            <state relative-caret-position="173">
+              <caret line="17" column="16" selection-start-line="17" selection-start-column="13" selection-end-line="17" selection-end-column="16" />
               <folding>
                 <element signature="e#0#15#0" expanded="true" />
               </folding>
@@ -55,7 +49,7 @@
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="main.py" pinned="false" current-in-tab="true">
+      <file leaf-file-name="main.py" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/SlackBot/main.py">
           <provider selected="true" editor-type-id="text-editor">
             <state relative-caret-position="102">
@@ -132,6 +126,7 @@
   <component name="FindInProjectRecents">
     <findStrings>
       <find>direc</find>
+      <find>RST</find>
     </findStrings>
   </component>
   <component name="Git.Settings">
@@ -157,10 +152,10 @@
         <option value="$PROJECT_DIR$/MotorControl/util.py" />
         <option value="$PROJECT_DIR$/settings.py" />
         <option value="$PROJECT_DIR$/OLEDDisplay/main.py" />
-        <option value="$PROJECT_DIR$/DisplayHandler/main.py" />
         <option value="$PROJECT_DIR$/glob_vars.py" />
         <option value="$PROJECT_DIR$/main.py" />
         <option value="$PROJECT_DIR$/SlackBot/main.py" />
+        <option value="$PROJECT_DIR$/DisplayHandler/main.py" />
       </list>
     </option>
   </component>
@@ -669,13 +664,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/settings.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="34">
-          <caret line="2" lean-forward="true" selection-start-line="2" selection-end-line="2" />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/MotorControl/configuration.py">
       <provider selected="true" editor-type-id="text-editor" />
     </entry>
@@ -706,20 +694,20 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/DisplayHandler/main.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="1598">
-          <caret line="94" column="22" selection-start-line="94" selection-start-column="8" selection-end-line="94" selection-end-column="22" />
-          <folding>
-            <element signature="e#0#15#0" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/glob_vars.py">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="17">
           <caret line="1" column="22" selection-start-line="1" selection-end-line="1" selection-end-column="22" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/SlackBot/main.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="102">
+          <caret line="21" column="90" selection-start-line="21" selection-start-column="90" selection-end-line="21" selection-end-column="90" />
+          <folding>
+            <element signature="e#0#32#0" expanded="true" />
+          </folding>
         </state>
       </provider>
     </entry>
@@ -733,12 +721,19 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/SlackBot/main.py">
+    <entry file="file://$PROJECT_DIR$/settings.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="102">
-          <caret line="21" column="90" selection-start-line="21" selection-start-column="90" selection-end-line="21" selection-end-column="90" />
+        <state relative-caret-position="34">
+          <caret line="2" lean-forward="true" selection-start-line="2" selection-end-line="2" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/DisplayHandler/main.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="173">
+          <caret line="17" column="16" selection-start-line="17" selection-start-column="13" selection-end-line="17" selection-end-column="16" />
           <folding>
-            <element signature="e#0#32#0" expanded="true" />
+            <element signature="e#0#15#0" expanded="true" />
           </folding>
         </state>
       </provider>

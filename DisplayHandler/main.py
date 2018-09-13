@@ -20,7 +20,7 @@ class DisplayHandler(object):
         self.SPI_PORT = 0
         self.SPI_DEVICE = 0
 
-        self.disp = Adafruit_SSD1306.SSD1306_128_64(rst=RST)
+        self.disp = Adafruit_SSD1306.SSD1306_128_64(rst=self.RST)
 
         self.disp.begin()
 
