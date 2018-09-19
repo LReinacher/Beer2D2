@@ -1,12 +1,14 @@
 import cv2
 import imutils
 from pyzbar import pyzbar
-import handler
-import glob_vars
+import system_vars
+from CamTracking import webcam_functions
+from MotorControl import motor_functions
+import settings
 
 
 def main():
-    motorControl = glob_vars.motorControlInstance
+    print(system_vars.colorcode['ok'] + "OK: CAM-TRACKING STARTED" + system_vars.colorcode['reset'])
 
     video_capture = cv2.VideoCapture(-1)
 
@@ -41,7 +43,7 @@ def main():
             cv2.putText(qr_frame, text, (x, y - 10),
                         cv2.FONT_HERSHEY_SIMPLEX, 0.5, (0, 0, 255), 2)
 
-            handler.found_barcode(barcodeData)
+            webcam_functions.found_barcode(barcodeData)
 
         # Crop the image
 
@@ -82,25 +84,23 @@ def main():
             cv2.drawContours(crop_img, contours, -1, (0, 255, 0), 1)
 
             if cx >= 120:
-                motorControl.execute_linetracker_directive('light_left_turn')
-                print("Turn Left!")
+                directive = 'light_left_turn'
+                motor_functions.execute_directive(directive, 'line')
+                print(system_vars.colorcode['warning'] + "WARNING: OFF LINE - EXECUTING DIRECTIVE: " + directive + system_vars.colorcode['reset'])
 
-            if cx < 120 and cx > 50:
-                motorControl.execute_linetracker_directive('forwards')
-                print("On Track!")
+            if 50 < cx < 120:
+                motor_functions.execute_directive('forwards', 'line')
+                print(system_vars.colorcode['info'] + "INFO: ON LINE" + system_vars.colorcode['reset'])
 
             if cx <= 50:
-                motorControl.execute_linetracker_directive('light_right_turn')
-                print("Turn Right")
+                directive = 'light_right_turn'
+                motor_functions.execute_directive(directive, 'line')
+                print(system_vars.colorcode['warning'] + "WARNING: OFF LINE - EXECUTING DIRECTIVE: " + directive + system_vars.colorcode['reset'])
 
         else:
-            print("Line not Found")
-            motorControl.execute_linetracker_directive('stop')
+            print(system_vars.colorcode['error'] + "ERROR: LINE LOST!" + system_vars.colorcode['reset'])
+            motor_functions.stop_both()
 
-        # Display the resulting frame
-
-        cv2.imshow('frame', crop_img)
-        cv2.imshow("Barcode Scanner", qr_frame)
-
-        if cv2.waitKey(1) & 0xFF == ord('q'):
-            break
+        if settings.gui_enabled:
+            cv2.imshow('frame', crop_img)
+            cv2.imshow("Barcode Scanner", qr_frame)

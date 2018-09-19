@@ -21,3 +21,19 @@ class slackCommunication(object):
        for user in users:
            if 'name' in user and botusername in user.get('name') and not user.get('deleted'):
               return user.get('id')
+
+    def getTeamList(self):
+        return self.sc.api_call("users.list")
+
+    def create_send_dm(self, user, message):
+        response = self.sc.api_call(
+            "conversations.open",
+            users=[user]
+        )
+        if response['ok'] is True:
+            ChannelID = response['channel']['id']
+            self.sc.api_call("chat.postMessage", channel=ChannelID, text=message, as_user=True)
+            return True
+        return False
+
+

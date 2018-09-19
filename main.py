@@ -1,28 +1,32 @@
 from threading import Thread
-import RestAPI.main as RestAPI
-import SlackBot.main as SlackBot
-import MotorControl.util as MotorControl
-import glob_vars
+import system_vars
 import settings
-#import WebcamHandler.line_qr_tracker as WebCamHandler
-import DisplayHandler.main as DisplayHandler
+from SlackBot import slack_functions
+from RestAPI import api_main
+from MotorControl import motor_functions
+from CamTracking import webcam_functions
 
 if __name__ == "__main__":
-    glob_vars.motorControlInstance = MotorControl.MotorControl()
-    glob_vars.DisplayHandlerInstance = DisplayHandler.DisplayHandler()
+    print(system_vars.colorcode['info'] + "INFO: INITIALIZING SYSTEM..." + system_vars.colorcode['reset'])
+    motor_functions.init()
+    print(system_vars.colorcode['ok'] + "OK: MOTOR-CONTROL INITIALIZED" + system_vars.colorcode['reset'])
 
-    print("INIT")
-
-    SlackBot_thread = Thread(target=SlackBot.main, args=(glob_vars.motorControlInstance,), name="SlackBot", daemon=False)
+    print(system_vars.colorcode['info'] + "INFO: STARTING SLACK-BOT..." + system_vars.colorcode['reset'])
+    SlackBot_thread = Thread(target=slack_functions.init, args=(), name="SlackBot", daemon=False)
     SlackBot_thread.start()
 
-    api_thread = Thread(target=RestAPI.start, args=(), name="API", daemon=False)
+    print(system_vars.colorcode['info'] + "INFO: STARTING REST-API..." + system_vars.colorcode['reset'])
+    api_thread = Thread(target=api_main.start, args=(), name="API", daemon=False)
     api_thread.start()
 
-    if settings.localhost is False:
-        display_thread = Thread(target=glob_vars.DisplayHandlerInstance.main, args=(), name="Display", daemon=False)
-        display_thread.start()
+    from Display import display_functions
+    print(system_vars.colorcode['info'] + "INFO: STARTING DISPLAY..." + system_vars.colorcode['reset'])
+    display_thread = Thread(target=display_functions.init, args=(), name="Display", daemon=False)
+    display_thread.start()
 
-    #WebCam_Thread = Thread(target=WebCamHandler.main, args=(), name="WebCamHandler", daemon=False)
-    #WebCam_Thread.start()
+    print(system_vars.colorcode['info'] + "INFO: STARTING CAM-TRACKING..." + system_vars.colorcode['reset'])
+    WebCam_Thread = Thread(target=webcam_functions.init, args=(), name="CamTracking", daemon=False)
+    WebCam_Thread.start()
+
+    print(system_vars.colorcode['ok'] + "OK: SYSTEM INITIALIZED" + system_vars.colorcode['reset'])
 

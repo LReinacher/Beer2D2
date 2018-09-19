@@ -1,0 +1,4 @@
+locations = {
+    'Morty',
+    'Rick'
+}

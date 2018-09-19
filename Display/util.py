@@ -1,15 +1,16 @@
 import subprocess
 import time
-from threading import Thread
+import system_vars
 
-import Adafruit_GPIO.SPI as SPI
 import Adafruit_SSD1306
 
 from PIL import Image
 from PIL import ImageDraw
 from PIL import ImageFont
 
-import glob_vars
+from Display import vars
+from Orders import order_functions
+from MotorControl import motor_functions
 
 
 class DisplayHandler(object):
@@ -41,31 +42,27 @@ class DisplayHandler(object):
         self.bottom = self.height - self.padding
         self.x = 0
 
-        #self.font = ImageFont.load_default()
-
         self.font = ImageFont.truetype("DisplayHandler/font/segoeui.ttf", 11)  # Schriftart, Schriftgröße
         self.font_b = ImageFont.truetype("DisplayHandler/font/segoeuib.ttf", 12)
         self.font_c = ImageFont.truetype("DisplayHandler/font/segoeuib.ttf", 18)
 
-    def main(self):
+    def run_default_screen(self):
+        print(system_vars.colorcode['ok'] + "OK: DISPLAY STARTED" + system_vars.colorcode['reset'])
         while True:
             if self.temp_text_override is False:
                 self.draw.rectangle((0, 0, self.width, self.height), outline=0, fill=0)
 
-                # Shell scripts for system monitoring from here : https://unix.stackexchange.com/questions/119126/command-to-display-memory-usage-disk-usage-and-cpu-load
                 cmd = "iwgetid -r"
                 SSID = subprocess.check_output(cmd, shell=True)
                 cmd = "hostname -I | cut -d\' \' -f1"
                 IP = subprocess.check_output(cmd, shell=True)
 
-                if glob_vars.remote_system_motor_override:
+                if system_vars.remote_control:
                     mode = "Remote"
-                elif glob_vars.executing_slack_direct:
-                    mode = "SlackDirect"
                 else:
                     mode = "LineTracking"
 
-                m1, m2 = glob_vars.current_motor_state
+                m1, m2 = motor_functions.get_motor_state()
                 if m1 == "forwards":
                     m1 = "Fwd"
                 elif m1 == "backwards":
@@ -82,37 +79,19 @@ class DisplayHandler(object):
 
                 # Write two lines of text.
 
-                self.draw.text((self.x, self.top), "SSID: " + str(SSID.decode('UTF-8')), font=self.font, fill=255)
-                self.draw.text((self.x, self.top + 10), "IP: " + str(IP.decode('UTF-8')), font=self.font, fill=255)
-                self.draw.text((self.x, self.top + 25), "Mode: " + str(mode), font=self.font, fill=255)
-                self.draw.text((self.x, self.top + 37), "Dest: " + str(glob_vars.current_destination), font=self.font, fill=255)
-                self.draw.text((self.x, self.top + 52), "Motors: " + str(m1) + " - " + str(m2), font=self.font, fill=255)
+                if vars.display_custom_text:
+                    top_offset = 10
+                    self.draw.text((self.x, self.top + top_offset), str(vars.header), font=self.font_c, fill=255)
+                    self.draw.text((self.x, self.top + top_offset + 20), str(vars.line2), font=self.font_b, fill=255)
+                    self.draw.text((self.x, self.top + top_offset + 28), str(vars.line3), font=self.font_b, fill=255)
+                else:
+                    self.draw.text((self.x, self.top), "SSID: " + str(SSID.decode('UTF-8')), font=self.font, fill=255)
+                    self.draw.text((self.x, self.top + 10), "IP: " + str(IP.decode('UTF-8')), font=self.font, fill=255)
+                    self.draw.text((self.x, self.top + 25), "Mode: " + str(mode), font=self.font, fill=255)
+                    self.draw.text((self.x, self.top + 37), "Dest: " + str(order_functions.get_current_destination()), font=self.font, fill=255)
+                    self.draw.text((self.x, self.top + 52), "Motors: " + str(m1) + " - " + str(m2), font=self.font, fill=255)
 
                 # Display image.
                 self.disp.image(self.image)
                 self.disp.display()
             time.sleep(.1)
-
-    def show_temp_text(self, line1, line2, line3, duration):
-        self.temp_text_override = True
-
-        time.sleep(0.2)
-        self.draw.rectangle((0, 0, self.width, self.height), outline=0, fill=0)
-
-        top_offset = 10
-
-        self.draw.text((self.x, self.top + top_offset), str(line1), font=self.font_c, fill=255)
-        self.draw.text((self.x, self.top + top_offset + 20), str(line2), font=self.font_b, fill=255)
-        self.draw.text((self.x, self.top + top_offset + 28), str(line3), font=self.font_b, fill=255)
-
-        # Display image.
-        self.disp.image(self.image)
-        self.disp.display()
-        time.sleep(duration)
-
-        self.temp_text_override = False
-
-
-def show_temp_text(line1, line2, line3, duration):
-    temp_text_thread = Thread(target=glob_vars.DisplayHandlerInstance.show_temp_text, args=(line1, line2, line3, duration,), name="Display", daemon=False)
-    temp_text_thread.start()

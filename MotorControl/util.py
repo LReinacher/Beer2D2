@@ -1,11 +1,13 @@
 import settings
+from MotorControl import vars
+from MotorControl import configuration
+import system_vars
 import time
-import glob_vars
-import MotorControl.configuration as configuration
 if settings.localhost:
     from GPIOEmulator.EmulatorGUI import GPIO as GPIO
 else:
     import RPi.GPIO as GPIO
+
 
 class MotorControl(object):
     def __init__(self):
@@ -15,6 +17,10 @@ class MotorControl(object):
         self.Motor_Right_Power_Pin = 17
         self.Motor_Right_Gear_pin = 18
 
+        self.Emergency_Stop_Pin = 25
+        self.Emergency_Stop_Unlock_Pin = 26
+        self.Emergency_Stop_Light_Pin = 27
+
         GPIO.setmode(GPIO.BCM)
         GPIO.setwarnings(False)
 
@@ -23,121 +29,78 @@ class MotorControl(object):
         GPIO.setup(self.Motor_Right_Power_Pin, GPIO.OUT, initial=GPIO.LOW)
         GPIO.setup(self.Motor_Right_Gear_pin, GPIO.OUT, initial=GPIO.LOW)
 
-    def motor(self, motor, command):
-        if motor == "left":
-            glob_vars.current_motor_state[0] = command
-            power_pin = self.Motor_Left_Power_Pin
-            gear_pin = self.Motor_Left_Gear_pin
-        elif motor == "right":
-            glob_vars.current_motor_state[1] = command
-            power_pin = self.Motor_Right_Power_Pin
-            gear_pin = self.Motor_Right_Gear_pin
-        else:
-            return 1
+        GPIO.setup(self.Emergency_Stop_Pin, GPIO.IN, pull_up_down=GPIO.PUD_DOWN)
+        GPIO.setup(self.Emergency_Stop_Unlock_Pin, GPIO.IN, pull_up_down=GPIO.PUD_DOWN)
+        GPIO.setup(self.Emergency_Stop_Light_Pin, GPIO.OUT, initial=GPIO.LOW)
 
-        if command == "forwards":
-            GPIO.output(power_pin, GPIO.HIGH)
-            GPIO.output(gear_pin, GPIO.LOW)
-        elif command == "backwards":
-            GPIO.output(power_pin, GPIO.HIGH)
-            GPIO.output(gear_pin, GPIO.HIGH)
-        elif command == "stop":
-            GPIO.output(power_pin, GPIO.LOW)
-            GPIO.output(gear_pin, GPIO.LOW)
-        else:
-            return 2
+        if configuration.pwm_mode:
+            self.left_pwm = GPIO.PWM(self.Motor_Left_Power_Pin, 0)
+            self.right_pwm = GPIO.PWM(self.Motor_Right_Power_Pin, 50)  # frequency=50Hz
+            self.left_pwm.start(0)
+            self.right_pwm.start(0)
 
-        return 0
-
-    def stop(self):
-        glob_vars.executing_slack_direct = False
-        self.motor("left", "stop")
-        self.motor("right", "stop")
-
-    def forwards(self, duration=None):
-        self.motor("left", "forwards")
-        self.motor("right", "forwards")
-        if duration is not None:
-            time.sleep(duration)
-            self.stop()
-
-    def backwards(self, duration=None):
-        self.motor("left", "backwards")
-        self.motor("right", "backwards")
-        if duration is not None:
-            time.sleep(duration)
-            self.stop()
-
-    def spin_right(self, duration=None):
-        self.motor("left", "forwards")
-        self.motor("right", "backwards")
-        if duration is not None:
-            time.sleep(duration)
-            self.stop()
-
-    def spin_left(self, duration=None):
-        self.motor("left", "backwards")
-        self.motor("right", "forwards")
-        if duration is not None:
-            time.sleep(duration)
-            self.stop()
-
-    def turn_right(self, duration=None):
-        self.motor("left", "forwards")
-        self.motor("right", "stop")
-        if duration is not None:
-            time.sleep(duration)
-            self.stop()
-
-    def turn_left(self, duration=None):
-        self.motor("left", "stop")
-        self.motor("right", "forwards")
-        if duration is not None:
-            time.sleep(duration)
-            self.stop()
-
-    def execute_qr_directive(self, directive):
-        if glob_vars.remote_system_motor_override is False:
-            current_state_left_motor, current_state_right_motor = glob_vars.current_motor_state
-            glob_vars.qr_system_motor_override = True
-            left_cmd, right_cmd, duration = configuration.commandIdentifiers[directive]
-            glob_vars.current_motor_state = left_cmd, right_cmd
-            self.motor("left", left_cmd)
-            self.motor("right", right_cmd)
-            if duration is not None:
-                time.sleep(duration)
-                if configuration.stop_after_qr_directive:
-                    self.motor("left", 'stop')
-                    self.motor("right", 'stop')
-                    glob_vars.current_motor_state = 'stop', 'stop'
-                else:
-                    glob_vars.current_motor_state = current_state_left_motor, current_state_right_motor
-                    self.motor("left", current_state_left_motor)
-                    self.motor("right", current_state_right_motor)
-            glob_vars.qr_system_motor_override = False
-        else:
-            print("QR-Directive Remote Override!")
-
-    def execute_linetracker_directive(self, directive):
-        if glob_vars.remote_system_motor_override is False:
-            if glob_vars.qr_system_motor_override is False:
-                current_state_left_motor, current_state_right_motor = glob_vars.current_motor_state
-                left_cmd, right_cmd, duration = configuration.commandIdentifiers[directive]
-                self.motor("left", left_cmd)
-                self.motor("right", right_cmd)
-                if duration is not None:
-                    time.sleep(duration)
-                    if configuration.stop_after_linetracker_directive:
-                        self.motor("left", 'stop')
-                        self.motor("right", 'stop')
-                    else:
-                        self.motor("left", current_state_left_motor)
-                        self.motor("right", current_state_right_motor)
-                glob_vars.qr_system_motor_override = False
+    def motor(self, motor, speed, emergency_override=False):
+        if vars.emergency_stop is False or emergency_override is True:
+            if motor == "left":
+                vars.current_motor_state[0] = speed
+                power_pin = self.Motor_Left_Power_Pin
+                gear_pin = self.Motor_Left_Gear_pin
+                if configuration.pwm_mode:
+                    pwm = self.left_pwm
+            elif motor == "right":
+                vars.current_motor_state[1] = speed
+                power_pin = self.Motor_Right_Power_Pin
+                gear_pin = self.Motor_Right_Gear_pin
+                if configuration.pwm_mode:
+                    pwm = self.right_pwm
             else:
-                print("Line Tracker QR-Directive Override!")
+                return False
+
+            if configuration.pwm_mode:
+                if speed in configuration.speedIdentifiers:
+                    pwm_data, gear_mode = configuration.speedIdentifiers[speed]
+                    if gear_mode == "fwd":
+                        GPIO.output(gear_pin, GPIO.LOW)
+                    else:
+                        GPIO.output(gear_pin, GPIO.HIGH)
+                    pwm.ChangeDutyCycle(pwm_data)
+                else:
+                    print(system_vars.colorcode['error'] + "ERROR: MOTOR-CONTROL-UTIL - UNKNOWN SPEED-IDENTIFIER" + system_vars.colorcode['reset'])
+
+            else:
+                if speed > 0:
+                    GPIO.output(gear_pin, GPIO.LOW)
+                    GPIO.output(power_pin, GPIO.HIGH)
+                elif speed < 0:
+                    GPIO.output(gear_pin, GPIO.HIGH)
+                    GPIO.output(power_pin, GPIO.HIGH)
+                else:
+                    GPIO.output(gear_pin, GPIO.LOW)
+                    GPIO.output(power_pin, GPIO.LOW)
+
+            return True
+
         else:
-            print("Line Tracker Remote Override!")
+            print(system_vars.colorcode['warning'] + "WARNING: MOTOR COMMAND OVERRIDE - EMERGENCY STOP ENABLED!" +
+                  system_vars.colorcode['reset'])
+
+    def emergency_stop_handler(self):
+        while True:
+            if GPIO.input(self.Emergency_Stop_Pin) == True:
+                vars.emergency_stop = True
+                self.motor('left', 0, True)
+                self.motor('right', 0, True)
+                GPIO.output(self.Emergency_Stop_Light_Pin, GPIO.HIGH)
+                print(system_vars.colorcode['warning'] + "WARNING: EMERGENCY STOP ENABLED!" +
+                      system_vars.colorcode['reset'])
+
+            elif GPIO.input(self.Emergency_Stop_Unlock_Pin) == True:
+                vars.emergency_stop = False
+                GPIO.output(self.Emergency_Stop_Light_Pin, GPIO.LOW)
+                print(system_vars.colorcode['warning'] + "WARNING: EMERGENCY STOP DISABLED!" +
+                      system_vars.colorcode['reset'])
+            time.sleep(.1)
+
 
 
 
