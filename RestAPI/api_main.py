@@ -5,6 +5,7 @@ import settings
 import json
 from Orders import order_functions
 from SlackBot import slack_functions
+from MotorControl import motor_functions
 
 dir_path = os.path.dirname(os.path.realpath(__file__))
 app = default_app()
@@ -13,19 +14,15 @@ app = default_app()
 @post('/direct')
 def motorDirect():
     motor = request.query.motor
-    command = request.query.command
     speed = request.query.speed
 
     if motor is None:
         return {'status': 'error', 'message': 'Missing Motor Identifier'}
 
-    if command is None:
-        return {'status': 'error', 'message': 'Missing Command'}
-
-    response = system_vars.motorControlInstance.motor(motor, command, speed)
+    response = motor_functions.set_motor(motor, speed)
 
     if response == 0:
-        return {'status': 'success', 'message': 'Motor ' + motor + ' executing ' + command}
+        return {'status': 'success', 'message': 'Motor ' + motor + ' turning ' + speed}
     elif response == 1:
         return {'status': 'error', 'message': 'Unknown Motor Identifier'}
     else:

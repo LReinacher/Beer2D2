@@ -11,11 +11,11 @@ else:
 
 class MotorControl(object):
     def __init__(self):
-        self.Motor_Left_Power_Pin = 22
-        self.Motor_Left_Gear_pin = 23
+        self.Motor_Left_Power_Pin = 13
+        self.Motor_Left_Gear_pin = 27
 
-        self.Motor_Right_Power_Pin = 17
-        self.Motor_Right_Gear_pin = 18
+        self.Motor_Right_Power_Pin = 18
+        self.Motor_Right_Gear_pin = 17
 
         self.Emergency_Stop_Pin = 25
         self.Emergency_Stop_Unlock_Pin = 26

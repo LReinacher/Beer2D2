@@ -1,7 +1,7 @@
 #settings
 stop_after_qr_directive = True
 stop_after_linetracker_directive = False
-pwm_mode = False
+pwm_mode = True
 
 #Motortimes in Seconds
 light_turn_time = 0.2
@@ -28,6 +28,24 @@ commandIdentifiers = { #[left_motor_command, right_motor_command, duration]]
 
 speedIdentifiers = { #[PWM-frequency in Hz, gear_relai_mode (fwd / bwd)]
     0: [0, 'fwd'],
-    1: [50, 'fwd'],
-    -1: [50, 'bwd'],
+    1: [100, 'fwd'],
+    2: [200, 'fwd'],
+    3: [300, 'fwd'],
+    4: [400, 'fwd'],
+    5: [500, 'fwd'],
+    6: [600, 'fwd'],
+    7: [700, 'fwd'],
+    8: [800, 'fwd'],
+    9: [900, 'fwd'],
+    10: [1000, 'fwd'],
+    -1: [100, 'bwd'],
+    -2: [200, 'bwd'],
+    -3: [300, 'bwd'],
+    -4: [400, 'bwd'],
+    -5: [500, 'bwd'],
+    -6: [600, 'bwd'],
+    -7: [700, 'bwd'],
+    -8: [800, 'bwd'],
+    -9: [900, 'bwd'],
+    -10: [1000, 'bwd'],
 }
