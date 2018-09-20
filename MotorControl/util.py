@@ -17,9 +17,9 @@ class MotorControl(object):
         self.Motor_Right_Power_Pin = 18
         self.Motor_Right_Gear_pin = 17
 
-        self.Emergency_Stop_Pin = 25
-        self.Emergency_Stop_Unlock_Pin = 26
-        self.Emergency_Stop_Light_Pin = 27
+        self.Emergency_Stop_Pin = 22
+        self.Emergency_Stop_Unlock_Pin = 22
+        self.Emergency_Stop_Light_Pin = 23
 
         GPIO.setmode(GPIO.BCM)
         GPIO.setwarnings(False)
@@ -34,8 +34,8 @@ class MotorControl(object):
         GPIO.setup(self.Emergency_Stop_Light_Pin, GPIO.OUT, initial=GPIO.LOW)
 
         if configuration.pwm_mode:
-            self.left_pwm = GPIO.PWM(self.Motor_Left_Power_Pin, 0)
-            self.right_pwm = GPIO.PWM(self.Motor_Right_Power_Pin, 50)  # frequency=50Hz
+            self.left_pwm = GPIO.PWM(self.Motor_Left_Power_Pin, 1)
+            self.right_pwm = GPIO.PWM(self.Motor_Right_Power_Pin, 1)  # frequency=1Hz
             self.left_pwm.start(0)
             self.right_pwm.start(0)
 
@@ -86,19 +86,21 @@ class MotorControl(object):
 
     def emergency_stop_handler(self):
         while True:
-            if GPIO.input(self.Emergency_Stop_Pin) == True:
+            if GPIO.input(self.Emergency_Stop_Pin) == True and vars.emergency_stop is False:
                 vars.emergency_stop = True
                 self.motor('left', 0, True)
                 self.motor('right', 0, True)
                 GPIO.output(self.Emergency_Stop_Light_Pin, GPIO.HIGH)
                 print(system_vars.colorcode['warning'] + "WARNING: EMERGENCY STOP ENABLED!" +
                       system_vars.colorcode['reset'])
+                time.sleep(1)
 
-            elif GPIO.input(self.Emergency_Stop_Unlock_Pin) == True:
+            elif GPIO.input(self.Emergency_Stop_Unlock_Pin) == True and vars.emergency_stop is True:
                 vars.emergency_stop = False
                 GPIO.output(self.Emergency_Stop_Light_Pin, GPIO.LOW)
                 print(system_vars.colorcode['warning'] + "WARNING: EMERGENCY STOP DISABLED!" +
                       system_vars.colorcode['reset'])
+                time.sleep(1)
             time.sleep(.1)
 
 

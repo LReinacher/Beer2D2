@@ -8,7 +8,7 @@ from Display import vars
 def init():
     if settings.localhost is False:
         from Display import util
-        vars.DisplayHandlerInstance = util.DisplayHandler
+        vars.DisplayHandlerInstance = util.DisplayHandler()
         print(system_vars.colorcode['ok'] + "OK: DISPLAY INITIALIZED" + system_vars.colorcode['reset'])
         vars.DisplayHandlerInstance.run_default_screen()
     print(system_vars.colorcode['warning'] + "WARNING: DISPLAY INITIALIZATION SKIPPED - LOCALHOST ENABLED" + system_vars.colorcode['reset'])

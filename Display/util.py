@@ -42,9 +42,9 @@ class DisplayHandler(object):
         self.bottom = self.height - self.padding
         self.x = 0
 
-        self.font = ImageFont.truetype("DisplayHandler/font/segoeui.ttf", 11)  # Schriftart, Schriftgröße
-        self.font_b = ImageFont.truetype("DisplayHandler/font/segoeuib.ttf", 12)
-        self.font_c = ImageFont.truetype("DisplayHandler/font/segoeuib.ttf", 18)
+        self.font = ImageFont.truetype("Display/font/segoeui.ttf", 11)  # Schriftart, Schriftgröße
+        self.font_b = ImageFont.truetype("Display/font/segoeuib.ttf", 12)
+        self.font_c = ImageFont.truetype("Display/font/segoeuib.ttf", 18)
 
     def run_default_screen(self):
         print(system_vars.colorcode['ok'] + "OK: DISPLAY STARTED" + system_vars.colorcode['reset'])
