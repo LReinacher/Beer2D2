@@ -121,6 +121,9 @@ def get_ready_order_list():
 def start_drop_off():
     import SlackBot.slack_functions as slack_functions
     import MotorControl.motor_functions as motor_functions
+    import LED.led_functions as led_functions
+
+    led_functions.set_led('green')
 
     system_vars.destination_reached = True
     motor_functions.stop_both()
@@ -155,6 +158,9 @@ def start_drop_off():
 def end_drop_off():
     import Locations.location_functions as location_functions
     import CamTracking.webcam_functions as webcam_functions
+    import LED.led_functions as led_functions
+
+    led_functions.set_led('blue')
 
     i = 0
     while i < len(vars.ready_order_list):
@@ -186,7 +192,7 @@ def order_countdown(t):
     while t and len(get_open_ready_orders()) > 0:
         mins, secs = divmod(t, 60)
         timeformat = '{:02d}:{:02d}'.format(mins, secs)
-        touchscreen_functions.set_info_label(texts.take_order % timeformat)
+        touchscreen_functions.set_info_label(texts.take_order % str(timeformat))
         vars.order_countdown = timeformat
         time.sleep(1)
         if system_vars.door_is_open is False:

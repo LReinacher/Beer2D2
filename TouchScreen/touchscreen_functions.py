@@ -52,8 +52,7 @@ def set_order_list(temp_list):
         x = x + 1
 
     list.extend(fill_list)
-
-    vars.screen_data['info_label']['text'] = texts.ready_for_order
+    set_info_label(texts.ready_for_order)
 
     i = 0
     while i < 6:
@@ -62,10 +61,6 @@ def set_order_list(temp_list):
         vars.screen_data['confirm_' + str(i + 1)]['enabled'] = False
         vars.screen_data['confirm_' + str(i + 1)]['label'] = '----'
         i = i + 1
-
-
-def set_info_text(text):
-    utils.set_info_text(text)
 
 
 def set_button_enabled(item, state):
@@ -81,7 +76,7 @@ def set_order_confirmed(nr):
 
 
 def set_info_label(text):
-    vars.screen_data['info_label'] = text
+    vars.screen_data['info_label']['text'] = text
 
 if __name__ == "__main__":
     init()

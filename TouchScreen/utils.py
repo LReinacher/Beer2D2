@@ -5,6 +5,7 @@ import gi
 # import gtk
 gi.require_version('Gtk', '3.0')
 from gi.repository import Gtk
+from gi.repository import Pango
 from threading import Thread
 import TouchScreen.vars as vars
 import time
@@ -12,11 +13,13 @@ import time
 
 def start():
     vars.builder = Gtk.Builder()
-    vars.builder.add_from_file("TouchScreen/test.glade")
+    vars.builder.add_from_file("TouchScreen/layout.glade")
     vars.builder.connect_signals(Handler())
 
     for object in vars.objects:
         vars.objects[object] = vars.builder.get_object(object)
+
+    vars.objects['info_label'].modify_font(Pango.FontDescription('Sans 20'))
 
     window = vars.builder.get_object("base")
     window.show_all()

@@ -190,15 +190,6 @@ def changed_data_handler():
 
 def send_api_call(url, data):
     import requests
-    r = requests.post(url, data={'data': encrypt_call(data)})
+    r = requests.post(url, data={'data': data})
     print(r.status_code, r.reason)
 
-
-def encrypt_call(data):
-    from simplecrypt import encrypt
-    return encrypt(vars.api_private, data)
-
-
-def decrypt_call(data):
-    from simplecrypt import decrypt
-    return decrypt(vars.api_private, data).decode('utf8')

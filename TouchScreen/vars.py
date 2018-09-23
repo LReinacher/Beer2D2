@@ -6,7 +6,7 @@ BuildInstance = None
 builder = None
 
 screen_data = {
-    'info_label': {'text': 'Ready for your order'},
+    'info_label': {'text': 'Ready for your order!'},
     'destination_1': {'text': '----'},
     'destination_2': {'text': '----'},
     'destination_3': {'text': '----'},

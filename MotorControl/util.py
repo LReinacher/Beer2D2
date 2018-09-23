@@ -99,6 +99,8 @@ class MotorControl(object):
                 self.motor('left', 0, True)
                 self.motor('right', 0, True)
                 GPIO.output(self.Emergency_Stop_Light_Pin, GPIO.HIGH)
+                import LED.led_functions as led_functions
+                led_functions.set_led('red')
                 print(system_vars.colorcode['warning'] + "WARNING: EMERGENCY STOP ENABLED!" +
                       system_vars.colorcode['reset'])
                 time.sleep(.2)
@@ -106,6 +108,8 @@ class MotorControl(object):
             elif GPIO.input(self.Emergency_Stop_Unlock_Pin) is True and vars.emergency_stop is True:
                 vars.emergency_stop = False
                 GPIO.output(self.Emergency_Stop_Light_Pin, GPIO.LOW)
+                import LED.led_functions as led_functions
+                led_functions.set_led('blue')
                 print(system_vars.colorcode['warning'] + "WARNING: EMERGENCY STOP DISABLED!" +
                       system_vars.colorcode['reset'])
                 time.sleep(.2)
