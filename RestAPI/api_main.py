@@ -5,11 +5,11 @@ import os
 import system_vars
 import settings
 import json
-from Orders import order_functions
-from SlackBot import slack_functions
-from MotorControl import motor_functions
-from CamTracking import webcam_functions
-from RestAPI import vars
+import Orders.order_functions as order_functions
+import SlackBot.slack_functions as slack_functions
+import MotorControl.motor_functions as motor_functions
+import CamTracking.webcam_functions as webcam_functions
+import RestAPI.vars as vars
 from datetime import datetime
 import time
 from threading import Thread

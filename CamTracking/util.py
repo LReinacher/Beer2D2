@@ -4,12 +4,12 @@ import cv2
 import imutils
 from pyzbar import pyzbar
 import system_vars
-from CamTracking import webcam_functions
-from MotorControl import motor_functions
 import settings
 
 
 def main():
+    import MotorControl.motor_functions as motor_functions
+    import CamTracking.webcam_functions as webcam_functions
     print(system_vars.colorcode['ok'] + "OK: CAM-TRACKING STARTED" + system_vars.colorcode['reset'])
 
     video_capture = cv2.VideoCapture(-1)

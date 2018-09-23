@@ -1,12 +1,10 @@
 #! /usr/bin/python3
 # -*- coding: utf-8 -*-
 import SlackBot.util as SlackBot
-import time
-from SlackBot import vars
-from Orders import order_functions
-from Locations import location_functions
-from SlackBot import responses
+import SlackBot.vars as vars
 import system_vars
+import time
+import SlackBot.responses as responses
 
 def init():
     vars.SlackBotInstance = SlackBot.slackCommunication()
@@ -63,6 +61,9 @@ def send_dm(user, message):
 
 
 def message_handling():
+    import Orders.order_functions as order_functions
+    import Locations.location_functions as location_functions
+
     print(system_vars.colorcode['ok'] + "OK: SLACK-BOT STARTED" + system_vars.colorcode['reset'])
     slackCommunication = vars.SlackBotInstance
 

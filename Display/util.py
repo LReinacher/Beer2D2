@@ -8,9 +8,8 @@ from PIL import Image
 from PIL import ImageDraw
 from PIL import ImageFont
 
-from Display import vars
-from Orders import order_functions
-from MotorControl import motor_functions
+import Display.vars as vars
+import MotorControl.motor_functions as motor_functions
 
 
 class DisplayHandler(object):
@@ -47,6 +46,7 @@ class DisplayHandler(object):
         self.font_c = ImageFont.truetype("Display/font/segoeuib.ttf", 18)
 
     def run_default_screen(self):
+        import Orders.order_functions as order_functions
         print(system_vars.colorcode['ok'] + "OK: DISPLAY STARTED" + system_vars.colorcode['reset'])
         while True:
             if self.temp_text_override is False:

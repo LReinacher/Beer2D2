@@ -4,7 +4,7 @@ from threading import Thread
 import time
 import system_vars
 import settings
-from Display import vars
+import Display.vars as vars
 
 
 def init():

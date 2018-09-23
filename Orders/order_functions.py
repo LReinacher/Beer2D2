@@ -1,17 +1,13 @@
 #! /usr/bin/python3
 # -*- coding: utf-8 -*-
-from Orders import vars
-from SlackBot import slack_functions
-from MotorControl import motor_functions
+import Orders.vars as vars
 import settings
 import system_vars
-from Locations import location_functions
-from CamTracking import webcam_functions
-if settings.touchscreen_enabled:
-    from TouchScreen import touchscreen_functions
 
 
 def check_room_order(room):
+    if settings.touchscreen_enabled:
+        import TouchScreen.touchscreen_functions as touchscreen_functions
     i = len(vars.order_que)
     while i > 0:
         if vars.order_que[i - 1]['room'] == room:
@@ -30,6 +26,7 @@ def check_user_order(user, ident2=None):
 
 
 def add_order(user, room, type, priority=False):
+    import SlackBot.slack_functions as slack_functions
     result = check_user_already_placed_order(user, type)
     real_name = slack_functions.get_real_name(user, type)
     if result is None:
@@ -51,6 +48,7 @@ def add_order(user, room, type, priority=False):
 
 
 def delete_oder(identifier, type):
+    import SlackBot.slack_functions as slack_functions
     if type == "index":
         index = identifier
     else:
@@ -70,6 +68,7 @@ def delete_oder(identifier, type):
 
 
 def check_user_already_placed_order(identifier, type):
+    import SlackBot.slack_functions as slack_functions
     if type == 'email':
         email = identifier
         id = slack_functions.get_id_by_email(email)
@@ -110,6 +109,9 @@ def get_ready_order_list():
 
 
 def start_drop_off():
+    import SlackBot.slack_functions as slack_functions
+    import MotorControl.motor_functions as motor_functions
+
     system_vars.destination_reached = True
     motor_functions.stop_both()
 
@@ -117,6 +119,7 @@ def start_drop_off():
     vars.ready_order_list = orders
 
     if settings.touchscreen_enabled:
+        import TouchScreen.touchscreen_functions as touchscreen_functions
         touchscreen_functions.set_ready_order_list(orders)
 
     wait_time = calc_order_wait_time()
@@ -139,6 +142,11 @@ def start_drop_off():
 
 
 def end_drop_off():
+    import Locations.location_functions as location_functions
+    import CamTracking.webcam_functions as webcam_functions
+
+    if settings.touchscreen_enabled:
+        import TouchScreen.touchscreen_functions as touchscreen_functions
     ready_order_count = len(vars.ready_order_list)
     vars.ready_order_list = []
     i = 0

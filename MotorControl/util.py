@@ -1,8 +1,8 @@
 #! /usr/bin/python3
 # -*- coding: utf-8 -*-
 import settings
-from MotorControl import vars
-from MotorControl import configuration
+import MotorControl.vars as vars
+import MotorControl.configuration as configuration
 import system_vars
 import time
 if settings.localhost:

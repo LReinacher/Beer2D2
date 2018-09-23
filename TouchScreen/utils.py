@@ -1,7 +1,6 @@
 #! /usr/bin/python3
 # -*- coding: utf-8 -*-
 import gi
-from Orders import order_functions
 
 # import gtk
 gi.require_version('Gtk', '3.0')
@@ -41,26 +40,32 @@ class Handler:
         Gtk.main_quit()
 
     def confirm_1_ButtonPressed(self, button):
+        import Orders.order_functions as order_functions
         order_functions.confirm_order(0)
         set_button_enabled('confirm_1', False)
 
     def confirm_2_ButtonPressed(self, button):
+        import Orders.order_functions as order_functions
         order_functions.confirm_order(0)
         set_button_enabled('confirm_2', False)
 
     def confirm_3_ButtonPressed(self, button):
+        import Orders.order_functions as order_functions
         order_functions.confirm_order(0)
         set_button_enabled('confirm_3', False)
 
     def confirm_4_ButtonPressed(self, button):
+        import Orders.order_functions as order_functions
         order_functions.confirm_order(0)
         set_button_enabled('confirm_4', False)
 
     def confirm_5_ButtonPressed(self, button):
+        import Orders.order_functions as order_functions
         order_functions.confirm_order(0)
         set_button_enabled('confirm_5', False)
 
     def confirm_6_ButtonPressed(self, button):
+        import Orders.order_functions as order_functions
         order_functions.confirm_order(0)
         set_button_enabled('confirm_6', False)
 

@@ -1,8 +1,8 @@
 #! /usr/bin/python3
 # -*- coding: utf-8 -*-
-from MotorControl import vars
-from MotorControl import util
-from MotorControl import configuration
+import MotorControl.vars as vars
+import MotorControl.util as util
+import MotorControl.configuration as configuration
 import system_vars
 import time
 from threading import Thread

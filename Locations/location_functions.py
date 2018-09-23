@@ -1,9 +1,9 @@
 #! /usr/bin/python3
 # -*- coding: utf-8 -*-
-from Locations import vars
+import Locations.vars as vars
 import system_vars
-from Locations import routes
-from MotorControl import motor_functions
+import Locations.routes as routes
+import MotorControl.motor_functions as motor_functions
 
 
 def get_locations():

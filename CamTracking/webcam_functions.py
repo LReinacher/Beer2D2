@@ -1,11 +1,10 @@
 #! /usr/bin/python3
 # -*- coding: utf-8 -*-
 import system_vars
-from Locations import routes
-from CamTracking import vars
-from CamTracking import util
-from MotorControl import motor_functions
-from Orders import order_functions
+import Locations.routes as routes
+import CamTracking.vars as vars
+import CamTracking.util as util
+import MotorControl.motor_functions as motor_functions
 import settings
 
 
@@ -18,6 +17,7 @@ def get_last_barcode():
 
 
 def found_barcode(data):
+    import Orders.order_functions as order_functions
     print(system_vars.colorcode['info'] + "INFO: BARCODE DETECTED: " + data + system_vars.colorcode['reset'])
     if data == order_functions.get_current_destination():
         vars.last_barcode = data
@@ -45,4 +45,5 @@ def found_barcode(data):
             
             
 def destination_reached():
+    import Orders.order_functions as order_functions
     order_functions.start_drop_off()
