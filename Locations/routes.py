@@ -1,3 +1,5 @@
+#! /usr/bin/python3
+# -*- coding: utf-8 -*-
 routes = {
     "Morty": {
         "001": {"A": "half_right_turn", "B": "full_right_spin", "C": "straight"},

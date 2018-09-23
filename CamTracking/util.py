@@ -1,3 +1,5 @@
+#! /usr/bin/python3
+# -*- coding: utf-8 -*-
 import cv2
 import imutils
 from pyzbar import pyzbar

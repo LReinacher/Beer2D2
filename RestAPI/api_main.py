@@ -1,3 +1,5 @@
+#! /usr/bin/python3
+# -*- coding: utf-8 -*-
 from RestAPI.rest_api_framework import get, post, request, default_app, static_file, route
 import os
 import system_vars

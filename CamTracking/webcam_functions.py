@@ -1,3 +1,5 @@
+#! /usr/bin/python3
+# -*- coding: utf-8 -*-
 import system_vars
 from Locations import routes
 from CamTracking import vars

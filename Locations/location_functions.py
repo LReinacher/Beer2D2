@@ -1,3 +1,5 @@
+#! /usr/bin/python3
+# -*- coding: utf-8 -*-
 from Locations import vars
 import system_vars
 from Locations import routes

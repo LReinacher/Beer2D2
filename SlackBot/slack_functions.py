@@ -1,3 +1,5 @@
+#! /usr/bin/python3
+# -*- coding: utf-8 -*-
 import SlackBot.util as SlackBot
 import time
 from SlackBot import vars

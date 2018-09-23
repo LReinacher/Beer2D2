@@ -1,3 +1,5 @@
+#! /usr/bin/python3
+# -*- coding: utf-8 -*-
 from MotorControl import vars
 from MotorControl import util
 from MotorControl import configuration

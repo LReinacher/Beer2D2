@@ -1,3 +1,5 @@
+#! /usr/bin/python3
+# -*- coding: utf-8 -*-
 from threading import Thread
 from TouchScreen import utils
 import time

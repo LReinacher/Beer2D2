@@ -1,3 +1,5 @@
+#! /usr/bin/python3
+# -*- coding: utf-8 -*-
 from Orders import vars
 from SlackBot import slack_functions
 from MotorControl import motor_functions

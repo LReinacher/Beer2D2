@@ -1,3 +1,6 @@
+#! /usr/bin/python3
+# -*- coding: utf-8 -*-
+
 last_command_time = None
 security_stopped = False
 security_stop_timer = 2 #sec

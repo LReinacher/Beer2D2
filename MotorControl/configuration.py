@@ -1,3 +1,6 @@
+#! /usr/bin/python3
+# -*- coding: utf-8 -*-
+
 #settings
 stop_after_qr_directive = True
 stop_after_linetracker_directive = False
