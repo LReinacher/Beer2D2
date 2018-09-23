@@ -61,7 +61,7 @@ def index():
         return static_file('control.html', root=dir_path + '/static')
 
 
-@post('/add-order')
+@get('/add-order')
 def add_order():
     location = request.query.location
     email = request.query.email

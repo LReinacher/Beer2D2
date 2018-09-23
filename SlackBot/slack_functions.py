@@ -7,8 +7,10 @@ import time
 import SlackBot.responses as responses
 import settings
 
+
 def init():
     vars.SlackBotInstance = SlackBot.slackCommunication()
+    vars.SlackBotInstance.slackConnect()
     vars.members_email, vars.members_id = load_member_emails()
     print(system_vars.colorcode['ok'] + "OK: SLACK-BOT INITIALIZED" + system_vars.colorcode['reset'])
     message_handling()
@@ -18,7 +20,6 @@ def load_member_emails():
     members_email = {}
     members_id = {}
     slackCommunication = vars.SlackBotInstance
-    slackCommunication.slackConnect()
     result = slackCommunication.getTeamList()
     memberNr = 0
     while memberNr < len(result['members']):
@@ -37,9 +38,12 @@ def load_member_emails():
 
 def get_real_name(user, type):
     if type == "slack":
-        return vars.members_id[user]['real_name']
+        if user in vars.members_id:
+            return vars.members_id[user]['real_name']
     else:
-        return vars.members_email[user]['real_name']
+        if user in vars.members_email:
+            return vars.members_email[user]['real_name']
+    return user
 
 
 def get_id_by_email(email):
@@ -60,7 +64,6 @@ def send_dm(user, message):
     return vars.SlackBotInstance.create_send_dm(user, message)
 
 
-
 def message_handling():
     import Orders.order_functions as order_functions
     import Locations.location_functions as location_functions
@@ -68,36 +71,34 @@ def message_handling():
     print(system_vars.colorcode['ok'] + "OK: SLACK-BOT STARTED" + system_vars.colorcode['reset'])
     slackCommunication = vars.SlackBotInstance
 
-    slackCommunication.slackConnect()
-
     bot_user_id = "UCQ3C8M5K"
 
     while True:
         communication = slackCommunication.slackReadRTM()
         if len(communication) > 0:
-            #try:
+            try:
                 if communication[0]['type'] == 'message' and communication[0]['user'] != bot_user_id:
                     message = communication[0]['text']
                     print(system_vars.colorcode['info'] + "INFO: SLACK MESSAGE: " + message + system_vars.colorcode['reset'])
                     if 'come to' in message:
                         split = message.split(' ')
-                        #try:
-                        location = split[2]
-                        if location_functions.check_for_location(location):
-                            status, order = order_functions.add_order(communication[0]['user'], location, 'slack')
-                            if status:
-                                response = (responses.order_placed_success % str(order + 1))
-                            else:
-                                if order['type'] == "slack":
-                                    order_type = responses.slack_interface_name
+                        try:
+                            location = split[2]
+                            if location_functions.check_for_location(location):
+                                status, order = order_functions.add_order(communication[0]['user'], location, 'slack')
+                                if status:
+                                    response = (responses.order_placed_success % str(order + 1))
                                 else:
-                                    order_type = responses.web_interface_name
-                                order_location = order['room']
-                                response = (responses.order_placed_error_already_placed % (order_type, order_location))
-                        else:
-                            response = responses.order_placed_error_location_not_available
-                        #except:
-                            #response = responses.order_placed_error_location_invalid
+                                    if order['type'] == "slack":
+                                        order_type = responses.slack_interface_name
+                                    else:
+                                        order_type = responses.web_interface_name
+                                    order_location = order['room']
+                                    response = (responses.order_placed_error_already_placed % (order_type, order_location))
+                            else:
+                                response = responses.order_placed_error_location_not_available
+                        except:
+                            response = responses.order_placed_error_location_invalid
 
                     elif 'cancel order' in message:
                         if order_functions.delete_oder(communication[0]['user'], 'slack'):
@@ -158,6 +159,6 @@ def message_handling():
                     if response is not None:
                         result = slackCommunication.writeToSlack(communication[0]['user'], response)["ok"]
 
-            #except Exception as e:
-                #print(system_vars.colorcode['error'] + "ERROR: SLACK-BOT-FUNCTIONS " + str(e).upper() + system_vars.colorcode['reset'])
+            except Exception as e:
+                print(system_vars.colorcode['error'] + "ERROR: SLACK-BOT-FUNCTIONS " + str(e).upper() + system_vars.colorcode['reset'])
         time.sleep(0.5)

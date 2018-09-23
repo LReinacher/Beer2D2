@@ -106,7 +106,7 @@ def get_current_destination():
 def get_destination_all_orders(destination):
     i = 0
     orders = []
-    while vars.order_que[i]['room'] == destination:
+    while i < len(vars.order_que) and 'room' in vars.order_que[i] and vars.order_que[i]['room'] == destination:
         order = vars.order_que[i]
         order.update({'open': True})
         orders.append(order)
@@ -130,9 +130,6 @@ def start_drop_off():
 
     if settings.touchscreen_enabled:
         import TouchScreen.touchscreen_functions as touchscreen_functions
-        from threading import Thread
-        #list_ready_orders_thread = Thread(target=touchscreen_functions.set_ready_order_list, args=(orders,), name="List_Ready_Orders", daemon=False)
-        #list_ready_orders_thread.start()
         touchscreen_functions.set_ready_order_list(orders)
 
     wait_time = calc_order_wait_time()
@@ -162,15 +159,14 @@ def end_drop_off():
     i = 0
     while i < len(vars.ready_order_list):
         if 'type' in vars.ready_order_list[i]:
-            delete_oder(i, 'index')
+            delete_oder(0, 'index')
         i = i + 1
-        vars.ready_order_list = []
-    location_functions.leave_location(webcam_functions.get_last_barcode())
-
+    vars.ready_order_list = []
     if settings.touchscreen_enabled:
         import TouchScreen.touchscreen_functions as touchscreen_functions
-        if system_vars.destination_reached is False:
-            touchscreen_functions.set_order_list(vars.order_que)
+        touchscreen_functions.set_order_list(vars.order_que)
+
+    location_functions.leave_location(webcam_functions.get_last_barcode())
 
 
 def calc_order_wait_time():
@@ -185,9 +181,12 @@ def calc_order_wait_time():
 
 def order_countdown(t):
     import time
+    import TouchScreen.touchscreen_functions as touchscreen_functions
+    import TouchScreen.texts as texts
     while t and len(get_open_ready_orders()) > 0:
         mins, secs = divmod(t, 60)
         timeformat = '{:02d}:{:02d}'.format(mins, secs)
+        touchscreen_functions.set_info_label(texts.take_order % timeformat)
         vars.order_countdown = timeformat
         time.sleep(1)
         if system_vars.door_is_open is False:
