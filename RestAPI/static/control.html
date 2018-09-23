@@ -18,6 +18,15 @@
     float: left;
 }
 
+input[type=range][orient=vertical]
+{
+    writing-mode: bt-lr; /* IE */
+    -webkit-appearance: slider-vertical; /* WebKit */
+    width: 8px;
+    height: 175px;
+    padding: 0 5px;
+}
+
 </style>
 <head>
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
@@ -26,116 +35,118 @@
     <title>Beer2D2 Control</title>
 </head>
 <body>
-    <div class="wrapper">
-        <div id="fwd_l"></div>
-        <div id="bwd_l"></div>
-    </div>
-    <div class="wrapper">
-        <div id="fwd_r"></div>
-        <div id="bwd_r"></div>
-    </div>
+    <button id="enable_remote">ENABLE</button>
+    <button id="disable_remote">DISABLE</button>
+    <input id="motor_l_slider" type="range" min="-10" max="10" value="0" step="2" orient="vertical"/>
+    <a id="l_status"></a>
+    <input id="motor_r_slider" type="range" min="-10" max="10" value="0" step="2" orient="vertical"/>
+    <a id="r_status"></a>
 </body>
 </html>
 
 
 <script>
-var fwd_l_timeout, fwd_l = $('#fwd_l');
-var fwd_r_timeout, fwd_r = $('#fwd_r');
+    var user = "lion.reinacher@code.berlin";
 
-var bwd_l_timeout, bwd_l = $('#bwd_l');
-var bwd_r_timeout, bwd_r = $('#bwd_r');
-var count = 0;
+    var remote_is_enabled = 0;
+    var motor_l_status = 0;
+    var motor_r_status = 0;
+    var motor_l_slider = document.getElementById('motor_l_slider');
+    var motor_r_slider = document.getElementById('motor_r_slider');
+    motor_l_slider.addEventListener('input', sliderChangeL);
+    motor_l_slider.addEventListener('mouseup', sliderResetL);
+    motor_r_slider.addEventListener('input', sliderChangeR);
+    motor_r_slider.addEventListener('mouseup', sliderResetR);
 
-var startEventType = 'mousedown',
-    endEventType   = 'mouseup';
+    var enable_button = document.getElementById('enable_remote');
+    var disable_button = document.getElementById('disable_remote');
+    enable_button.addEventListener('click', enableRemote);
+    disable_button.addEventListener('click', disableRemote);
 
-if (Modernizr.touch === true) {
-    startEventType = 'touchstart';
-    endEventType   = 'touchend';
-}
 
-fwd_l.on(startEventType, function(){
-    fwd_l_timeout = setInterval(function(){
-        fwd_l.css('background-color', '#00ff00');
-        $.ajax({
+    function sliderChangeL() {
+      motor_l_status = this.value;
+      sendStatus();
+    }
+
+    function sliderResetL() {
+      motor_l_slider.value = 0;
+      motor_l_status = 0;
+      sendStatus();
+    }
+
+    function sliderChangeR() {
+      motor_r_status = this.value;
+      sendStatus();
+    }
+
+    function sliderResetR() {
+      motor_r_slider.value = 0;
+      motor_r_status = 0;
+      sendStatus();
+    }
+
+    function enableRemote() {
+      $.ajax({
             type: "POST",
-            url: "/direct?motor=left&command=forwards",
+            url: "/toggle-remote-control?status=enable&user=" + user,
+            success : function(data)
+             {
+                 response = data["status"];
+                 message = data["message"];
+             }
         });
-    }, 500);
-    return false;
-});
+        alert(message);
+        if (response == "success")
+            {
+                setTimeout(function(){
+                    remote_is_enabled = 1;
+                }, 1000);
+            }
+    }
 
-fwd_r.on(startEventType, function(){
-    fwd_r_timeout = setInterval(function(){
-        fwd_r.css('background-color', '#00ff00');
-        $.ajax({
+    function disableRemote() {
+      $.ajax({
             type: "POST",
-            url: "/direct?motor=right&command=forwards",
+            url: "/toggle-remote-control?status=disable&user=" + user,
+            success : function(data)
+             {
+                 response = data["status"];
+                 message = data["message"];
+             }
         });
-    }, 500);
-    return false;
-});
-
-bwd_l.on(startEventType, function(){
-    bwd_l_timeout = setInterval(function(){
-        bwd_l.css('background-color', '#00ff00');
-        $.ajax({
-            type: "POST",
-            url: "/direct?motor=left&command=backwards",
-        });
-    }, 500);
-    return false;
-});
-
-bwd_r.on(startEventType, function(){
-    bwd_r_timeout = setInterval(function(){
-        bwd_r.css('background-color', '#00ff00');
-        $.ajax({
-            type: "POST",
-            url: "/direct?motor=right&command=backwards",
-        });
-    }, 500);
-    return false;
-});
-
-fwd_l.on(endEventType, function(){
-    clearInterval(fwd_l_timeout);
-    fwd_l.css('background-color', 'orange');
-    $.ajax({
-            type: "POST",
-            url: "/direct?motor=left&command=stop",
-        });
-    return false;
-});
-
-fwd_r.on(endEventType, function(){
-    clearInterval(fwd_r_timeout);
-    fwd_r.css('background-color', 'orange');
-    $.ajax({
-            type: "POST",
-            url: "/direct?motor=right&command=stop",
-        });
-    return false;
-});
+        alert(message);
+        if (response == "success")
+            {
+                setTimeout(function(){
+                    remote_is_enabled = 0;
+                }, 1000);
+            }
+    }
 
 
-bwd_l.on(endEventType, function(){
-    clearInterval(bwd_l_timeout);
-    bwd_l.css('background-color', 'orange');
-    $.ajax({
-            type: "POST",
-            url: "/direct?motor=left&command=stop",
-        });
-    return false;
-});
+    function sendStatus() {
+      if (remote_is_enabled == 1)
+      {
+          document.getElementById("l_status").innerHTML = motor_l_status;
+          document.getElementById("r_status").innerHTML = motor_r_status;
+          $.ajax({
+                type: "POST",
+                url: "/direct?motor_l=" + motor_l_status + "&motor_r=" + motor_r_status + "&user=" + user,
+                success : function(data)
+                 {
+                     response = data["status"];
+                     message = data["message"];
+                 }
+            });
+            if (response == "error")
+            {
+                alert(message);
+            }
+      }
+    }
 
-bwd_r.on(endEventType, function(){
-    clearInterval(bwd_r_timeout);
-    bwd_r.css('background-color', 'orange');
-    $.ajax({
-            type: "POST",
-            url: "/direct?motor=right&command=stop",
-        });
-    return false;
-});
+    setInterval( function() {
+        sendStatus();
+    }, 650 );
 </script>

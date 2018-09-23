@@ -55,6 +55,11 @@ def get_email_by_id(id):
         return None
 
 
+def send_dm(user, message):
+    return vars.SlackBotInstance.create_send_dm(user, message)
+
+
+
 def message_handling():
     print(system_vars.colorcode['ok'] + "OK: SLACK-BOT STARTED" + system_vars.colorcode['reset'])
     slackCommunication = vars.SlackBotInstance

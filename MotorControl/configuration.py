@@ -1,7 +1,7 @@
 #settings
 stop_after_qr_directive = True
 stop_after_linetracker_directive = False
-pwm_mode = True
+pwm_mode = False
 
 #Motortimes in Seconds
 light_turn_time = 0.2
