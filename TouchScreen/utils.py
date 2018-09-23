@@ -6,12 +6,12 @@ import gi
 gi.require_version('Gtk', '3.0')
 from gi.repository import Gtk
 from threading import Thread
-from TouchScreen import vars
+import TouchScreen.vars as vars
 
 
 def start():
     vars.builder = Gtk.Builder()
-    vars.builder.add_from_file("test.glade")
+    vars.builder.add_from_file("TouchScreen/test.glade")
     vars.builder.connect_signals(Handler())
 
     window = vars.builder.get_object("base")
@@ -40,9 +40,8 @@ class Handler:
         Gtk.main_quit()
 
     def confirm_1_ButtonPressed(self, button):
-        import Orders.order_functions as order_functions
-        order_functions.confirm_order(0)
-        set_button_enabled('confirm_1', False)
+        import TouchScreen.touchscreen_functions as touchscreen_functions
+        touchscreen_functions.set_order_confirmed(1)
 
     def confirm_2_ButtonPressed(self, button):
         import Orders.order_functions as order_functions

@@ -1,3 +1,5 @@
+#! /usr/bin/python3
+# -*- coding: utf-8 -*-
 web_interface_name = " the web-interface"
 slack_interface_name = "Slack"
 

@@ -42,6 +42,11 @@ def add_order(user, room, type, priority=False):
                 vars.order_que.append({'room': room, 'user': user, 'real_name': real_name, 'type': type})
                 position = len(vars.order_que) - 1
 
+            if settings.touchscreen_enabled:
+                import TouchScreen.touchscreen_functions as touchscreen_functions
+                if system_vars.destination_reached is False:
+                    touchscreen_functions.set_order_list(vars.order_que)
+
         return True, position
     else:
         return False, result
@@ -62,6 +67,10 @@ def delete_oder(identifier, type):
 
     if index >= 0:
         vars.order_que.pop(index)
+        if settings.touchscreen_enabled:
+            import TouchScreen.touchscreen_functions as touchscreen_functions
+            if system_vars.destination_reached is False:
+                touchscreen_functions.set_order_list(vars.order_que)
         return True
     else:
         return False
@@ -98,7 +107,8 @@ def get_destination_all_orders(destination):
     i = 0
     orders = []
     while vars.order_que[i]['room'] == destination:
-        order = vars.order_que[i]['open'] = True
+        order = vars.order_que[i]
+        order.update({'open': True})
         orders.append(order)
         i = i + 1
     return orders
@@ -120,21 +130,25 @@ def start_drop_off():
 
     if settings.touchscreen_enabled:
         import TouchScreen.touchscreen_functions as touchscreen_functions
+        from threading import Thread
+        #list_ready_orders_thread = Thread(target=touchscreen_functions.set_ready_order_list, args=(orders,), name="List_Ready_Orders", daemon=False)
+        #list_ready_orders_thread.start()
         touchscreen_functions.set_ready_order_list(orders)
 
     wait_time = calc_order_wait_time()
 
     i = 0
     while i < len(orders):
-        if orders[i]['type'] == ['Slack']:
-            slack_functions.send_dm(orders[i]['user'], '')
-        else:
-            user_id = slack_functions.get_id_by_email(orders[i]['user'])
-            if user_id is not None:
+        if 'type' in orders[i]:
+            if orders[i]['type'] == ['slack']:
                 slack_functions.send_dm(orders[i]['user'], '')
             else:
-                pass
-                #send e-mail
+                user_id = slack_functions.get_id_by_email(orders[i]['user'])
+                if user_id is not None:
+                    slack_functions.send_dm(orders[i]['user'], '')
+                else:
+                    pass
+                    #send e-mail
         i = i + 1
 
     order_countdown(wait_time)
@@ -145,24 +159,28 @@ def end_drop_off():
     import Locations.location_functions as location_functions
     import CamTracking.webcam_functions as webcam_functions
 
+    i = 0
+    while i < len(vars.ready_order_list):
+        if 'type' in vars.ready_order_list[i]:
+            delete_oder(i, 'index')
+        i = i + 1
+        vars.ready_order_list = []
+    location_functions.leave_location(webcam_functions.get_last_barcode())
+
     if settings.touchscreen_enabled:
         import TouchScreen.touchscreen_functions as touchscreen_functions
-    ready_order_count = len(vars.ready_order_list)
-    vars.ready_order_list = []
-    i = 0
-    while i < ready_order_count:
-        delete_oder(i, 'index')
-        i = i + 1
-    location_functions.leave_location(webcam_functions.get_last_barcode())
+        if system_vars.destination_reached is False:
+            touchscreen_functions.set_order_list(vars.order_que)
 
 
 def calc_order_wait_time():
     time = 0
     i = 0
     while i < len(vars.ready_order_list):
-        time = time + (settings.order_waiting_time / i)
+        if 'type' in vars.ready_order_list[i]:
+            time = time + (settings.order_waiting_time / (i + 1))
         i = i + 1
-    return time
+    return int(round(time))
 
 
 def order_countdown(t):
@@ -184,8 +202,9 @@ def get_open_ready_orders():
     orders = []
     i = 0
     while i < len(vars.ready_order_list):
-        if vars.ready_order_list[i]['open'] is True:
-            orders.append(vars.ready_order_list[i])
+        if 'open' in vars.ready_order_list[i]:
+            if vars.ready_order_list[i]['open'] is True:
+                orders.append(vars.ready_order_list[i])
         i = i + 1
     return orders
 

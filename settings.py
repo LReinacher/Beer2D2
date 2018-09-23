@@ -3,6 +3,7 @@
 ip = "192.168.2.140"
 localhost = True
 gui_enabled = True
-touchscreen_enabled = False
+touchscreen_enabled = True
 
 order_waiting_time = 60
+debug_commands = True
