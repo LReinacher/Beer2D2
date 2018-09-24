@@ -1,0 +1,347 @@
+.bg-dark {
+        background-color: #1b1e2e!important;
+    }
+
+    a {
+    color: #c7cce6;
+    text-decoration: none;
+    background-color: transparent;
+    -webkit-text-decoration-skip: objects;
+    }
+
+    a:hover {
+    color: #7a98f7;
+    text-decoration: underline;
+    }
+
+
+element.style {
+}
+*, ::after, ::before {
+    box-sizing: border-box;
+}
+user agent stylesheet
+div {
+    display: block;
+}
+body {
+    margin: 0;
+    font-family: -apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,"Helvetica Neue",Arial,sans-serif,"Apple Color Emoji","Segoe UI Emoji","Segoe UI Symbol";
+    font-size: 1rem;
+    font-weight: 400;
+    line-height: 1.5;
+    color: #c7cce6;
+    text-align: left;
+    background-color: #262a42;
+}
+
+.nav-item {
+    margin-left: 30px;
+}
+
+.navbar {
+    padding: .6rem 2rem;
+}
+
+.navbar-nav > .active > a,
+.navbar-nav > .active > a:hover,
+.navbar-nav > .active > a:focus {
+    color: #7a98f7;
+}
+
+.darkcontainer {
+    background-color: #1b1e2e;
+    width: 100%;
+    padding-left: 20px;
+    padding-right: 20px;
+    padding-top: 10px;
+    padding-bottom: 15px;
+}
+
+.col, .col-1, .col-10, .col-11, .col-12, .col-2, .col-3, .col-4, .col-5, .col-6, .col-7, .col-8, .col-9, .col-auto, .col-lg, .col-lg-1, .col-lg-10, .col-lg-11, .col-lg-12, .col-lg-2, .col-lg-3, .col-lg-4, .col-lg-5, .col-lg-6, .col-lg-7, .col-lg-8, .col-lg-9, .col-lg-auto, .col-md, .col-md-1, .col-md-10, .col-md-11, .col-md-12, .col-md-2, .col-md-3, .col-md-4, .col-md-5, .col-md-6, .col-md-7, .col-md-8, .col-md-9, .col-md-auto, .col-sm, .col-sm-1, .col-sm-10, .col-sm-11, .col-sm-12, .col-sm-2, .col-sm-3, .col-sm-4, .col-sm-5, .col-sm-6, .col-sm-7, .col-sm-8, .col-sm-9, .col-sm-auto, .col-xl, .col-xl-1, .col-xl-10, .col-xl-11, .col-xl-12, .col-xl-2, .col-xl-3, .col-xl-4, .col-xl-5, .col-xl-6, .col-xl-7, .col-xl-8, .col-xl-9, .col-xl-auto {
+    position: relative;
+    width: 100%;
+    min-height: 1px;
+    padding: 5px;
+}
+
+.bodywrapper {
+    padding: 5px;
+}
+
+b, strong {
+    font-weight: bolder;
+    font-size: 19px;
+}
+
+.table td, .table th {
+    padding: 2px;
+    vertical-align: top;
+    border-top: 1.5px solid #262a42;
+    font-weight: normal;
+    font-size: 15px;
+}
+
+       .container-fluid {
+    width: 100%;
+    padding-right: 0px;
+    padding-left: 0px;
+    margin-right: auto;
+    margin-left: auto;
+}
+
+.row {
+    padding: 5px;
+    margin-right: 0px;
+    margin-left: 0px;
+
+}
+
+.btn-outline-primary {
+    color: #c7cce6;
+    background-color: transparent;
+    background-image: none;
+    border-color: #c7cce6;
+    border-radius: 0rem;
+}
+
+.btn-outline-primary:hover {
+    background-color: #262a42;
+    border-color: #262a42;
+    color: #c7cce6;
+    border-radius: 0rem;
+}
+
+.btn-outline-primary:focus {
+    box-shadow: 0 0 0 0.2rem rgba(64,70,103,.5);
+}
+
+.btn-outline-primary:active {
+    background-color: #262a42;
+    border-color: #262a42;
+    color: #c7cce6;
+    border-radius: 0rem;
+}
+
+.btn-outline-primary:visited {
+    color: #c7cce6;
+    background-color: transparent;
+    background-image: none;
+    border-color: #c7cce6;
+    border-radius: 0rem;
+}
+
+.btn-outline-primary:focuswithin {
+    background-color: #262a42;
+    border-color: #262a42;
+    color: #c7cce6;
+    border-radius: 0rem;
+}
+
+progress {
+    width: 180px;
+    height: 14px;
+    margin-top: 4.5px;
+    display: block;
+    -webkit-appearance: none;
+    border: none;
+}
+
+/* All good till now. Now we'll style the background */
+progress::-webkit-progress-bar {
+	background: #262a42;
+}
+
+/* Now the value part */
+progress::-webkit-progress-value {
+	background: #c7cce6;
+
+	/* Looks great, now animating it */
+	background-size: 25px 14px, 100% 100%, 100% 100%;
+	-webkit-animation: move 5s linear 0 infinite;
+}
+
+/* That's it! Now let's try creating a new stripe pattern and animate it using animation and keyframes properties  */
+
+@-webkit-keyframes move {
+	0% {background-position: 0px 0px, 0 0, 0 0}
+	100% {background-position: -100px 0px, 0 0, 0 0}
+}
+
+.dropdown-item:focus, .dropdown-item:hover {
+    color: #7a98f7;
+    text-decoration: none;
+    background-color: #262b42;
+}
+.dropdown-item {
+    display: block;
+    width: 100%;
+    padding: .25rem 1.5rem;
+    clear: both;
+    font-weight: 400;
+    color: #c7cce6;
+    text-align: inherit;
+    white-space: nowrap;
+    background-color: transparent;
+    border: 0;
+    border-radius: 0rem;
+}
+
+.navbar-dark .navbar-nav .nav-link {
+    color: #c7cce6;
+}
+
+.navbar-dark .navbar-nav .active>.nav-link, .navbar-dark .navbar-nav .nav-link.active, .navbar-dark .navbar-nav .nav-link.show, .navbar-dark .navbar-nav .show>.nav-link {
+    color: #7a98f7;
+}
+
+.navbar-dark .navbar-nav .nav-link:focus, .navbar-dark .navbar-nav .nav-link:hover {
+    color: #7a98f7;
+}
+
+.form-control:focus {
+    color: #c7cce6;
+    background-color: transparent;
+    border-color: #c7cce6;
+    outline: 0;
+    box-shadow: 0 0 0 0.2rem #627af559;
+    border-radius: 0rem;
+}
+
+.form-control {
+    display: block;
+    width: 100%;
+    padding: .375rem .75rem;
+    font-size: 1rem;
+    line-height: 1.5;
+    color: #c7cce6;
+    background-color: #dc86a300;
+    background-clip: padding-box;
+    border: 1px solid #c7cce6;
+    transition: border-color .15s ease-in-out,box-shadow .15s ease-in-out;border-radius: 0rem;
+    border-radius: 0rem;
+}
+
+.btn-outline-primary.focus, .btn-outline-primary:focus {
+    box-shadow: 0 0 0 0.2rem #627af500;
+    border-radius: 0rem;
+}
+
+.btn-outline-primary:not(:disabled):not(.disabled).active, .btn-outline-primary:not(:disabled):not(.disabled):active, .show>.btn-outline-primary.dropdown-toggle {
+    color: #c7cce6;
+    background-color: #404667;
+    border-color: #262a42;
+    border-radius: 0rem;
+}
+
+option {
+  background:#1b1e2e;
+  border-top:1px solid #1b1e2e;
+  padding:.3em 1em .3em 1em;
+}
+
+select {
+  font-size: 1em;
+}
+
+select {
+  width:100%;
+  border: 1px solid #bbb;
+  padding:.75em 1em .5em 1em;
+  box-shadow: 0 2px 1px 0 rgba(0,0,0,0.2);
+  background-color:white;
+  background-image:url(select-arrow.png);
+  background-position: right;
+  background-repeat: no-repeat;
+}
+
+.btn-outline-primary.disabled, .btn-outline-primary:disabled {
+    color: #788694;
+    border-color: #788694;
+    background-color: transparent;
+}
+
+.nav-droplet-link {
+    display: block;
+    padding: .5rem 1rem;
+    color: #9bb5dc;
+    text-transform: uppercase;
+}
+
+.nav-droplet-link:hover {
+    color: #7a98f7;
+    text-decoration: none;
+    text-transform: uppercase;
+}
+
+.stripes:hover {
+  background: repeating-linear-gradient( -45deg, #e3bc0275, #e3bc0275 10px, #5454546b 10px, #5454546e 20px );
+  color: #c7cce6 !important;
+ }
+
+.alert {
+    position: relative;
+    padding: .75rem 1.25rem;
+    margin-top: 0.3rem;
+    margin-bottom: 0.3rem;
+    border: 1px solid transparent;
+    border-radius: 0rem;
+}
+
+.btn
+{
+  border-radius: .0rem;
+}
+
+.btn-outline-ok {
+    color: green;
+    background-color: transparent;
+    background-image: none;
+    border-color: green;
+}
+
+.btn-outline-ok:hover {
+    color: #c7cce6;
+    background-color: green;
+    border-color: #262a42;
+}
+
+.btn-outline-danger:hover {
+    border-color: #262a42;
+    color: #c7cce6;
+}
+
+.btn-outline-ok.focus, .btn-outline-ok:focus {
+    box-shadow: 0 0 0 0.2rem rgba(0,99,0,.5);
+}
+
+.btn-outline-primary.focus, .btn-outline-primary:focus {
+    box-shadow: 0 0 0 0.2rem rgba(64,70,103,.5);
+}
+
+.btn-outline-primary {
+    color: #c7cce6;
+    background-color: transparent;
+    background-image: none;
+    border-color: #c7cce6;
+    border-radius: 0rem;
+}
+
+.btn-outline-primary:hover {
+    background-color: #262a42;
+    border-color: #262a42;
+    color: #c7cce6;
+    border-radius: 0rem;
+}
+
+.btn-outline-primary:focus {
+    box-shadow: 0 0 0 0.2rem rgba(64,70,103,.5);
+}
+
+.btn-outline-primary:active {
+
+}
+
+.btn-outline-primary:visited {
+
+}
