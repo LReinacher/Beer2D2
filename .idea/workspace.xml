@@ -2,18 +2,16 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="994662ca-e502-45b2-80b9-36f7f04e1061" name="Default" comment="">
-      <change afterPath="$PROJECT_DIR$/LED/configuration.py" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/LED/led_functions.py" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/AudioHandler/audio_functions.py" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/LED/led_functions.py" beforeDir="false" afterPath="$PROJECT_DIR$/LED/led_functions.py" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/MotorControl/util.py" beforeDir="false" afterPath="$PROJECT_DIR$/MotorControl/util.py" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/Orders/order_functions.py" beforeDir="false" afterPath="$PROJECT_DIR$/Orders/order_functions.py" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/RestAPI/api_main.py" beforeDir="false" afterPath="$PROJECT_DIR$/RestAPI/api_main.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/RestAPI/cryt.py" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/TouchScreen/texts.py" beforeDir="false" afterPath="$PROJECT_DIR$/TouchScreen/texts.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/TouchScreen/touchscreen_functions.py" beforeDir="false" afterPath="$PROJECT_DIR$/TouchScreen/touchscreen_functions.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/TouchScreen/utils.py" beforeDir="false" afterPath="$PROJECT_DIR$/TouchScreen/utils.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/TouchScreen/vars.py" beforeDir="false" afterPath="$PROJECT_DIR$/TouchScreen/vars.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/SlackBot/slack_functions.py" beforeDir="false" afterPath="$PROJECT_DIR$/SlackBot/slack_functions.py" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/main.py" beforeDir="false" afterPath="$PROJECT_DIR$/main.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/settings.py" beforeDir="false" afterPath="$PROJECT_DIR$/settings.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/system_handler.py" beforeDir="false" afterPath="$PROJECT_DIR$/system_handler.py" afterDir="false" />
     </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="SHOW_DIALOG" value="false" />
@@ -26,31 +24,32 @@
       <usages-collector id="statistics.lifecycle.project">
         <counts>
           <entry key="project.open.time.13" value="1" />
-          <entry key="project.opened" value="1" />
+          <entry key="project.open.time.25" value="1" />
+          <entry key="project.opened" value="2" />
         </counts>
       </usages-collector>
       <usages-collector id="statistics.file.extensions.edit">
         <counts>
           <entry key="glade" value="7" />
-          <entry key="py" value="2805" />
+          <entry key="py" value="3296" />
         </counts>
       </usages-collector>
       <usages-collector id="statistics.file.types.edit">
         <counts>
           <entry key="PLAIN_TEXT" value="7" />
-          <entry key="Python" value="2805" />
+          <entry key="Python" value="3296" />
         </counts>
       </usages-collector>
       <usages-collector id="statistics.file.extensions.open">
         <counts>
           <entry key="glade" value="2" />
-          <entry key="py" value="21" />
+          <entry key="py" value="30" />
         </counts>
       </usages-collector>
       <usages-collector id="statistics.file.types.open">
         <counts>
           <entry key="PLAIN_TEXT" value="2" />
-          <entry key="Python" value="21" />
+          <entry key="Python" value="30" />
         </counts>
       </usages-collector>
       <usages-collector id="statistics.vcs.git.usages" />
@@ -61,8 +60,8 @@
       <file pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/main.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="194">
-              <caret line="49" column="4" selection-start-line="49" selection-start-column="4" selection-end-line="49" selection-end-column="33" />
+            <state relative-caret-position="285">
+              <caret line="22" column="58" selection-start-line="22" selection-start-column="58" selection-end-line="22" selection-end-column="58" />
               <folding>
                 <element signature="e#44#72#0" expanded="true" />
               </folding>
@@ -73,10 +72,23 @@
       <file pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/Orders/order_functions.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="-661">
-              <caret line="160" column="4" selection-start-line="160" selection-start-column="4" selection-end-line="162" selection-end-column="33" />
+            <state relative-caret-position="238">
+              <caret line="201" selection-start-line="201" selection-end-line="201" />
               <folding>
                 <element signature="e#44#70#0" expanded="true" />
+              </folding>
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file pinned="false" current-in-tab="true">
+        <entry file="file://$PROJECT_DIR$/AudioHandler/audio_functions.py">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="180">
+              <caret line="12" lean-forward="true" selection-start-line="12" selection-end-line="12" />
+              <folding>
+                <marker date="1537917593478" expanded="true" signature="27:28" ph="..." />
+                <marker date="1537917593478" expanded="true" signature="80:81" ph="..." />
               </folding>
             </state>
           </provider>
@@ -85,20 +97,23 @@
       <file pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/LED/led_functions.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="194">
-              <caret line="30" column="72" selection-start-line="30" selection-start-column="72" selection-end-line="30" selection-end-column="72" />
+            <state relative-caret-position="600">
+              <caret line="41" column="8" selection-start-line="41" selection-start-column="8" selection-end-line="42" selection-end-column="45" />
               <folding>
-                <marker date="1537733309755" expanded="true" signature="414:419" ph="..." />
+                <element signature="e#0#15#0" expanded="true" />
               </folding>
             </state>
           </provider>
         </entry>
       </file>
       <file pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/GPIOEmulator/EmulatorGUI.py">
+        <entry file="file://$PROJECT_DIR$/CamTracking/webcam_functions.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="146">
-              <caret line="438" column="55" selection-start-line="438" selection-start-column="46" selection-end-line="438" selection-end-column="55" />
+            <state relative-caret-position="562">
+              <caret line="47" column="52" selection-start-line="47" selection-start-column="52" selection-end-line="47" selection-end-column="52" />
+              <folding>
+                <element signature="e#44#62#0" expanded="true" />
+              </folding>
             </state>
           </provider>
         </entry>
@@ -106,8 +121,8 @@
       <file pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/MotorControl/util.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="104">
-              <caret line="109" column="56" selection-start-line="109" selection-start-column="56" selection-end-line="109" selection-end-column="56" />
+            <state relative-caret-position="193">
+              <caret line="103" selection-start-line="103" selection-end-line="103" />
               <folding>
                 <element signature="e#44#59#0" expanded="true" />
               </folding>
@@ -115,31 +130,10 @@
           </provider>
         </entry>
       </file>
-      <file pinned="false" current-in-tab="true">
-        <entry file="file://$PROJECT_DIR$/RestAPI/api_main.py">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="126">
-              <caret line="181" column="51" lean-forward="true" selection-start-line="181" selection-start-column="51" selection-end-line="181" selection-end-column="51" />
-              <folding>
-                <element signature="e#44#134#0" expanded="true" />
-              </folding>
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file pinned="false" current-in-tab="false">
-        <entry file="file:///usr/lib/python3/dist-packages/Crypto/PublicKey/RSA.py">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="151">
-              <caret line="223" selection-start-line="223" selection-end-line="223" />
-            </state>
-          </provider>
-        </entry>
-      </file>
       <file pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/MotorControl/motor_functions.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="1064">
+            <state relative-caret-position="412">
               <caret line="90" column="30" selection-start-line="90" selection-start-column="30" selection-end-line="90" selection-end-column="30" />
               <folding>
                 <element signature="e#44#76#0" expanded="true" />
@@ -149,12 +143,20 @@
         </entry>
       </file>
       <file pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/MotorControl/configuration.py">
+        <entry file="file://$PROJECT_DIR$/SlackBot/slack_functions.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="90">
-              <caret line="6" column="16" selection-start-line="6" selection-start-column="16" selection-end-line="6" selection-end-column="16" />
+            <state relative-caret-position="119">
+              <caret line="139" selection-start-line="139" selection-end-line="139" />
+              <folding>
+                <element signature="e#44#76#0" expanded="true" />
+              </folding>
             </state>
           </provider>
+        </entry>
+      </file>
+      <file pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/system_handler.py">
+          <provider selected="true" editor-type-id="text-editor" />
         </entry>
       </file>
     </leaf>
@@ -196,8 +198,6 @@
   <component name="IdeDocumentHistory">
     <option name="CHANGED_PATHS">
       <list>
-        <option value="$PROJECT_DIR$/SlackBot_old/util.py" />
-        <option value="$PROJECT_DIR$/SlackBot/run.py" />
         <option value="$PROJECT_DIR$/SlackBot/main.py" />
         <option value="$PROJECT_DIR$/SlackBot/vars.py" />
         <option value="$PROJECT_DIR$/Rooms/vars.py" />
@@ -222,7 +222,6 @@
         <option value="$PROJECT_DIR$/system_vars.py" />
         <option value="$PROJECT_DIR$/Orders/vars.py" />
         <option value="$PROJECT_DIR$/MotorControl/vars.py" />
-        <option value="$PROJECT_DIR$/system_handler.py" />
         <option value="$PROJECT_DIR$/Locations/routes.py" />
         <option value="$PROJECT_DIR$/Display/display_functions.py" />
         <option value="$PROJECT_DIR$/MotorControl/motor_functions.py" />
@@ -231,8 +230,6 @@
         <option value="$PROJECT_DIR$/CamTracking/webcam_functions.py" />
         <option value="$PROJECT_DIR$/Display/util.py" />
         <option value="$PROJECT_DIR$/Locations/location_functions.py" />
-        <option value="$PROJECT_DIR$/settings.py" />
-        <option value="$PROJECT_DIR$/SlackBot/slack_functions.py" />
         <option value="$PROJECT_DIR$/TouchScreen/touchscreen_functions.py" />
         <option value="$PROJECT_DIR$/TouchScreen/vars.py" />
         <option value="$PROJECT_DIR$/TouchScreen/layout.glade" />
@@ -240,13 +237,18 @@
         <option value="$PROJECT_DIR$/TouchScreen/texts.py" />
         <option value="$PROJECT_DIR$/LED/util.py" />
         <option value="$PROJECT_DIR$/LED/configuration.py" />
-        <option value="$PROJECT_DIR$/LED/led_functions.py" />
-        <option value="$PROJECT_DIR$/main.py" />
-        <option value="$PROJECT_DIR$/Orders/order_functions.py" />
-        <option value="$PROJECT_DIR$/MotorControl/util.py" />
         <option value="$PROJECT_DIR$/RestAPI/cryt.py" />
         <option value="$PROJECT_DIR$/RestAPI/crypt.py" />
         <option value="$PROJECT_DIR$/RestAPI/api_main.py" />
+        <option value="$PROJECT_DIR$/settings.py" />
+        <option value="$PROJECT_DIR$/LED/led_functions.py" />
+        <option value="$PROJECT_DIR$/system_handler.py" />
+        <option value="$PROJECT_DIR$/SlackBot/slack_functions.py" />
+        <option value="$PROJECT_DIR$/MotorControl/util.py" />
+        <option value="$PROJECT_DIR$/Orders/order_functions.py" />
+        <option value="$PROJECT_DIR$/AudioHandler/vars.py" />
+        <option value="$PROJECT_DIR$/main.py" />
+        <option value="$PROJECT_DIR$/AudioHandler/audio_functions.py" />
       </list>
     </option>
   </component>
@@ -268,6 +270,11 @@
             <path>
               <item name="Beer2D2" type="b2602c69:ProjectViewProjectNode" />
               <item name="Beer2D2" type="462c0819:PsiDirectoryNode" />
+            </path>
+            <path>
+              <item name="Beer2D2" type="b2602c69:ProjectViewProjectNode" />
+              <item name="Beer2D2" type="462c0819:PsiDirectoryNode" />
+              <item name="AudioHandler" type="462c0819:PsiDirectoryNode" />
             </path>
             <path>
               <item name="Beer2D2" type="b2602c69:ProjectViewProjectNode" />
@@ -357,7 +364,28 @@
       </list>
     </option>
   </component>
-  <component name="RunManager" selected="Python.crypt">
+  <component name="RunManager" selected="Python.main">
+    <configuration name="audio_functions" type="PythonConfigurationType" factoryName="Python" temporary="true">
+      <module name="Beer2D2" />
+      <option name="INTERPRETER_OPTIONS" value="" />
+      <option name="PARENT_ENVS" value="true" />
+      <envs>
+        <env name="PYTHONUNBUFFERED" value="1" />
+      </envs>
+      <option name="SDK_HOME" value="" />
+      <option name="WORKING_DIRECTORY" value="$PROJECT_DIR$/AudioHandler" />
+      <option name="IS_MODULE_SDK" value="true" />
+      <option name="ADD_CONTENT_ROOTS" value="true" />
+      <option name="ADD_SOURCE_ROOTS" value="true" />
+      <option name="SCRIPT_NAME" value="$PROJECT_DIR$/AudioHandler/audio_functions.py" />
+      <option name="PARAMETERS" value="" />
+      <option name="SHOW_COMMAND_LINE" value="false" />
+      <option name="EMULATE_TERMINAL" value="false" />
+      <option name="MODULE_MODE" value="false" />
+      <option name="REDIRECT_INPUT" value="false" />
+      <option name="INPUT_FILE" value="" />
+      <method v="2" />
+    </configuration>
     <configuration name="crypt" type="PythonConfigurationType" factoryName="Python" temporary="true">
       <module name="Beer2D2" />
       <option name="INTERPRETER_OPTIONS" value="" />
@@ -392,27 +420,6 @@
       <option name="ADD_CONTENT_ROOTS" value="true" />
       <option name="ADD_SOURCE_ROOTS" value="true" />
       <option name="SCRIPT_NAME" value="$PROJECT_DIR$/RestAPI/cryt.py" />
-      <option name="PARAMETERS" value="" />
-      <option name="SHOW_COMMAND_LINE" value="false" />
-      <option name="EMULATE_TERMINAL" value="false" />
-      <option name="MODULE_MODE" value="false" />
-      <option name="REDIRECT_INPUT" value="false" />
-      <option name="INPUT_FILE" value="" />
-      <method v="2" />
-    </configuration>
-    <configuration name="main (2)" type="PythonConfigurationType" factoryName="Python" temporary="true">
-      <module name="Beer2D2" />
-      <option name="INTERPRETER_OPTIONS" value="" />
-      <option name="PARENT_ENVS" value="true" />
-      <envs>
-        <env name="PYTHONUNBUFFERED" value="1" />
-      </envs>
-      <option name="SDK_HOME" value="" />
-      <option name="WORKING_DIRECTORY" value="$USER_HOME$/../DESKTOP/rpi-kivy-screen-master" />
-      <option name="IS_MODULE_SDK" value="false" />
-      <option name="ADD_CONTENT_ROOTS" value="true" />
-      <option name="ADD_SOURCE_ROOTS" value="true" />
-      <option name="SCRIPT_NAME" value="$USER_HOME$/../DESKTOP/rpi-kivy-screen-master/main.py" />
       <option name="PARAMETERS" value="" />
       <option name="SHOW_COMMAND_LINE" value="false" />
       <option name="EMULATE_TERMINAL" value="false" />
@@ -465,18 +472,18 @@
     </configuration>
     <list>
       <item itemvalue="Python.main" />
-      <item itemvalue="Python.main (2)" />
       <item itemvalue="Python.touchscreen_functions" />
       <item itemvalue="Python.cryt" />
       <item itemvalue="Python.crypt" />
+      <item itemvalue="Python.audio_functions" />
     </list>
     <recent_temporary>
       <list>
+        <item itemvalue="Python.main" />
+        <item itemvalue="Python.audio_functions" />
         <item itemvalue="Python.crypt" />
         <item itemvalue="Python.cryt" />
-        <item itemvalue="Python.main" />
         <item itemvalue="Python.touchscreen_functions" />
-        <item itemvalue="Python.main (2)" />
       </list>
     </recent_temporary>
   </component>
@@ -494,23 +501,23 @@
     <servers />
   </component>
   <component name="ToolWindowManager">
-    <frame x="0" y="27" width="2560" height="948" extended-state="6" />
+    <frame x="0" y="27" width="2560" height="1053" extended-state="6" />
     <editor active="true" />
     <layout>
-      <window_info active="true" content_ui="combo" id="Project" order="0" visible="true" weight="0.24921136" />
+      <window_info content_ui="combo" id="Project" order="0" visible="true" weight="0.24921136" />
       <window_info id="Structure" order="1" side_tool="true" weight="0.25" />
       <window_info id="Favorites" order="2" side_tool="true" />
       <window_info anchor="bottom" id="Message" order="0" />
       <window_info anchor="bottom" id="Find" order="1" />
-      <window_info anchor="bottom" id="Run" order="2" sideWeight="0.49487382" weight="0.3267571" />
-      <window_info anchor="bottom" id="Debug" order="3" sideWeight="0.7791798" visible="true" weight="0.405672" />
+      <window_info anchor="bottom" id="Run" order="2" sideWeight="0.4944795" weight="0.3264192" />
+      <window_info active="true" anchor="bottom" id="Debug" order="3" sideWeight="0.7783912" visible="true" weight="0.40502185" />
       <window_info anchor="bottom" id="Cvs" order="4" weight="0.25" />
       <window_info anchor="bottom" id="Inspection" order="5" weight="0.4" />
       <window_info anchor="bottom" id="TODO" order="6" />
       <window_info anchor="bottom" id="Terminal" order="7" sideWeight="0.4984375" weight="0.38894793" />
       <window_info anchor="bottom" id="Python Console" order="8" />
       <window_info anchor="bottom" id="Version Control" order="9" />
-      <window_info anchor="bottom" id="Event Log" order="10" sideWeight="0.22082019" side_tool="true" visible="true" weight="0.405672" />
+      <window_info anchor="bottom" id="Event Log" order="10" sideWeight="0.22160883" side_tool="true" visible="true" weight="0.40502185" />
       <window_info anchor="right" id="Commander" order="0" weight="0.4" />
       <window_info anchor="right" id="Ant Build" order="1" weight="0.25" />
       <window_info anchor="right" content_ui="combo" id="Hierarchy" order="2" weight="0.25" />
@@ -580,8 +587,6 @@
     </expressions>
   </component>
   <component name="editorHistoryManager">
-    <entry file="file://$USER_HOME$/../DESKTOP/PyGObject-3.30.1/build/lib.win32-3.6/gi/__init__.py" />
-    <entry file="file://C:/Python36/Lib/gi/__init__.py" />
     <entry file="file://C:/Python36/Lib/site-packages/gi/__init__.py" />
     <entry file="file://$USER_HOME$/../mingw32/lib/python3.7/site-packages/requests/__init__.py" />
     <entry file="file://$USER_HOME$/../mingw32/lib/python3.7/site-packages/requests/certs.py" />
@@ -679,9 +684,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/system_handler.py">
-      <provider selected="true" editor-type-id="text-editor" />
-    </entry>
     <entry file="file://$PROJECT_DIR$/RestAPI/vars.py">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="165">
@@ -703,16 +705,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/CamTracking/webcam_functions.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="525">
-          <caret line="47" column="52" selection-start-line="47" selection-start-column="52" selection-end-line="47" selection-end-column="52" />
-          <folding>
-            <element signature="e#44#62#0" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/SlackBot/util.py">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="315">
@@ -720,26 +712,7 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/settings.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="120">
-          <caret line="8" column="21" lean-forward="true" selection-start-line="8" selection-start-column="21" selection-end-line="8" selection-end-column="21" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/SlackBot/slack_functions.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="119">
-          <caret line="41" column="53" lean-forward="true" selection-start-line="41" selection-start-column="53" selection-end-line="41" selection-end-column="53" />
-          <folding>
-            <element signature="e#44#76#0" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/TouchScreen/main.py">
-      <provider selected="true" editor-type-id="text-editor" />
-    </entry>
+    <entry file="file://$PROJECT_DIR$/TouchScreen/main.py" />
     <entry file="file://$PROJECT_DIR$/TouchScreen/vars.py">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="120">
@@ -789,8 +762,46 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/LED/util.py">
-      <provider selected="true" editor-type-id="text-editor" />
+    <entry file="file://$PROJECT_DIR$/LED/util.py" />
+    <entry file="file://$PROJECT_DIR$/RestAPI/cryt.py" />
+    <entry file="file://$PROJECT_DIR$/RestAPI/crypt.py" />
+    <entry file="file://$PROJECT_DIR$/GPIOEmulator/EmulatorGUI.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="6495">
+          <caret line="438" column="55" selection-start-line="438" selection-start-column="46" selection-end-line="438" selection-end-column="55" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file:///usr/lib/python3/dist-packages/Crypto/PublicKey/RSA.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="3345">
+          <caret line="223" selection-start-line="223" selection-end-line="223" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/MotorControl/configuration.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="90">
+          <caret line="6" column="15" selection-start-line="6" selection-start-column="15" selection-end-line="6" selection-end-column="15" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/RestAPI/api_main.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="337">
+          <caret line="31" lean-forward="true" selection-start-line="31" selection-end-line="31" />
+          <folding>
+            <element signature="e#44#134#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/settings.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="90">
+          <caret line="6" column="12" selection-start-line="6" selection-end-line="6" selection-end-column="12" />
+        </state>
+      </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/LED/configuration.py">
       <provider selected="true" editor-type-id="text-editor">
@@ -799,46 +810,29 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/GPIOEmulator/EmulatorGUI.py">
+    <entry file="file://$PROJECT_DIR$/CamTracking/webcam_functions.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="146">
-          <caret line="438" column="55" selection-start-line="438" selection-start-column="46" selection-end-line="438" selection-end-column="55" />
+        <state relative-caret-position="562">
+          <caret line="47" column="52" selection-start-line="47" selection-start-column="52" selection-end-line="47" selection-end-column="52" />
+          <folding>
+            <element signature="e#44#62#0" expanded="true" />
+          </folding>
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/LED/led_functions.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="194">
-          <caret line="30" column="72" selection-start-line="30" selection-start-column="72" selection-end-line="30" selection-end-column="72" />
+        <state relative-caret-position="600">
+          <caret line="41" column="8" selection-start-line="41" selection-start-column="8" selection-end-line="42" selection-end-column="45" />
           <folding>
-            <marker date="1537733309755" expanded="true" signature="414:419" ph="..." />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/main.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="194">
-          <caret line="49" column="4" selection-start-line="49" selection-start-column="4" selection-end-line="49" selection-end-column="33" />
-          <folding>
-            <element signature="e#44#72#0" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/Orders/order_functions.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="-661">
-          <caret line="160" column="4" selection-start-line="160" selection-start-column="4" selection-end-line="162" selection-end-column="33" />
-          <folding>
-            <element signature="e#44#70#0" expanded="true" />
+            <element signature="e#0#15#0" expanded="true" />
           </folding>
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/MotorControl/motor_functions.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="1064">
+        <state relative-caret-position="412">
           <caret line="90" column="30" selection-start-line="90" selection-start-column="30" selection-end-line="90" selection-end-column="30" />
           <folding>
             <element signature="e#44#76#0" expanded="true" />
@@ -846,50 +840,63 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/MotorControl/configuration.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="90">
-          <caret line="6" column="16" selection-start-line="6" selection-start-column="16" selection-end-line="6" selection-end-column="16" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file:///usr/lib/python3/dist-packages/Crypto/PublicKey/RSA.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="151">
-          <caret line="223" selection-start-line="223" selection-end-line="223" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/RestAPI/cryt.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="375">
-          <caret line="25" selection-start-line="25" selection-end-line="25" />
-        </state>
-      </provider>
+    <entry file="file://$PROJECT_DIR$/system_handler.py">
+      <provider selected="true" editor-type-id="text-editor" />
     </entry>
     <entry file="file://$PROJECT_DIR$/MotorControl/util.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="104">
-          <caret line="109" column="56" selection-start-line="109" selection-start-column="56" selection-end-line="109" selection-end-column="56" />
+        <state relative-caret-position="193">
+          <caret line="103" selection-start-line="103" selection-end-line="103" />
           <folding>
             <element signature="e#44#59#0" expanded="true" />
           </folding>
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/RestAPI/crypt.py">
+    <entry file="file://$PROJECT_DIR$/SlackBot/slack_functions.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state>
-          <caret selection-end-line="25" selection-end-column="16" />
+        <state relative-caret-position="119">
+          <caret line="139" selection-start-line="139" selection-end-line="139" />
+          <folding>
+            <element signature="e#44#76#0" expanded="true" />
+          </folding>
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/RestAPI/api_main.py">
+    <entry file="file://$PROJECT_DIR$/Orders/order_functions.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="126">
-          <caret line="181" column="51" lean-forward="true" selection-start-line="181" selection-start-column="51" selection-end-line="181" selection-end-column="51" />
+        <state relative-caret-position="238">
+          <caret line="201" selection-start-line="201" selection-end-line="201" />
           <folding>
-            <element signature="e#44#134#0" expanded="true" />
+            <element signature="e#44#70#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/AudioHandler/vars.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state>
+          <caret column="15" selection-end-column="15" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/main.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="285">
+          <caret line="22" column="58" selection-start-line="22" selection-start-column="58" selection-end-line="22" selection-end-column="58" />
+          <folding>
+            <element signature="e#44#72#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/AudioHandler/audio_functions.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="180">
+          <caret line="12" lean-forward="true" selection-start-line="12" selection-end-line="12" />
+          <folding>
+            <marker date="1537917593478" expanded="true" signature="27:28" ph="..." />
+            <marker date="1537917593478" expanded="true" signature="80:81" ph="..." />
           </folding>
         </state>
       </provider>

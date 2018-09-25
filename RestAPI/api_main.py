@@ -112,7 +112,7 @@ def toggle_remote_control():
             vars.last_active_command_time = datetime.now().timestamp()
             system_vars.remote_control = True
             system_vars.remote_control_user = user
-            #motor_functions.set_motors_api(0, 0)
+            motor_functions.set_motors_api(0, 0)
             return {'status': 'success', 'message': "remote control enabled successfully"}
         else:
             return {'status': 'error', 'message': "already remote controlled by:" + system_vars.remote_control_user}

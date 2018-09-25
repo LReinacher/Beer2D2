@@ -188,12 +188,13 @@ def order_countdown(t):
     import time
     import TouchScreen.touchscreen_functions as touchscreen_functions
     import TouchScreen.texts as texts
+    import LED.led_functions as led_functions
     while t and len(get_open_ready_orders()) > 0:
         mins, secs = divmod(t, 60)
         timeformat = '{:02d}:{:02d}'.format(mins, secs)
         touchscreen_functions.set_info_label(texts.take_order % str(timeformat))
         vars.order_countdown = timeformat
-        if t < 20:
+        if t == 20:
             led_functions.set_led('yellow')
         time.sleep(1)
         if system_vars.door_is_open is False:

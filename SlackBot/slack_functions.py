@@ -136,13 +136,13 @@ def message_handling():
 
                     elif 'destination_reached=' in message and settings.debug_commands:
                         split = message.split('=')
-                        if split[1] == "True":
+                        if split[1] == "true":
                             system_vars.destination_reached = True
-                            #from threading import Thread
-                            #Confirm_Thread = Thread(target=order_functions.start_drop_off, args=(),
+                            from threading import Thread
+                            Confirm_Thread = Thread(target=order_functions.start_drop_off, args=(),
                                                     name="ConfirmOrder", daemon=False)
-                            #Confirm_Thread.start()
-                            order_functions.start_drop_off()
+                            Confirm_Thread.start()
+                            #order_functions.start_drop_off()
                         else:
                             system_vars.destination_reached = False
                         response = "destination_reached set " + split[1]
