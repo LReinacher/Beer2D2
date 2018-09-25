@@ -37,9 +37,9 @@ def motorDirect():
             vars.security_stopped = False
             if motor_l != "0" or motor_r != "0":
                 vars.last_active_command_time = datetime.now().timestamp()
-            print('Motor Direct by: ' + user)
+            print('Setting Motors to: ' + str(motor_l) + ' | ' + str(motor_r) + ' by ' + user)
             response = motor_functions.set_motors_api(motor_l, motor_r)
-
+        
             if response == 0:
                 return {'status': 'success', 'message': 'left motor set to ' + motor_l + ' - right motor set to  ' + motor_r}
             elif response == 1:
@@ -107,9 +107,12 @@ def toggle_remote_control():
         return {'status': 'error', 'message': "user not defined"}
     if status == "enable":
         if system_vars.remote_control is False:
+            vars.last_command_time = datetime.now().timestamp()
+            vars.security_stopped = False
+            vars.last_active_command_time = datetime.now().timestamp()
             system_vars.remote_control = True
             system_vars.remote_control_user = user
-            motor_functions.set_motors_api(0, 0)
+            #motor_functions.set_motors_api(0, 0)
             return {'status': 'success', 'message': "remote control enabled successfully"}
         else:
             return {'status': 'error', 'message': "already remote controlled by:" + system_vars.remote_control_user}

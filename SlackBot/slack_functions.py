@@ -80,10 +80,13 @@ def message_handling():
                 if communication[0]['type'] == 'message' and communication[0]['user'] != bot_user_id:
                     message = communication[0]['text']
                     print(system_vars.colorcode['info'] + "INFO: SLACK MESSAGE: " + message + system_vars.colorcode['reset'])
+                    message = message.lower()
                     if 'come to' in message:
                         split = message.split(' ')
                         try:
                             location = split[2]
+                            location = location.lower().title()
+                            
                             if location_functions.check_for_location(location):
                                 status, order = order_functions.add_order(communication[0]['user'], location, 'slack')
                                 if status:
@@ -135,11 +138,11 @@ def message_handling():
                         split = message.split('=')
                         if split[1] == "True":
                             system_vars.destination_reached = True
-                            from threading import Thread
-                            Confirm_Thread = Thread(target=order_functions.start_drop_off, args=(),
+                            #from threading import Thread
+                            #Confirm_Thread = Thread(target=order_functions.start_drop_off, args=(),
                                                     name="ConfirmOrder", daemon=False)
-                            Confirm_Thread.start()
-                            #order_functions.start_drop_off()
+                            #Confirm_Thread.start()
+                            order_functions.start_drop_off()
                         else:
                             system_vars.destination_reached = False
                         response = "destination_reached set " + split[1]

@@ -34,9 +34,8 @@ def set_motors_api(speed_l, speed_r):
         return 4
 
     if speed_l in configuration.speedIdentifiers:
-        if speed_l in configuration.speedIdentifiers:
-            set_motor('left', speed_l)
-            set_motor('right', speed_r)
+        if speed_r in configuration.speedIdentifiers:
+            set_motors(speed_l, speed_r)
             return 0
         else:
             return 2
@@ -59,6 +58,7 @@ def stop_both(security_override=False):
 
 
 def execute_directive(directive, type, custom_duration=None):
+    print('directive')
     if system_vars.remote_control is False:
         if type == "leave":
             stop_after_directive = True

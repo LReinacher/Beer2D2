@@ -22,6 +22,7 @@ def leave_location(location):
         while i < routes.leave_procedure[location]:
             for key in routes.leave_procedure[location][i]:
                 motor_functions.execute_directive(key, 'leave', routes.leave_procedure[location][i][key])
+            i = i + 1
 
     system_vars.destination_reached = False
 

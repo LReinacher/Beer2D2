@@ -122,7 +122,6 @@ def start_drop_off():
     import SlackBot.slack_functions as slack_functions
     import MotorControl.motor_functions as motor_functions
     import LED.led_functions as led_functions
-
     led_functions.set_led('green')
 
     system_vars.destination_reached = True
@@ -131,9 +130,9 @@ def start_drop_off():
     orders = get_destination_all_orders(get_current_destination())
     vars.ready_order_list = orders
 
-    if settings.touchscreen_enabled:
-        import TouchScreen.touchscreen_functions as touchscreen_functions
-        touchscreen_functions.set_ready_order_list(orders)
+    #if settings.touchscreen_enabled:
+        #import TouchScreen.touchscreen_functions as touchscreen_functions
+        #touchscreen_functions.set_ready_order_list(orders)
 
     wait_time = calc_order_wait_time()
 
@@ -168,9 +167,9 @@ def end_drop_off():
             delete_oder(0, 'index')
         i = i + 1
     vars.ready_order_list = []
-    if settings.touchscreen_enabled:
-        import TouchScreen.touchscreen_functions as touchscreen_functions
-        touchscreen_functions.set_order_list(vars.order_que)
+    #if settings.touchscreen_enabled:
+        #import TouchScreen.touchscreen_functions as touchscreen_functions
+        #touchscreen_functions.set_order_list(vars.order_que)
 
     location_functions.leave_location(webcam_functions.get_last_barcode())
 
@@ -194,6 +193,8 @@ def order_countdown(t):
         timeformat = '{:02d}:{:02d}'.format(mins, secs)
         touchscreen_functions.set_info_label(texts.take_order % str(timeformat))
         vars.order_countdown = timeformat
+        if t < 20:
+            led_functions.set_led('yellow')
         time.sleep(1)
         if system_vars.door_is_open is False:
             t -= 1

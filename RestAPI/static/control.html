@@ -37,9 +37,9 @@ input[type=range][orient=vertical]
 <body>
     <button id="enable_remote">ENABLE</button>
     <button id="disable_remote">DISABLE</button>
-    <input id="motor_l_slider" type="range" min="-10" max="10" value="0" step="2" orient="vertical"/>
+    <input id="motor_l_slider" type="range" min="-25" max="25" value="0" step="2" orient="vertical"/>
     <a id="l_status"></a>
-    <input id="motor_r_slider" type="range" min="-10" max="10" value="0" step="2" orient="vertical"/>
+    <input id="motor_r_slider" type="range" min="-25" max="25" value="0" step="2" orient="vertical"/>
     <a id="r_status"></a>
 </body>
 </html>
@@ -55,8 +55,10 @@ input[type=range][orient=vertical]
     var motor_r_slider = document.getElementById('motor_r_slider');
     motor_l_slider.addEventListener('input', sliderChangeL);
     motor_l_slider.addEventListener('mouseup', sliderResetL);
+    motor_l_slider.addEventListener('touchend', sliderResetL);
     motor_r_slider.addEventListener('input', sliderChangeR);
     motor_r_slider.addEventListener('mouseup', sliderResetR);
+    motor_r_slider.addEventListener('touchend', sliderResetR);
 
     var enable_button = document.getElementById('enable_remote');
     var disable_button = document.getElementById('disable_remote');

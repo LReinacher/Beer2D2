@@ -8,6 +8,7 @@ from RestAPI import api_main
 from MotorControl import motor_functions
 from LED import led_functions
 from CamTracking import webcam_functions
+import system_handler
 #import SlackBot.slack_functions as slack_functions
 #import RestAPI.api_main as api_main
 #import MotorControl.motor_functions as motor_functions
@@ -17,6 +18,8 @@ from CamTracking import webcam_functions
 if __name__ == "__main__":
     print(system_vars.colorcode['info'] + "INFO: INITIALIZING SYSTEM..." + system_vars.colorcode['reset'])
     motor_functions.init()
+    #Motor_thread = Thread(target=motor_functions.init, args=(), name="Motor_thread", daemon=False)
+    #Motor_thread.start()
     print(system_vars.colorcode['ok'] + "OK: MOTOR-CONTROL INITIALIZED" + system_vars.colorcode['reset'])
     led_functions.init()
     led_functions.set_led('red')
