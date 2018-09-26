@@ -9,6 +9,7 @@ from threading import Thread
 if settings.gpio_enabled:
     import pigpio
 
+
 class MotorControl(object):
     def __init__(self):
         

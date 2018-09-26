@@ -27,13 +27,13 @@ if __name__ == "__main__":
     led_functions.set_led('red')
     print(system_vars.colorcode['ok'] + "OK: LED INITIALIZED" + system_vars.colorcode['reset'])
 
-    #print(system_vars.colorcode['info'] + "INFO: STARTING SLACK-BOT..." + system_vars.colorcode['reset'])
-    #SlackBot_thread = Thread(target=slack_functions.init, args=(), name="SlackBot", daemon=False)
-    #SlackBot_thread.start()
+    print(system_vars.colorcode['info'] + "INFO: STARTING SLACK-BOT..." + system_vars.colorcode['reset'])
+    SlackBot_thread = Thread(target=slack_functions.init, args=(), name="SlackBot", daemon=False)
+    SlackBot_thread.start()
 
-    #print(system_vars.colorcode['info'] + "INFO: STARTING REST-API..." + system_vars.colorcode['reset'])
-    #api_thread = Thread(target=api_main.start, args=(), name="API", daemon=False)
-    #api_thread.start()
+    print(system_vars.colorcode['info'] + "INFO: STARTING REST-API..." + system_vars.colorcode['reset'])
+    api_thread = Thread(target=api_main.start, args=(), name="API", daemon=False)
+    api_thread.start()
 
     print(system_vars.colorcode['info'] + "INFO: STARTING CAM-TRACKING..." + system_vars.colorcode['reset'])
     WebCam_Thread = Thread(target=tracking.main, args=(), name="CamTracking", daemon=False)

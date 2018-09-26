@@ -15,18 +15,38 @@ straight_time = 1
 
 #CommandIdentifiers
 commandIdentifiers = { #[left_motor_command, right_motor_command, duration]]
-    'light_left_turn': [0, 1, light_turn_time],
-    'light_right_turn': [1, 0, light_turn_time],
-    'half_left_turn': [0, 1, half_turn_time],
-    'half_right_turn': [1, 0, half_turn_time],
-    'full_left_turn': [0, 1, full_turn_time],
-    'full_right_turn': [1, 0, full_turn_time],
-    'full_left_spin': [-1, 1, full_spin_time],
-    'full_right_spin': [1, -1, full_spin_time],
-    'straight': [1, 1, straight_time],
-    'forwards': [1, 1, None],
-    'backwards': [-1, -1, None],
+    'light_left_turn': [0, 15, light_turn_time],
+    'light_right_turn': [15, 0, light_turn_time],
+    'half_left_turn': [0, 15, half_turn_time],
+    'half_right_turn': [15, 0, half_turn_time],
+    'full_left_turn': [0, 15, full_turn_time],
+    'full_right_turn': [15, 0, full_turn_time],
+    'full_left_spin': [-15, 15, full_spin_time],
+    'full_right_spin': [15, -15, full_spin_time],
+    'straight': [15, 15, straight_time],
+
     'stop': [0, 0, None],
+    'forwards': [15, 15, None],
+    'backwards': [-15, -15, None],
+
+    'left_1': [14, 15, None],
+    'left_2': [13, 15, None],
+    'left_3': [12, 15, None],
+    'left_4': [10, 15, None],
+    'left_5': [8, 15, None],
+    'left_6': [5, 15, None],
+    'left_7': [3, 15, None],
+    'left_8': [0, 15, None],
+    'right_1': [15, 14, None],
+    'right_2': [15, 13, None],
+    'right_3': [15, 12, None],
+    'right_4': [15, 10, None],
+    'right_5': [15, 8, None],
+    'right_6': [15, 5, None],
+    'right_7': [15, 3, None],
+    'right_8': [15, 0, None],
+
+    'spin': [5, -5, None]
 }
 
 speedIdentifiers = { #[PWM-frequency in Hz, gear_relai_mode (fwd / bwd)]
