@@ -14,7 +14,7 @@ def main():
         ret, frame = video_capture.read()
 
         # Crop the image
-        crop_img = frame[60:120, 0:160]
+        crop_img = frame[30:160, 0:480]
 
         # Convert to grayscale
         gray = cv2.cvtColor(crop_img, cv2.COLOR_BGR2GRAY)
@@ -40,43 +40,75 @@ def main():
             cv2.line(crop_img,(0,cy),(1280,cy),(255,0,0),1)
 
             cv2.drawContours(crop_img, contours, -1, (0,255,0), 1)
-            #print(cx)
+            print(cx)
 
-            if cx > 150:
-                print("4 Left!")
-                motor_functions.set_motors(0, 20)
-
-            if 150 >= cx > 130:
-                print("3 Left")
-                motor_functions.set_motors(5, 20)
-
-            if 130 >= cx > 110:
-                print("2 Left")
-                motor_functions.set_motors(10, 20)
-
-            if 110 >= cx > 90:
-                print("1 Left")
-                motor_functions.set_motors(15, 20)
-
-            if 70 <= cx <= 90:
-                print("On Track!")
-                motor_functions.set_motors(20, 20)
-
-            if 50 <= cx < 70:
-                print("1 Right")
-                motor_functions.set_motors(20, 15)
-
-            if 30 <= cx < 50:
-                print("2 Right")
-                motor_functions.set_motors(20, 10)
-
-            if 10 <= cx < 30:
-                print("3 Right")
-                motor_functions.set_motors(20, 5)
-
-            if cx < 10:
+            if cx > 290:
+                print("6 Right!")
+                motor_functions.set_motors(15, 0)
+                
+            if 290 >= cx > 260:
+                print("5 Right")
+                motor_functions.set_motors(15, 3)
+                
+            if 260 >= cx > 240:
                 print("4 Right")
-                motor_functions.set_motors(20, 0)
+                motor_functions.set_motors(15, 5)
+
+            if 240 >= cx > 220:
+                print("3 Right")
+                motor_functions.set_motors(15, 8)
+
+            if 220 >= cx > 200:
+                print("2 Right")
+                motor_functions.set_motors(15, 10)
+                
+            if 200 >= cx > 190:
+                print("1 Right")
+                motor_functions.set_motors(15, 12)
+
+            if 190 >= cx > 180:
+                print("1 Right")
+                motor_functions.set_motors(15, 13)
+                
+            if 180 >= cx > 170:
+                print("1 Right")
+                motor_functions.set_motors(15, 14)
+
+            if 150 <= cx <= 170:
+                print("On Track!")
+                motor_functions.set_motors(15, 15)
+                
+            if 140 <= cx < 150:
+                print("1 Left")
+                motor_functions.set_motors(14, 15)
+
+            if 130 <= cx < 140:
+                print("1 Left")
+                motor_functions.set_motors(13, 15)
+
+            if 120 <= cx < 130:
+                print("1 Left")
+                motor_functions.set_motors(12, 15)
+            
+            if 100 <= cx < 120:
+                print("2 Left")
+                motor_functions.set_motors(10, 15)
+
+            if 80 <= cx < 100:
+                print("3 Left")
+                motor_functions.set_motors(5, 15)
+                
+            if 60 <= cx < 80:
+                print("4 Left")
+                motor_functions.set_motors(6, 15)
+                
+            if 30 <= cx < 60:
+                print("5 Left")
+                motor_functions.set_motors(3, 15)
+
+            if cx < 30:
+                print("6 Left")
+                motor_functions.set_motors(0, 15)
 
         else:
             print("I don't see the line")
@@ -86,3 +118,6 @@ def main():
         cv2.imshow('frame',crop_img)
         if cv2.waitKey(1) & 0xFF == ord('q'):
             break
+        
+if __name__ == "__main__":
+    main()
