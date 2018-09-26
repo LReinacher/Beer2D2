@@ -35,11 +35,6 @@ if __name__ == "__main__":
     api_thread = Thread(target=api_main.start, args=(), name="API", daemon=False)
     api_thread.start()
 
-    from Display import display_functions
-    print(system_vars.colorcode['info'] + "INFO: STARTING DISPLAY..." + system_vars.colorcode['reset'])
-    display_thread = Thread(target=display_functions.init, args=(), name="Display", daemon=False)
-    display_thread.start()
-
     print(system_vars.colorcode['info'] + "INFO: STARTING CAM-TRACKING..." + system_vars.colorcode['reset'])
     #WebCam_Thread = Thread(target=webcam_functions.init, args=(), name="CamTracking", daemon=False)
     #WebCam_Thread.start()
