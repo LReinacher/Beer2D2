@@ -154,7 +154,7 @@ def start_drop_off():
                     slack_functions.send_dm(orders[i]['user'], responses.order_ready % vars.order_countdown)
                 else:
                     import mail_system
-                    mail_system.send_mail(responses.order_ready, responses.order_ready, orders[i]['user'])
+                    mail_system.send_mail(responses.order_ready % vars.order_countdown, responses.order_ready % vars.order_countdown, orders[i]['user'])
         i = i + 1
 
     order_countdown(wait_time)
