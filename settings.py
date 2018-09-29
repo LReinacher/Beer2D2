@@ -7,3 +7,4 @@ touchscreen_enabled = True
 gpio_enabled = False
 order_waiting_time = 60
 debug_commands = True
+name = 'Beer2D2'

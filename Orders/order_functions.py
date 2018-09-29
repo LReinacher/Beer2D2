@@ -142,20 +142,19 @@ def start_drop_off():
         import UI.ui_functions as ui_functions
         ui_functions.start_drop_off()
 
-
-
     i = 0
+    import SlackBot.responses as responses
     while i < len(orders):
         if 'type' in orders[i]:
-            if orders[i]['type'] == ['slack']:
-                slack_functions.send_dm(orders[i]['user'], 'Order Ready')
+            if orders[i]['type'] == 'slack':
+                slack_functions.send_dm(orders[i]['user'], responses.order_ready % vars.order_countdown)
             else:
                 user_id = slack_functions.get_id_by_email(orders[i]['user'])
                 if user_id is not None:
-                    slack_functions.send_dm(orders[i]['user'], 'Order Ready')
+                    slack_functions.send_dm(orders[i]['user'], responses.order_ready % vars.order_countdown)
                 else:
-                    pass
-                    #send e-mail
+                    import mail_system
+                    mail_system.send_mail(responses.order_ready, responses.order_ready, orders[i]['user'])
         i = i + 1
 
     order_countdown(wait_time)
