@@ -23,6 +23,15 @@ def check_user_order(user, ident2=None):
     return -1
 
 
+def check_user_ready_order(user, ident2=None):
+    i = len(vars.ready_order_list)
+    while i > 0:
+        if vars.ready_order_list[i - 1]['user'] == user or vars.ready_order_list[i - 1]['user'] == ident2:
+            return i - 1
+        i = i - 1
+    return -1
+
+
 def add_order(user, room, type, priority=False):
     import SlackBot.slack_functions as slack_functions
     result = check_user_already_placed_order(user, type)
@@ -122,6 +131,7 @@ def start_drop_off():
 
     orders = get_destination_all_orders(get_current_destination())
     vars.ready_order_list = orders
+    vars.drop_off_running = True
 
     wait_time = calc_order_wait_time()
     mins, secs = divmod(wait_time, 60)
@@ -157,7 +167,6 @@ def end_drop_off():
     import CamTracking.webcam_functions as webcam_functions
     import LED.led_functions as led_functions
     import UI.ui_functions as ui_functions
-
     led_functions.set_led('blue')
 
     i = 0
@@ -165,8 +174,8 @@ def end_drop_off():
         if 'type' in vars.ready_order_list[i]:
             delete_oder(0, 'index')
         i = i + 1
+    vars.drop_off_running = False
     vars.ready_order_list = []
-    print(vars.order_que)
     ui_functions.force_order_update()
 
     location_functions.leave_location(webcam_functions.get_last_barcode())
@@ -211,5 +220,37 @@ def get_open_ready_orders():
     return orders
 
 
-def confirm_order(index):
-    vars.ready_order_list[index]['open'] = False
+def confirm_order(user_or_index, type=None):
+    import SlackBot.slack_functions as slack_functions
+    if type == "slack":
+        email = slack_functions.get_email_by_id(user_or_index)
+        if vars.drop_off_running:
+            index = check_user_ready_order(user_or_index, email)
+            if index > -1:
+                vars.ready_order_list[index]['open'] = False
+                return True
+        index = check_user_order(user_or_index, email)
+        if index > -1:
+            delete_oder(index, "index")
+            import UI.ui_functions as ui_functions
+            ui_functions.force_order_update()
+            return True
+        else:
+            return False
+    elif type == "interface":
+        user_id = slack_functions.get_id_by_email(user_or_index)
+        if vars.drop_off_running:
+            index = check_user_ready_order(user_or_index, user_id)
+            if index > -1:
+                vars.ready_order_list[index]['open'] = False
+                return True
+        index = check_user_order(user_or_index, user_id)
+        if index > -1:
+            delete_oder(index, "index")
+            import UI.ui_functions as ui_functions
+            ui_functions.force_order_update()
+            return True
+        else:
+            return False
+    elif type is None:
+        vars.ready_order_list[user_or_index]['open'] = False

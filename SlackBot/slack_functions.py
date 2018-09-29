@@ -111,7 +111,7 @@ def message_handling():
                         email = get_email_by_id(communication[0]['user'])
                         index = order_functions.check_user_order(communication[0]['user'], email)
                         if index >= 0:
-                            order_functions.delete_oder(communication[0]['user'], 'slack')
+                            order_functions.confirm_order(communication[0]['user'], 'slack')
                             response = responses.order_marked_delivered_success
                         else:
                             response = responses.error_no_open_order
