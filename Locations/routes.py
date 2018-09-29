@@ -8,6 +8,6 @@ routes = {
 
 }
 
-l9eave_procedure = { #destination_identifer: [{command: duration}]
+leave_procedure = { #destination_identifer: [{command: duration}]
     'Morty': [{'backwards': 2, 'full_turn': None}],
 }

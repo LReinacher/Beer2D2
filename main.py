@@ -39,12 +39,11 @@ if __name__ == "__main__":
     WebCam_Thread = Thread(target=tracking.main, args=(), name="CamTracking", daemon=False)
     WebCam_Thread.start()
 
-    #if settings.touchscreen_enabled:
-     #   from TouchScreen import touchscreen_functions
-      #  print(system_vars.colorcode['info'] + "INFO: STARTING TOUCHSCREEN..." + system_vars.colorcode['reset'])
-       # TouchScreen_Thread = Thread(target=touchscreen_functions.init, args=(), name="TouchScreen", daemon=False)
-        #TouchScreen_Thread.start()
-
+    if settings.touchscreen_enabled:
+        from UI import ui_functions
+        print(system_vars.colorcode['info'] + "INFO: STARTING TOUCHSCREEN..." + system_vars.colorcode['reset'])
+        TouchScreen_Thread = Thread(target=ui_functions.init, args=(), name="TouchScreen", daemon=False)
+        TouchScreen_Thread.start()
 
     print(system_vars.colorcode['ok'] + "OK: SYSTEM INITIALIZED" + system_vars.colorcode['reset'])
     led_functions.set_led('blue')

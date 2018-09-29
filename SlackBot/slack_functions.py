@@ -86,7 +86,6 @@ def message_handling():
                         try:
                             location = split[2]
                             location = location.lower().title()
-                            
                             if location_functions.check_for_location(location):
                                 status, order = order_functions.add_order(communication[0]['user'], location, 'slack')
                                 if status:
@@ -163,5 +162,5 @@ def message_handling():
                         result = slackCommunication.writeToSlack(communication[0]['user'], response)["ok"]
 
             except Exception as e:
-                print(system_vars.colorcode['error'] + "ERROR: SLACK-BOT-FUNCTIONS " + str(e).upper() + system_vars.colorcode['reset'])
+               print(system_vars.colorcode['error'] + "ERROR: SLACK-BOT-FUNCTIONS " + str(e).upper() + system_vars.colorcode['reset'])
         time.sleep(0.5)

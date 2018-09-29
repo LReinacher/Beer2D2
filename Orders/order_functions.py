@@ -6,8 +6,6 @@ import system_vars
 
 
 def check_room_order(room):
-    if settings.touchscreen_enabled:
-        import TouchScreen.touchscreen_functions as touchscreen_functions
     i = len(vars.order_que)
     while i > 0:
         if vars.order_que[i - 1]['room'] == room:
@@ -42,11 +40,8 @@ def add_order(user, room, type, priority=False):
                 vars.order_que.append({'room': room, 'user': user, 'real_name': real_name, 'type': type})
                 position = len(vars.order_que) - 1
 
-            if settings.touchscreen_enabled:
-                import TouchScreen.touchscreen_functions as touchscreen_functions
-                if system_vars.destination_reached is False:
-                    touchscreen_functions.set_order_list(vars.order_que)
-
+        import UI.ui_functions as ui_functions
+        ui_functions.force_order_update()
         return True, position
     else:
         return False, result
@@ -67,10 +62,8 @@ def delete_oder(identifier, type):
 
     if index >= 0:
         vars.order_que.pop(index)
-        if settings.touchscreen_enabled:
-            import TouchScreen.touchscreen_functions as touchscreen_functions
-            if system_vars.destination_reached is False:
-                touchscreen_functions.set_order_list(vars.order_que)
+        import UI.ui_functions as ui_functions
+        ui_functions.force_order_update()
         return True
     else:
         return False
@@ -130,21 +123,26 @@ def start_drop_off():
     orders = get_destination_all_orders(get_current_destination())
     vars.ready_order_list = orders
 
-    #if settings.touchscreen_enabled:
-        #import TouchScreen.touchscreen_functions as touchscreen_functions
-        #touchscreen_functions.set_ready_order_list(orders)
-
     wait_time = calc_order_wait_time()
+    mins, secs = divmod(wait_time, 60)
+    timeformat = '{:02d}:{:02d}'.format(mins, secs)
+    vars.order_countdown = timeformat
+
+    if settings.touchscreen_enabled:
+        import UI.ui_functions as ui_functions
+        ui_functions.start_drop_off()
+
+
 
     i = 0
     while i < len(orders):
         if 'type' in orders[i]:
             if orders[i]['type'] == ['slack']:
-                slack_functions.send_dm(orders[i]['user'], '')
+                slack_functions.send_dm(orders[i]['user'], 'Order Ready')
             else:
                 user_id = slack_functions.get_id_by_email(orders[i]['user'])
                 if user_id is not None:
-                    slack_functions.send_dm(orders[i]['user'], '')
+                    slack_functions.send_dm(orders[i]['user'], 'Order Ready')
                 else:
                     pass
                     #send e-mail
@@ -158,6 +156,7 @@ def end_drop_off():
     import Locations.location_functions as location_functions
     import CamTracking.webcam_functions as webcam_functions
     import LED.led_functions as led_functions
+    import UI.ui_functions as ui_functions
 
     led_functions.set_led('blue')
 
@@ -167,9 +166,8 @@ def end_drop_off():
             delete_oder(0, 'index')
         i = i + 1
     vars.ready_order_list = []
-    #if settings.touchscreen_enabled:
-        #import TouchScreen.touchscreen_functions as touchscreen_functions
-        #touchscreen_functions.set_order_list(vars.order_que)
+    print(vars.order_que)
+    ui_functions.force_order_update()
 
     location_functions.leave_location(webcam_functions.get_last_barcode())
 
@@ -186,13 +184,10 @@ def calc_order_wait_time():
 
 def order_countdown(t):
     import time
-    import TouchScreen.touchscreen_functions as touchscreen_functions
-    import TouchScreen.texts as texts
     import LED.led_functions as led_functions
     while t and len(get_open_ready_orders()) > 0:
         mins, secs = divmod(t, 60)
         timeformat = '{:02d}:{:02d}'.format(mins, secs)
-        touchscreen_functions.set_info_label(texts.take_order % str(timeformat))
         vars.order_countdown = timeformat
         if t == 20:
             led_functions.set_led('yellow')
