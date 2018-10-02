@@ -1,0 +1,251 @@
+<html>
+
+<head>
+
+ <!--   <script type="text/javascript" src="js/jquery-1.11.2.min.js"></script>
+    <script type="text/javascript" src="js/underscore-min.js"></script>
+    <script type="text/javascript" src="js/backbone-min.js"></script>
+    <script type="text/javascript" src="js/joystick_view.js"></script>
+ -->   <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/modernizr/2.8.3/modernizr.js"></script>
+
+    <link rel="stylesheet" type="text/css" href="../../static/vendor/skeleton/normalize.css" />
+    <link rel="stylesheet" type="text/css" href="../../static/vendor/skeleton/skeleton.css" />
+
+    <style>
+        #wrapper {
+                text-align: center;
+            }
+
+            #parent {
+                display: inline-block;
+                width: 100%;
+                height: 100%;
+                border: solid 1px #000;
+            }
+
+            button {
+                background-color: rgba(76, 175, 79, 0.514);
+            }
+
+            #parent>#right,
+            #left,
+            #forward,
+            #back {
+                opacity: 0.3;
+                position: relative;
+                bottom: 180px;
+                transition: 0.5s;
+            }
+
+            #parent>#right,
+            #left,
+            #forward,
+            #back {
+                opacity: 1;
+            }
+
+    .wasdcontainer {
+        margin-top: -175px;
+        text-align: center;
+     /*   margin-left: 40%;
+        margin-right: 50%;
+        width: 50%;*/ /* Width of the outside container */
+    }
+
+    .wasd {
+        opacity: 0.7;
+        -webkit-transition: .2s;
+        transition: opacity .2s;
+    }
+
+        </style>
+
+
+</head>
+
+
+<body>
+    <div id="wrapper">
+        <div id="parent">
+
+            <iframe width="100%" height="100%" src="https://www.youtube.com/embed/YqLznHTyxVw" frameborder="0" allow="autoplay; encrypted-media"
+                allowfullscreen></iframe>
+
+
+        </div>
+
+        </div>
+
+
+            <div class="wasdcontainer">
+                <img src="../../static/img/wasd.png" alt="wasd" class="wasd" usemap="#wasd">
+                <p class="wasd" style="margin-top:0px; padding-bottom:-10;">Use keyboard to controll BeeR2D2</p>
+
+                <map name="wasd">
+                    <!--Forward-->
+                    <area shape="rect" coords="68,33,111,77" onmousedown="forward()"
+                        alt="w"  onmouseup="stopDriving()">
+                    <!--Left-->
+                    <area shape="rect" coords="8,93,51,138" onmousedown="left()"
+                        alt="a"  onmouseup="stopDriving()">
+                    <!--Back-->
+                    <area shape="rect" coords="68,93,111,138" onmousedown="backward()"
+                        alt="s"  onmouseup="stopDriving()">
+                    <!--Right-->
+                    <area shape="rect" coords="129,93,172,138" onmousedown="right()"
+                        alt="d"  onmouseup="stopDriving()">
+
+                </map>
+
+           <!--     <input type="range" min="1" max="100" value="50" class="slider" id="myRange"> -->
+            </div>
+
+     <!--               <div>
+                        x: <span id="xVal"></span><br/>
+                        y: <span id="yVal"></span><br/>
+                    </div>
+-->
+
+            <script type="text/javascript">
+                            // Keyboard listening
+                document.addEventListener('keyup', function (event) {
+                    if (event.code == 'KeyW') {
+                        stopDriving()
+                    }
+                    if (event.code == 'KeyD') {
+                        stopDriving()
+                    }
+                    if (event.code == 'KeyS') {
+                        stopDriving()
+                    }
+                    if (event.code == 'KeyA') {
+                        stopDriving()
+                    }
+                });
+
+                document.addEventListener('keydown', function (event) {
+                    if (event.code == 'KeyW') {
+                        forward()
+                    }
+                    if (event.code == 'KeyD') {
+                        right()
+                    }
+                    if (event.code == 'KeyS') {
+                        backward()
+                    }
+                    if (event.code == 'KeyA') {
+                        left()
+                    }
+           //         if (event.code == 'KeyW' && event.code == 'KeyD') {
+          //              controll(10,5)
+         //           }
+        //            if (event.code == 'KeyW' && event.code == 'KeyA') {
+       //                 controll(5,10)
+      //              }
+                });
+
+                function stopDriving() {
+                    controll(0,0)
+                }
+
+                function forward() {
+                    controll(10, 10)
+                }
+
+                function backward() {
+                    controll(-10, -10)
+                }
+
+                function left() {
+                    controll(-5, 5)
+                }
+
+                function right() {
+                    controll(5, -5)
+                }
+
+                var user = "leonard.huesgen@code.berlin"
+                var motor_l = 0
+                var motor_r = 0
+
+                function controll(motor_l, motor_r) {
+                enableRemote()
+                    $.ajax({
+                        type: "POST",
+                        url: "http://192.168.2.140:8000/direct?motor_l=" + motor_l + "&motor_r=" + motor_r + "&user=" + user,
+                        success: function (data) {
+                            response = data["status"];
+                            message = data["message"];
+                        }
+                    });
+                    // if (response == "success") {
+                    //     alert("Order submitted!");
+                    // } else {
+                    //     alert("Fuck");wwww
+                    // }
+                }
+
+                // Enable remote controll
+                function enableRemote() {
+                var code = "bla"
+                    $.ajax({
+                    type: "POST",
+                    url: "http://192.168.2.140:8000/toggle-remote-control?status=enable&user=" + user,
+                    success : function(data)
+                        {
+                            response = data["status"];
+                            message = data["message"];
+                            code = data["code"];
+                        }
+                    });
+                    alert("response: "+status);
+                    alert("Message: "+message);
+                    alert("Code: "+code);
+                }
+
+            // Joystick
+  /*              $(document).ready(function () {
+                    var joystickView = new JoystickView(150, function (callbackView) {
+                        $("#joystickContent").append(callbackView.render().el);
+                        setTimeout(function () {
+                            callbackView.renderSprite();
+                        }, 0);
+                    });
+                    joystickView.bind("verticalMove", function (y) {
+                        $("#yVal").html(y);
+                    });
+                    joystickView.bind("horizontalMove", function (x) {
+                        $("#xVal").html(x);
+                    });
+                });
+*/
+                // Slider
+       //         var slider = document.getElementById("myRange");
+       //         var output = document.getElementById("demo");
+       //         output.innerHTML = slider.value; // Display the default slider value
+
+       //         // Update the current slider value (each time you drag the slider handle)
+       //         slider.oninput = function () {
+       //             output.innerHTML = this.value;
+       //         }
+
+
+                
+            </script>
+            <!--  /Joystick  -->
+
+            <!-- Buttons can be used by uncommenting the stuff below and comenting out the joystick code from above-->
+
+            <!--  Button  -->
+            <!--  <button id="forward">forward</button>
+                <br>
+                <button id="left">left</button>
+                <button id="right">right</button>
+                <br>
+                <button id="back">back</button> -->
+            <!--  /Button  -->
+
+</body>
+
+</html>

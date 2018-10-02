@@ -1,0 +1,242 @@
+<!DOCTYPE html>
+
+<html>
+
+<head>
+    <meta charset="utf-8" />
+    <title>Beer2You2</title>
+    <link rel="icon" href="../../static/img/icon.png">
+    <link rel="stylesheet" type="text/css" href="../../static/vendor/skeleton/normalize.css" />
+    <link rel="stylesheet" type="text/css" href="../../static/vendor/skeleton/skeleton.css" />
+    <link rel="stylesheet" type="text/css" href="../../static/css/styles.css" />
+    <!--  </Users/leonardtonio/Desktop/beer2/Beer2D2/static/css -->
+
+    <script>
+        function writeText(txt) {
+            document.getElementById("desc").innerHTML = txt;
+        }
+
+        function bedSelected() {
+            alert("You selected Bed");
+            addOrder("Bed")
+        }
+
+        function mortySelected() {
+            alert("You selected Morty");
+            addOrder("Morty")
+        }
+
+        function rickSelected() {
+            alert("You selected Rick");
+            addOrder("Rick")
+        }
+
+        function roomySelected() {
+            alert("You selected Roomy");
+            addOrder("Roomy")
+        }
+
+        function dontKnowSelected() {
+            alert("You selected DontKnow");
+        }
+
+        function codeTeamSelected() {
+            alert("You selected Code Team");
+            addOrder("Team")
+        }
+
+        function paperSelected() {
+            alert("You selected Paper");
+            addOrder("Paper")
+        }
+
+        function rockSelected() {
+            alert("You selected Rock");
+            addOrder("Rock")
+        }
+
+        function scissorsSelected() {
+            alert("You selected Scissors");
+            addOrder("Scissors")
+        }
+
+        function watchmenSelected() {
+            alert("You selected Watchmen");
+            addOrder("Watchmen")
+        }
+
+        function addOrder(location) {
+            $.ajax({
+                type: "GET",
+                url: "http://127.0.0.1:9000/add-order?location=" + location + "&user=" + user,
+                success: function (data) {
+                    response = data["status"];
+                    message = data["message"];
+                }
+            });
+        }
+
+        var user = 'leonard.huesgen@code.berlin'
+
+        function getOrders() {
+            $.ajax({
+                type: "get",
+                url: "http://127.0.0.1:9000/get-orders",
+                success: function (data) {
+                    response = data["code"];
+                    data = data["data"];
+                    var dataArray = data.orders;
+
+                    for (var i = 0; i < dataArray.length; i++) {
+                        tr = $('<tr/>');
+                        if (dataArray[i].user == user) {
+                            tr.append("<td>" + "<button style='padding-left:5px; padding-right:5px; margin-right:-20px; border-radius: 50%; border:0px; font-size:110%; margin-bottom:0px;' onclick='cancelOrder()' id='cancelOrderButton;'>✖</button>" + "</td>");
+                        } else {
+                            tr.append("<td></td>");
+                        }
+                        tr.append("<td>" + dataArray[i].room + "</td>");
+                        tr.append("<td>" + dataArray[i].user + "</td>");
+                        tr.append("<td>" + dataArray[i].real_name + "</td>");
+
+                        $('.table1').append(tr);
+                    };
+                }
+            });
+        };
+
+        function cancelOrder() {
+            $.ajax({
+                type: "GET",
+                url: "http://127.0.0.1:9000/cancel-order?user=" + user,
+                success: function (data) {
+                    response = data["status"];
+                    message = data["message"];
+                }
+            });
+            location.reload();
+        }
+
+        function changeUserButtonText() {
+            var button = document.getElementById("userButton");
+            button.innerText = username + " ▼";
+        }
+
+
+        window.onload = function () {
+            getOrders();
+        };
+
+
+        function logout() {
+            firebase.auth().signOut().then(function () {
+                window.open('index.html', '_self', false)
+                // Sign-out successful.
+            }).catch(function (error) {
+                // An error happened.
+            });
+        }
+
+    </script>
+</head>
+
+<body>
+    <header class="header">
+        <div class="dropdown">
+            <button onclick="dropdownPressed()" id="userButton" class="dropbtn"></button>
+            <div id="myDropdown" class="dropdown-content">
+                <a onclick="logout();">Logout</a>
+                <!-- <a href="#">Link 2</a> -->
+            </div>
+        </div>
+        <div style="text-align:right;">
+            <button id="cameraButton" onclick="window.location.href='./camera.html'">
+                Camera View
+            </button>
+        </div>
+
+        <div class="slogan">
+            BeeR2D2
+        </div>
+        <!--
+            <button onclick=getOrders() style="margin-top: 10px; margin-right: 10px; color: #1d1c20; background-color: silver;">Get
+                Orders</button>
+-->
+        <!-- Campus Map -->
+        <div class="roomplan">
+            <img src="../../static/img/roomplan1.png" id="roomNine" class="mapper" alt="campusFloor" usemap="#campusFloor">
+            <map name="campusFloor">
+                <!--Chill Area 1-->
+                <area shape="rect" coords="830,21,896,45" onclick="bedSelected()" alt="bed">
+                <!--Morty-->
+                <area shape="rect" coords="784,144,830,193" onclick="mortySelected()" alt="morty">
+                <!--Rick-->
+                <area shape="rect" coords="784,95,830,144" onclick="rickSelected()" alt="rick">
+                <!--Roomy McRoomface-->
+                <area shape="rect" coords="784,30,830,95" onclick="roomySelected()" alt="roomy">
+                <!--CODE TEAM-->
+                <area shape="rect" coords="453,255,592,317" onclick="codeTeamSelected()" alt="codeTeam">
+                <!--Paper-->
+                <area shape="rect" coords="195,260,308,317" onclick="paperSelected()" alt="paper">
+                <!--Rock-->
+                <area shape="rect" coords="85,260,195,317" onclick="rockSelected()" alt="rock">
+                <!--Scisscors-->
+                <area shape="rect" coords="308,255,453,317" onclick="scissorsSelected()" alt="scissors">
+                <!--Watchmen-->
+                <area shape="rect" coords="44,260,85,317" onclick="watchmenSelected()" alt="watchmen">
+                <!---->
+            </map>
+            <!-- <p id="desc">Select room</p> -->
+        </div>
+        <div class="container">
+            <a>{{username}}</a>
+            <table class="table1" align="center" style="margin-top: 50px;">
+                <tr>
+                    <th></th>
+                    <th>Room</th>
+                    <th>Email</th>
+                    <th>Name</th>
+                </tr>
+            </table>
+        </div>
+    </header>
+
+    <script src="https://www.gstatic.com/firebasejs/5.5.1/firebase.js"></script>
+    <script type="text/javascript" src="../../static/js/main.js"></script>
+    <script src="https://code.jquery.com/jquery-3.3.1.min.js" integrity="sha256-FgpCb/KJQlLNfOu91ta32o/NMZxltwRo8QtmkMRdAu8="
+        crossorigin="anonymous"></script>
+    <script type="text/javascript" src="../../static/vendor/mapper/wz_jsgraphics.js"></script>
+    <script type="text/javascript" src="../../static/vendor/mapper/mapper.js"></script>
+    <!--
+<script>
+    
+  // Initialize Firebase
+  // TODO: Replace with your project's customized code snippet
+  var config = {
+    apiKey: "AIzaSyBvwprYXi182UzC0yXiXJXgxXkZ_e68Li0",
+    authDomain: "beer2d2-1c27e.firebaseapp.com",
+    databaseURL: "https://beer2d2-1c27e.firebaseio.com",
+    projectId: "beer2d2-1c27e",
+    storageBucket: "",
+    messagingSenderId: "109673741253"
+  };
+  firebase.initializeApp(config);
+
+  firebase.auth().createUserWithEmailAndPassword(email, password).catch(function(error) {
+  // Handle Errors here.
+  var errorCode = error.code;
+  var errorMessage = error.message;
+  // ...
+});
+
+firebase.auth().onAuthStateChanged((user)=>{
+     const userProfile = firebase.auth().currentUser;
+     if(!user){
+        window.location.replace("/login.html");
+     }
+})
+</script>
+-->
+    <!-- Add additional services that you want to use -->
+</body>
+
+</html>
