@@ -32,7 +32,7 @@ def main():
         vars.frame = frame
 
         # Crop the image
-        crop_img = frame[30:160, 0:480]
+        crop_img = frame[0:90, 0:480]
 
         # Convert to grayscale
         gray = cv2.cvtColor(crop_img, cv2.COLOR_BGR2GRAY)
@@ -60,7 +60,7 @@ def main():
                 cv2.line(crop_img,(0,cy),(1280,cy),(255,0,0),1)
 
                 cv2.drawContours(crop_img, contours, -1, (0,255,0), 1)
-                #print(cx)
+                print(cx)
 
                 if cx > 290:
                     #print("6 Righ7t!")
@@ -148,6 +148,8 @@ def main():
                     #print("6 Left")
                     #motor_functions.set_motors(0, 15)
                     motor_functions.execute_directive('left_8', 'line')
+            else:
+                print('DIVIDE ERROR')
 
         else:
             print(system_vars.colorcode['error'] + "WARNING: LINE NOT IN VISIBLE!" + system_vars.colorcode['reset'])

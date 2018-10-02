@@ -13,7 +13,6 @@ import time
 
 
 def check(frame):
-    print('checking')
     qr_frame = imutils.resize(frame, width=400)
     
     barcodes = pyzbar.decode(qr_frame)
