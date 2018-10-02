@@ -60,7 +60,9 @@ def main():
                 cv2.line(crop_img,(0,cy),(1280,cy),(255,0,0),1)
 
                 cv2.drawContours(crop_img, contours, -1, (0,255,0), 1)
-                print(cx)
+                
+                x_multiplier = 320 / 160
+                cx = cx * x_multiplier
 
                 if cx > 290:
                     #print("6 Righ7t!")
