@@ -226,7 +226,8 @@ def init_UI():
     vars.main_window_instance = window
     window.setWindowFlags(QtCore.Qt.FramelessWindowHint)
     window.setFixedSize(800, 480)
-    window.show()
+    #window.show()
+    window.showFullScreen()
     sys.exit(app.exec_())
 
 

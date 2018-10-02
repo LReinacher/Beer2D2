@@ -58,7 +58,6 @@ def stop_both(security_override=False):
 
 
 def execute_directive(directive, type, custom_duration=None):
-    print('directive')
     if system_vars.remote_control is False:
         if type == "leave":
             stop_after_directive = True
