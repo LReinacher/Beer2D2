@@ -236,4 +236,4 @@ def show_DropOff_UI():
     window.setWindowFlags(QtCore.Qt.FramelessWindowHint)
     window.setFixedSize(800, 480)
     vars.dropOff_window_instance = window
-    window.show()
+    window.showFullScreen()

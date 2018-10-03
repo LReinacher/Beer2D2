@@ -57,7 +57,9 @@ def stop_both(security_override=False):
     set_motor('right', 0, security_override)
 
 
-def execute_directive(directive, type, custom_duration=None):
+def execute_directive(directive, type, custom_duration=None, speed=None):
+    #print(directive)
+    speed_multiplier = 1
     if system_vars.remote_control is False:
         if type == "leave":
             stop_after_directive = True
@@ -66,6 +68,12 @@ def execute_directive(directive, type, custom_duration=None):
             if type == "qr":
                 stop_after_directive = configuration.stop_after_qr_directive
                 vars.qr_directive_executing = True
+                if speed == 1:
+                    speed_multiplier = configuration.tracking_min_speed / 15
+                elif speed == 1:
+                    speed_multiplier = configuration.tracking_mid_speed / 15
+                else:
+                    speed_multiplier = configuration.tracking_max_speed / 15
             else:
                 stop_after_directive = configuration.stop_after_linetracker_directive
         elif system_vars.door_is_open:
@@ -79,6 +87,8 @@ def execute_directive(directive, type, custom_duration=None):
         if directive in configuration.commandIdentifiers:
             curr_l, curr_r = get_motor_state()
             s_l, s_r, duration = configuration.commandIdentifiers[directive]
+            s_l = int(s_l * speed_multiplier)
+            s_r = int(s_r * speed_multiplier)
             if custom_duration is not None:
                 duration = custom_duration
             set_motors(s_l, s_r)

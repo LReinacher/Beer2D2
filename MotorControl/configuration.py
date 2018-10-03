@@ -49,6 +49,10 @@ commandIdentifiers = { #[left_motor_command, right_motor_command, duration]]
     'spin': [5, -5, None]
 }
 
+tracking_min_speed = 4
+tracking_mid_speed = 7
+tracking_max_speed = 10
+
 speedIdentifiers = { #[PWM-frequency in Hz, gear_relai_mode (fwd / bwd)]
     0: [0, 'fwd'],
     1: [100, 'fwd'],

@@ -51,10 +51,31 @@ def main():
             line_last_seen = datetime.now().timestamp()
             c = max(contours, key=cv2.contourArea)
             M = cv2.moments(c)
+            #min_rect = cv2.minAreaRect(c)
+            x,y,w,h = cv2.boundingRect(c)
+            cv2.rectangle(crop_img,(x,y),(x+w,y+h),(0,0,255),2)
+            #box = cv2.boxPoints(min_rect)
+            #box = np.int0(box)
+            #cv2.drawContours(crop_img,min_rect,0,(0,0,255),2)
+            #coord_1, coord_2, angle = min_rect
+            #x_1, y_1 = coord_1
+            #x_2, y_2 = coord_2
+            #width = x_1 - x_2
+            #print(w)
+            #print(angle)
             
             if M['m00'] != 0:
                 cx = int(M['m10']/M['m00'])
                 cy = int(M['m01']/M['m00'])
+                
+                if w < 23:
+                    speed = 3
+                    
+                elif 23 <= w <= 30:
+                    speed = 2
+                    
+                elif w > 30:
+                    speed = 1
 
                 cv2.line(crop_img,(cx,0),(cx,720),(255,0,0),1)
                 cv2.line(crop_img,(0,cy),(1280,cy),(255,0,0),1)
@@ -67,89 +88,89 @@ def main():
                 if cx > 290:
                     #print("6 Righ7t!")
                     #motor_functions.set_motors(15, 0)
-                    motor_functions.execute_directive('right_8', 'line')
+                    motor_functions.execute_directive('right_8', 'line', None, speed)
                     
                 if 290 >= cx > 260:
                     #print("5 Right")
                     #motor_functions.set_motors(15, 3)
-                    motor_functions.execute_directive('right_7', 'line')
+                    motor_functions.execute_directive('right_7', 'line', None, speed)
                     
                 if 260 >= cx > 240:
                     #print("4 Right")
                     #motor_functions.set_motors(15, 5)
-                    motor_functions.execute_directive('right_6', 'line')
+                    motor_functions.execute_directive('right_6', 'line', None, speed)
 
                 if 240 >= cx > 220:
                     #print("3 Right")
                     #motor_functions.set_motors(15, 8)
-                    motor_functions.execute_directive('right_5', 'line')
+                    motor_functions.execute_directive('right_5', 'line', None, speed)
 
                 if 220 >= cx > 200:
                     #print("2 Right")
                     #motor_functions.set_motors(15, 10)
-                    motor_functions.execute_directive('right_4', 'line')
+                    motor_functions.execute_directive('right_4', 'line', None, speed)
                     
                 if 200 >= cx > 190:
                     #print("1 Right")
                     #motor_functions.set_motors(15, 12)
-                    motor_functions.execute_directive('right_3', 'line')
+                    motor_functions.execute_directive('right_3', 'line', None, speed)
 
                 if 190 >= cx > 180:
                     #print("1 Right")
                     #motor_functions.set_motors(15, 13)
-                    motor_functions.execute_directive('right_2', 'line')
+                    motor_functions.execute_directive('right_2', 'line', None, speed)
                     
                 if 180 >= cx > 170:
                     #print("1 Right")
                     #motor_functions.set_motors(15, 14)
-                    motor_functions.execute_directive('right_1', 'line')
+                    motor_functions.execute_directive('right_1', 'line', None, speed)
 
                 if 150 <= cx <= 170:
                     #print("On Track!")
                     #motor_functions.set_motors(15, 15)
-                    motor_functions.execute_directive('forwards', 'line')
+                    motor_functions.execute_directive('forwards', 'line', None, speed)
                     print(system_vars.colorcode['info'] + "INFO: ON LINE" + system_vars.colorcode['reset'])
                     
                 if 140 <= cx < 150:
                     #print("1 Left")
                     #motor_functions.set_motors(14, 15)
-                    motor_functions.execute_directive('left_1', 'line')
+                    motor_functions.execute_directive('left_1', 'line', None, speed)
 
                 if 130 <= cx < 140:
                     #print("1 Left")
                     #motor_functions.set_motors(13, 15)
-                    motor_functions.execute_directive('left_2', 'line')
+                    motor_functions.execute_directive('left_2', 'line', None, speed)
 
                 if 120 <= cx < 130:
                     #print("1 Left")
                     #motor_functions.set_motors(12, 15)
-                    motor_functions.execute_directive('left_3', 'line')
+                    motor_functions.execute_directive('left_3', 'line', None, speed)
                 
                 if 100 <= cx < 120:
                     #print("2 Left")
                     #motor_functions.set_motors(10, 15)
-                    motor_functions.execute_directive('left_4', 'line')
+                    motor_functions.execute_directive('left_4', 'line', None, speed)
 
                 if 80 <= cx < 100:
                     #print("3 Left")
                     #motor_functions.set_motors(5, 15)
-                    motor_functions.execute_directive('left_5', 'line')
+                    motor_functions.execute_directive('left_5', 'line', None, speed)
 
                     
                 if 60 <= cx < 80:
                     #print("4 Left")
                     #motor_functions.set_motors(6, 15)
-                    motor_functions.execute_directive('left_6', 'line')
+                    motor_functions.execute_directive('left_6', 'line', None, speed)
                     
                 if 30 <= cx < 60:
                     #print("5 Left")
                     #motor_functions.set_motors(3, 15)
-                    motor_functions.execute_directive('left_7', 'line')
+                    motor_functions.execute_directive('left_7', 'line', None, speed)
 
                 if cx < 30:
                     #print("6 Left")
                     #motor_functions.set_motors(0, 15)
-                    motor_functions.execute_directive('left_8', 'line')
+                    motor_functions.execute_directive('left_8', 'line', None, speed)
             else:
                 print('DIVIDE ERROR')
 
@@ -157,9 +178,9 @@ def main():
             print(system_vars.colorcode['error'] + "WARNING: LINE NOT IN VISIBLE!" + system_vars.colorcode['reset'])
             #motor_functions.set_motors(0, 0)
             if datetime.now().timestamp() - line_last_seen < 5:
-                motor_functions.execute_directive('spin', 'line')
+                motor_functions.execute_directive('spin', 'line', None, speed)
             else:
-                motor_functions.execute_directive('stop', 'line')
+                motor_functions.execute_directive('stop', 'line', None, speed)
                 print(system_vars.colorcode['error'] + "ERROR: LINE LOST!" + system_vars.colorcode['reset'])
 
         #Display the resulting frame

@@ -76,91 +76,91 @@ def message_handling():
     while True:
         communication = slackCommunication.slackReadRTM()
         if len(communication) > 0:
-            try:
-                if communication[0]['type'] == 'message' and communication[0]['user'] != bot_user_id:
-                    message = communication[0]['text']
-                    print(system_vars.colorcode['info'] + "INFO: SLACK MESSAGE: " + message + system_vars.colorcode['reset'])
-                    message = message.lower()
-                    if 'come to' in message:
-                        split = message.split(' ')
-                        try:
-                            location = split[2]
-                            location = location.lower().title()
-                            if location_functions.check_for_location(location):
-                                status, order = order_functions.add_order(communication[0]['user'], location, 'slack')
-                                if status:
-                                    response = (responses.order_placed_success % str(order + 1))
-                                else:
-                                    if order['type'] == "slack":
-                                        order_type = responses.slack_interface_name
-                                    else:
-                                        order_type = responses.web_interface_name
-                                    order_location = order['room']
-                                    response = (responses.order_placed_error_already_placed % (order_type, order_location))
+            #try:
+            if communication[0]['type'] == 'message' and communication[0]['user'] != bot_user_id:
+                message = communication[0]['text']
+                print(system_vars.colorcode['info'] + "INFO: SLACK MESSAGE: " + message + system_vars.colorcode['reset'])
+                message = message.lower()
+                if 'come to' in message:
+                    split = message.split(' ')
+                    #try:
+                    location = split[2]
+                    location = location.lower().title()
+                    if location_functions.check_for_location(location):
+                        status, order = order_functions.add_order(communication[0]['user'], location, 'slack')
+                        if status:
+                            response = (responses.order_placed_success % str(order + 1))
+                        else:
+                            if order['type'] == "slack":
+                                order_type = responses.slack_interface_name
                             else:
-                                response = responses.order_placed_error_location_not_available
-                        except:
-                            response = responses.order_placed_error_location_invalid
-
-                    elif 'cancel order' in message:
-                        if order_functions.delete_oder(communication[0]['user'], 'slack'):
-                            response = responses.order_cancel_success
-                        else:
-                            response = responses.error_no_open_order
-                    elif 'confirm delivery' in message:
-                        email = get_email_by_id(communication[0]['user'])
-                        index = order_functions.check_user_order(communication[0]['user'], email)
-                        if index >= 0:
-                            order_functions.confirm_order(communication[0]['user'], 'slack')
-                            response = responses.order_marked_delivered_success
-                        else:
-                            response = responses.error_no_open_order
-                    elif 'list orders' in message:
-                        orders = order_functions.get_orders()
-                        if len(orders) > 0:
-                            orders_string = ""
-                            i = 0
-                            while i < len(orders):
-                                orders_string = orders_string + "\n `" + str(i + 1) + ". " + orders[i]['room'] + " - " + orders[i]['real_name'] + "`"
-                                i = i + 1
-                            response = (responses.current_orders % orders_string)
-                        else:
-                            response = responses.no_current_orders
-                    elif 'list locations' in message:
-                        locations = location_functions.get_locations()
-                        location_string = ""
-                        for location in locations:
-                            location_string = location_string + "\n • `" + location + "`"
-                        response = (responses.list_locations % location_string)
-
-                    elif 'destination_reached=' in message and settings.debug_commands:
-                        split = message.split('=')
-                        if split[1] == "true":
-                            system_vars.destination_reached = True
-                            from threading import Thread
-                            Confirm_Thread = Thread(target=order_functions.start_drop_off, args=(),
-                                                    name="ConfirmOrder", daemon=False)
-                            Confirm_Thread.start()
-                            #order_functions.start_drop_off()
-                        else:
-                            system_vars.destination_reached = False
-                        response = "destination_reached set " + split[1]
-
-                    elif 'door_is_open' in message and settings.debug_commands:
-                        split = message.split('=')
-                        if split[1] == "True":
-                            system_vars.door_is_open = True
-                        else:
-                            system_vars.door_is_open = False
-                        response = "door_is_open set " + split[1]
-
-                    elif 'hello' in message:
-                        response = (responses.hello_message % responses.available_commands)
+                                order_type = responses.web_interface_name
+                            order_location = order['room']
+                            response = (responses.order_placed_error_already_placed % (order_type, order_location))
                     else:
-                        response = (responses.command_not_found % responses.available_commands)
-                    if response is not None:
-                        result = slackCommunication.writeToSlack(communication[0]['user'], response)["ok"]
+                        response = responses.order_placed_error_location_not_available
+                #except:
+                    #response = responses.order_placed_error_location_invalid
 
-            except Exception as e:
-               print(system_vars.colorcode['error'] + "ERROR: SLACK-BOT-FUNCTIONS " + str(e).upper() + system_vars.colorcode['reset'])
+                elif 'cancel order' in message:
+                    if order_functions.delete_oder(communication[0]['user'], 'slack'):
+                        response = responses.order_cancel_success
+                    else:
+                        response = responses.error_no_open_order
+                elif 'confirm delivery' in message:
+                    email = get_email_by_id(communication[0]['user'])
+                    index = order_functions.check_user_order(communication[0]['user'], email)
+                    if index >= 0:
+                        order_functions.confirm_order(communication[0]['user'], 'slack')
+                        response = responses.order_marked_delivered_success
+                    else:
+                        response = responses.error_no_open_order
+                elif 'list orders' in message:
+                    orders = order_functions.get_orders()
+                    if len(orders) > 0:
+                        orders_string = ""
+                        i = 0
+                        while i < len(orders):
+                            orders_string = orders_string + "\n `" + str(i + 1) + ". " + orders[i]['room'] + " - " + orders[i]['real_name'] + "`"
+                            i = i + 1
+                        response = (responses.current_orders % orders_string)
+                    else:
+                        response = responses.no_current_orders
+                elif 'list locations' in message:
+                    locations = location_functions.get_locations()
+                    location_string = ""
+                    for location in locations:
+                        location_string = location_string + "\n • `" + location + "`"
+                    response = (responses.list_locations % location_string)
+
+                elif 'destination_reached=' in message and settings.debug_commands:
+                    split = message.split('=')
+                    if split[1] == "true":
+                        system_vars.destination_reached = True
+                        from threading import Thread
+                        Confirm_Thread = Thread(target=order_functions.start_drop_off, args=(),
+                                                name="ConfirmOrder", daemon=False)
+                        Confirm_Thread.start()
+                        #order_functions.start_drop_off()
+                    else:
+                        system_vars.destination_reached = False
+                    response = "destination_reached set " + split[1]
+
+                elif 'door_is_open' in message and settings.debug_commands:
+                    split = message.split('=')
+                    if split[1] == "True":
+                        system_vars.door_is_open = True
+                    else:
+                        system_vars.door_is_open = False
+                    response = "door_is_open set " + split[1]
+
+                elif 'hello' in message:
+                    response = (responses.hello_message % responses.available_commands)
+                else:
+                    response = (responses.command_not_found % responses.available_commands)
+                if response is not None:
+                    result = slackCommunication.writeToSlack(communication[0]['user'], response)["ok"]
+
+            #except Exception as e:
+               #print(system_vars.colorcode['error'] + "ERROR: SLACK-BOT-FUNCTIONS " + str(e).upper() + system_vars.colorcode['reset'])
         time.sleep(0.5)

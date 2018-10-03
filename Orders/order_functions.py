@@ -52,7 +52,7 @@ def add_order(user, room, type, priority=False):
 
         import UI.ui_functions as ui_functions
         ui_functions.force_order_update()
-        database_functions.upload_order(room, user)
+        #database_functions.upload_order(room, user)
         return True, position
     else:
         return False, result
