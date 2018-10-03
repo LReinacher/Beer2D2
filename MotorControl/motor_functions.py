@@ -63,19 +63,19 @@ def execute_directive(directive, type, custom_duration=None, speed=None):
     if system_vars.remote_control is False:
         if type == "leave":
             stop_after_directive = True
-
         elif vars.qr_directive_executing is False and system_vars.destination_reached is False and system_vars.door_is_open is False:
             if type == "qr":
                 stop_after_directive = configuration.stop_after_qr_directive
                 vars.qr_directive_executing = True
+            else:
+                stop_after_directive = configuration.stop_after_linetracker_directive
+                print('Speed:' + str(speed))
                 if speed == 1:
                     speed_multiplier = configuration.tracking_min_speed / 15
-                elif speed == 1:
+                elif speed == 2:
                     speed_multiplier = configuration.tracking_mid_speed / 15
                 else:
                     speed_multiplier = configuration.tracking_max_speed / 15
-            else:
-                stop_after_directive = configuration.stop_after_linetracker_directive
         elif system_vars.door_is_open:
             stop_both()
             print(system_vars.colorcode['warning'] + "WARNING: MOTOR STOPPED - DOOR IS OPEN" +
@@ -89,6 +89,7 @@ def execute_directive(directive, type, custom_duration=None, speed=None):
             s_l, s_r, duration = configuration.commandIdentifiers[directive]
             s_l = int(s_l * speed_multiplier)
             s_r = int(s_r * speed_multiplier)
+            print(speed_multiplier)
             if custom_duration is not None:
                 duration = custom_duration
             set_motors(s_l, s_r)

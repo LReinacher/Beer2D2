@@ -32,25 +32,25 @@ commandIdentifiers = { #[left_motor_command, right_motor_command, duration]]
     'left_1': [14, 15, None],
     'left_2': [13, 15, None],
     'left_3': [12, 15, None],
-    'left_4': [10, 15, None],
-    'left_5': [8, 15, None],
-    'left_6': [5, 15, None],
-    'left_7': [3, 15, None],
-    'left_8': [0, 15, None],
+    'left_4': [11, 15, None],
+    'left_5': [10, 15, None],
+    'left_6': [8, 15, None],
+    'left_7': [5, 15, None],
+    'left_8': [3, 15, None],
     'right_1': [15, 14, None],
     'right_2': [15, 13, None],
     'right_3': [15, 12, None],
-    'right_4': [15, 10, None],
-    'right_5': [15, 8, None],
-    'right_6': [15, 5, None],
-    'right_7': [15, 3, None],
-    'right_8': [15, 0, None],
+    'right_4': [15, 11, None],
+    'right_5': [15, 10, None],
+    'right_6': [15, 8, None],
+    'right_7': [15, 5, None],
+    'right_8': [15, 3, None],
 
     'spin': [5, -5, None]
 }
 
 tracking_min_speed = 4
-tracking_mid_speed = 7
+tracking_mid_speed = 8
 tracking_max_speed = 10
 
 speedIdentifiers = { #[PWM-frequency in Hz, gear_relai_mode (fwd / bwd)]

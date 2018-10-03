@@ -70,12 +70,15 @@ def main():
                 
                 if w < 23:
                     speed = 3
+                    #print('fast')
                     
                 elif 23 <= w <= 30:
                     speed = 2
+                    #print('mid')
                     
                 elif w > 30:
                     speed = 1
+                    #print('slow')
 
                 cv2.line(crop_img,(cx,0),(cx,720),(255,0,0),1)
                 cv2.line(crop_img,(0,cy),(1280,cy),(255,0,0),1)
