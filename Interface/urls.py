@@ -23,6 +23,9 @@ from django.conf.urls.static import static
 urlpatterns = [
     path('', views.dashboard, name='dashboard'),
     path('login/', views.login, name='login'),
+    path('api/update-orders', views.update_orders, name='update-orders'),
+    path('api/update-remote-control', views.update_orders, name='update-orders'),
+    path('api/update-last-barcode', views.update_orders, name='update-orders'),
 ] + static(settings.STATIC_URL, document_root=settings.STATIC_ROOT)
 
 # path('admin/', admin.site.urls),
