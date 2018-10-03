@@ -3,6 +3,7 @@
 import Orders.vars as vars
 import settings
 import system_vars
+import SQLite.database_functions as database_functions
 
 
 def check_room_order(room):
@@ -51,6 +52,7 @@ def add_order(user, room, type, priority=False):
 
         import UI.ui_functions as ui_functions
         ui_functions.force_order_update()
+        database_functions.upload_order(room, user)
         return True, position
     else:
         return False, result
@@ -73,6 +75,7 @@ def delete_oder(identifier, type):
         vars.order_que.pop(index)
         import UI.ui_functions as ui_functions
         ui_functions.force_order_update()
+        database_functions.set_canceled(identifier)
         return True
     else:
         return False
