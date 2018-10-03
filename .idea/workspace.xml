@@ -1,14 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="ChangeListManager">
-    <list default="true" id="994662ca-e502-45b2-80b9-36f7f04e1061" name="Default" comment="">
-      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/CamTracking/webcam_functions.py" beforeDir="false" afterPath="$PROJECT_DIR$/CamTracking/webcam_functions.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Orders/order_functions.py" beforeDir="false" afterPath="$PROJECT_DIR$/Orders/order_functions.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/RestAPI/api_main.py" beforeDir="false" afterPath="$PROJECT_DIR$/RestAPI/api_main.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/RestAPI/vars.py" beforeDir="false" afterPath="$PROJECT_DIR$/RestAPI/vars.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/settings.py" beforeDir="false" afterPath="$PROJECT_DIR$/settings.py" afterDir="false" />
-    </list>
+    <list default="true" id="994662ca-e502-45b2-80b9-36f7f04e1061" name="Default" comment="" />
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="TRACKING_ENABLED" value="true" />
     <option name="SHOW_DIALOG" value="false" />
@@ -249,7 +242,7 @@
       </list>
     </option>
   </component>
-  <component name="ProjectFrameBounds" extendedState="6">
+  <component name="ProjectFrameBounds" extendedState="7">
     <option name="x" value="2552" />
     <option name="y" value="-8" />
     <option name="width" value="1936" />
