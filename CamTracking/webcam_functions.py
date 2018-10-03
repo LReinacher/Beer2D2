@@ -21,6 +21,8 @@ def found_barcode(data):
     print(system_vars.colorcode['info'] + "INFO: BARCODE DETECTED: " + data + system_vars.colorcode['reset'])
     if data == order_functions.get_current_destination():
         vars.last_barcode = data
+        import RestAPI.api_main as api
+        api.send_last_barcode_update_call()
         destination_reached()
     else:
         split_data = data.split("-")

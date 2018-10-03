@@ -21,44 +21,48 @@ app = default_app()
 @post('/direct')
 def motorDirect():
     user = request.query.user
-    #print('Motor Direct request by: ' + user)
+    remote_key = request.query.remote_key
     if system_vars.remote_control:
         if system_vars.remote_control_user == user:
-            motor_l = request.query.motor_l
-            motor_r = request.query.motor_r
+            if vars.remote_control_key == remote_key:
+                motor_l = request.query.motor_l
+                motor_r = request.query.motor_r
 
-            if motor_l is None:
-                return {'status': 'error', 'code': 105, 'message': 'speed for left motor not defined'}
+                if motor_l is None:
+                    return {'status': 'error', 'code': 105, 'message': 'speed for left motor not defined'}
 
-            if motor_r is None:
-                return {'status': 'error', 'code': 106, 'message': 'speed for right motor not defined'}
+                if motor_r is None:
+                    return {'status': 'error', 'code': 106, 'message': 'speed for right motor not defined'}
 
-            vars.last_command_time = datetime.now().timestamp()
-            vars.security_stopped = False
-            if motor_l != "0" or motor_r != "0":
-                vars.last_active_command_time = datetime.now().timestamp()
-            print('Setting Motors to: ' + str(motor_l) + ' | ' + str(motor_r) + ' by ' + user)
-            response = motor_functions.set_motors_api(motor_l, motor_r)
+                vars.last_command_time = datetime.now().timestamp()
+                vars.security_stopped = False
+                if motor_l != "0" or motor_r != "0":
+                    vars.last_active_command_time = datetime.now().timestamp()
+                print('Setting Motors to: ' + str(motor_l) + ' | ' + str(motor_r) + ' by ' + user)
+                response = motor_functions.set_motors_api(motor_l, motor_r)
 
-            if response == 0:
-                return {'status': 'success', 'code': 100,
-                        'message': 'left motor set to ' + motor_l + ' - right motor set to  ' + motor_r}
-            elif response == 1:
-                return {'status': 'error', 'code': 107, 'message': 'Unknown left speed Identifier'}
-            elif response == 2:
-                return {'status': 'error', 'code': 108, 'message': 'Unknown right speed Identifier'}
-            elif response == 3:
-                return {'status': 'error', 'code': 109,
-                        'message': 'Invalid left speed Identifier - speed Identifier has to be float'}
-            elif response == 4:
-                return {'status': 'error', 'code': 110,
-                        'message': 'Invalid right speed Identifier - speed Identifier has to be float'}
+                if response == 0:
+                    return {'status': 'success', 'code': 100,
+                            'message': 'left motor set to ' + motor_l + ' - right motor set to  ' + motor_r}
+                elif response == 1:
+                    return {'status': 'error', 'code': 107, 'message': 'Unknown left speed Identifier'}
+                elif response == 2:
+                    return {'status': 'error', 'code': 108, 'message': 'Unknown right speed Identifier'}
+                elif response == 3:
+                    return {'status': 'error', 'code': 109,
+                            'message': 'Invalid left speed Identifier - speed Identifier has to be float'}
+                elif response == 4:
+                    return {'status': 'error', 'code': 110,
+                            'message': 'Invalid right speed Identifier - speed Identifier has to be float'}
             else:
-                return {'status': 'error', 'code': 104,
-                        'message': "already remote controlled by:" + system_vars.remote_control_user,
-                        'data': {'user': system_vars.remote_control_user}}
+                return {'status': 'error', 'code': 116,
+                        'message': "Authorisation failed"}
         else:
-            return {'status': 'error', 'code': 111, 'message': 'remote control not enabled'}
+            return {'status': 'error', 'code': 104,
+                    'message': "already remote controlled by:" + system_vars.remote_control_user,
+                    'data': {'user': system_vars.remote_control_user}}
+    else:
+        return {'status': 'error', 'code': 111, 'message': 'remote control not enabled'}
 
 
 @route('/', method=['GET', 'POST'])
@@ -70,32 +74,53 @@ def index():
 def add_order():
     location = request.query.location
     email = request.query.email
+    verify_key = request.query.verify_key
+    timestamp = request.query.timestamp
+    if timestamp is None:
+        return {'status': 'error', 'code': 117, 'message': "timestamp missing"}
     priority = request.query.priority
-    result, response = order_functions.add_order(email, location, 'email', priority)
-    if result:
-        return {'status': 'success', 'code': 100, 'message': response}
+    if verify_call(verify_key, timestamp, email, vars.secret_keys['add_order']):
+        result, response = order_functions.add_order(email, location, 'email', priority)
+        if result:
+            return {'status': 'success', 'code': 100, 'message': response}
+        else:
+            return {'status': 'error', 'code': 199, 'message': response}
     else:
-        return {'status': 'error', 'code': 199, 'message': response}
+        return {'status': 'error', 'code': 116, 'message': 'Authorisation failed'}
 
 
 @post('/cancel-order')
 def delete_order():
     email = request.query.email
-    if order_functions.delete_oder(email, 'email'):
-        return {'status': 'success', 'code': 100, 'message': "order canceled"}
+    verify_key = request.query.verify_key
+    timestamp = request.query.timestamp
+    if timestamp is None:
+        return {'status': 'error', 'code': 117, 'message': "timestamp missing"}
+    if verify_call(verify_key, timestamp, email, vars.secret_keys['cancel_order']):
+        if order_functions.delete_oder(email, 'email'):
+            return {'status': 'success', 'code': 100, 'message': "order canceled"}
+        else:
+            return {'status': 'error', 'code': 101, 'message': "no open order"}
     else:
-        return {'status': 'error', 'code': 101, 'message': "no open order"}
+        return {'status': 'error', 'code': 116, 'message': 'Authorisation failed'}
 
 
 @post('/confirm-delivery')
 def confirm_delivery():
     email = request.query.email
+    verify_key = request.query.verify_key
+    timestamp = request.query.timestamp
+    if timestamp is None:
+        return {'status': 'error', 'code': 117, 'message': "timestamp missing"}
     id = slack_functions.get_id_by_email(email)
     index = order_functions.check_user_order(id, email)
-    if index >= 0:
-        return {'status': 'success', 'code': 100, 'message': "order marked as delivered"}
+    if verify_call(verify_key, timestamp, email, vars.secret_keys['confirm_order']):
+        if index >= 0:
+            return {'status': 'success', 'code': 100, 'message': "order marked as delivered"}
+        else:
+            return {'status': 'error', 'code': 101, 'message': "no open order"}
     else:
-        return {'status': 'error', 'code': 101, 'message': "no open order"}
+        return {'status': 'error', 'code': 116, 'message': 'Authorisation failed'}
 
 
 @get('/get-orders')
@@ -108,17 +133,28 @@ def get_orders():
 def toggle_remote_control():
     status = request.query.status
     user = request.query.user
+    remote_key = request.query.remote_key
+    verify_key = request.query.verify_key
+    timestamp = request.query.timestamp
+    if timestamp is None:
+        return {'status': 'error', 'code': 117, 'message': "timestamp missing"}
     if user is None:
         return {'status': 'error', 'code': 115, 'message': "user not defined"}
     if status == "enable":
         if system_vars.remote_control is False:
-            vars.last_command_time = datetime.now().timestamp()
-            vars.security_stopped = False
-            vars.last_active_command_time = datetime.now().timestamp()
-            system_vars.remote_control = True
-            system_vars.remote_control_user = user
-            motor_functions.set_motors_api(0, 0)
-            return {'status': 'success', 'code': 100, 'message': "remote control enabled successfully"}
+            if verify_call(verify_key, timestamp, user, vars.secret_keys['enable_remote']):
+                vars.last_command_time = datetime.now().timestamp()
+                vars.security_stopped = False
+                vars.last_active_command_time = datetime.now().timestamp()
+                system_vars.remote_control = True
+                system_vars.remote_control_user = user
+                remote_key = gen_control_key()
+                vars.remote_control_key = remote_key
+                send_remote_control_update_call()
+                motor_functions.set_motors_api(0, 0)
+                return {'status': 'success', 'code': 100, 'message': "remote control enabled successfully", 'data': {'remote_key': remote_key}}
+            else:
+                return {'status': 'error', 'code': 116, 'message': 'Authorisation failed'}
         else:
             return {'status': 'error', 'code': 103,
                     'message': "already remote controlled by:" + system_vars.remote_control_user,
@@ -126,9 +162,15 @@ def toggle_remote_control():
     elif status == "disable":
         if system_vars.remote_control is True:
             if system_vars.remote_control_user == user:
-                system_vars.remote_control = False
-                system_vars.remote_control_user = None
-                return {'status': 'success', 'code': 100, 'message': "remote control disabled successfully"}
+                if vars.remote_control_key == remote_key:
+                    system_vars.remote_control = False
+                    system_vars.remote_control_user = None
+                    vars.remote_control_key = None
+                    send_remote_control_update_call()
+                    return {'status': 'success', 'code': 100, 'message': "remote control disabled successfully"}
+                else:
+                    return {'status': 'error', 'code': 116,
+                            'message': "Authorisation failed"}
             else:
                 return {'status': 'error', 'code': 104,
                         'message': "not your remote session - remote controlled by:" + system_vars.remote_control_user,
@@ -161,6 +203,8 @@ def api_inactivity_timer():
                     motor_functions.set_motors_api(0, 0)
                     system_vars.remote_control = False
                     system_vars.remote_control_user = None
+                    vars.remote_control_key = None
+                    send_remote_control_update_call()
                     print(system_vars.colorcode['warning'] + "WARNING: REMOTE-CONTROL SESSION TERMINATED DUE TO INACTIVITY!" + system_vars.colorcode[
                         'reset'])
         time.sleep(0.1)
@@ -182,26 +226,89 @@ def start():
         httpserver.serve(application, host=settings.ip, port=8000)
 
 
+# #SEND DATA
+# def changed_data_handler():
+#     print(system_vars.colorcode['ok'] + "OK: DATA UPDATE API ONLINE" + system_vars.colorcode[
+#         'reset'])
+#
+#     interface_api_url = "http://beer2d2.berlin"
+#
+#     old_remote_control = system_vars.remote_control
+#     old_orders = order_functions.get_orders()
+#     old_last_barcode = webcam_functions.get_last_barcode()
+#     while True:
+#         if system_vars.remote_control != old_remote_control:
+#             old_remote_control = system_vars.remote_control
+#             send_api_call(interface_api_url + '/update-remote', {'remote_enabled': system_vars.remote_control, 'remote_user': system_vars.remote_control_user}, generate_verification_hash('', vars.secret_keys['update_remote_control_status']))
+#         if order_functions.get_orders() != old_orders:
+#             print('Update Orders')
+#             old_orders = order_functions.get_orders()
+#             send_api_call(interface_api_url + '/update-orders', order_functions.get_orders(), generate_verification_hash('', vars.secret_keys['update_order_list']))
+#         if webcam_functions.get_last_barcode() != old_last_barcode:
+#             old_last_barcode = webcam_functions.get_last_barcode()
+#             send_api_call(interface_api_url + '/update-last-barcode', webcam_functions.get_last_barcode(), generate_verification_hash('', vars.secret_keys['update_last_barcode']))
+#         time.sleep(0.2)
 
-#SEND DATA
-def changed_data_handler():
-    print(system_vars.colorcode['ok'] + "OK: DATA UPLOAD API ONLINE" + system_vars.colorcode[
-        'reset'])
-    old_remote_control = system_vars.remote_control
-    old_orders = order_functions.get_orders()
-    old_last_barcode = webcam_functions.get_last_barcode()
-    while True:
-        if system_vars.remote_control != old_remote_control:
-            old_remote_control = system_vars.remote_control
-        if order_functions.get_orders() != old_orders:
-            old_orders = order_functions.get_orders()
-        if webcam_functions.get_last_barcode() != old_last_barcode:
-            old_last_barcode = webcam_functions.get_last_barcode()
-        time.sleep(0.2)
+
+def send_order_update_call():
+    data_update_thread = Thread(target=send_order_update_call_util, args=(), name="Update Orders Call", daemon=False)
+    data_update_thread.start()
 
 
-def send_api_call(url, data):
+def send_order_update_call_util():
+    send_api_call(vars.interface_api_url + '/update-orders', json.dumps(order_functions.get_orders()),
+                  generate_verification_hash('', str(datetime.utcnow().timestamp()), vars.secret_keys['update_order_list']), str(datetime.utcnow().timestamp()))
+
+
+def send_remote_control_update_call():
+    data_update_thread = Thread(target=send_remote_control_update_call_util, args=(), name="Update Remote Control Call", daemon=False)
+    data_update_thread.start()
+
+
+def send_remote_control_update_call_util():
+    send_api_call(vars.interface_api_url + '/update-remote-control',
+                  json.dumps({'remote_enabled': system_vars.remote_control, 'remote_user': system_vars.remote_control_user}),
+                  generate_verification_hash('', str(datetime.utcnow().timestamp()), vars.secret_keys['update_remote_control_status']), str(datetime.utcnow().timestamp()))
+
+
+def send_last_barcode_update_call():
+    data_update_thread = Thread(target=send_last_barcode_update_call_util, args=(), name="Update Last Barcode Call", daemon=False)
+    data_update_thread.start()
+
+
+def send_last_barcode_update_call_util():
+    send_api_call(vars.interface_api_url + '/update-last-barcode', webcam_functions.get_last_barcode(),
+                  generate_verification_hash('', str(datetime.utcnow().timestamp()), vars.secret_keys['update_last_barcode']), str(datetime.utcnow().timestamp()))
+
+
+def send_api_call(url, data, verify_key, timestamp):
     import requests
-    r = requests.post(url, data={'data': data})
-    print(r.status_code, r.reason)
+    r = requests.post(url, data={'data': data, 'verify_key': verify_key, 'timestamp': timestamp})
+
+
+def gen_control_key():
+    import string
+    import random
+    return ''.join(random.choice(string.ascii_uppercase + string.digits) for _ in range(6))
+
+
+def verify_call(hash, timestamp, identifier, secret_key):
+    import hashlib
+    from datetime import datetime
+    try:
+        timestamp = float(timestamp)
+    except:
+        return False
+    if datetime.utcnow().timestamp() - timestamp < 30:
+        compare_hash = hashlib.sha224((identifier + secret_key + str(timestamp)).encode('UTF-8')).hexdigest()
+        if hash == compare_hash:
+            return True
+    return False
+
+
+def generate_verification_hash(identifier, timestamp, secret_key):
+    import hashlib
+    from datetime import datetime
+    hash = hashlib.sha224((identifier + secret_key + timestamp).encode('UTF-8')).hexdigest()
+    return hash
 

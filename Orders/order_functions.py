@@ -52,6 +52,8 @@ def add_order(user, room, type, priority=False):
 
         import UI.ui_functions as ui_functions
         ui_functions.force_order_update()
+        import RestAPI.api_main as api
+        api.send_order_update_call()
         #database_functions.upload_order(room, user)
         return True, position
     else:
@@ -75,7 +77,9 @@ def delete_oder(identifier, type):
         vars.order_que.pop(index)
         import UI.ui_functions as ui_functions
         ui_functions.force_order_update()
-        database_functions.set_canceled(identifier)
+        import RestAPI.api_main as api
+        api.send_order_update_call()
+        #database_functions.set_canceled(identifier)
         return True
     else:
         return False
@@ -179,6 +183,8 @@ def end_drop_off():
     vars.drop_off_running = False
     vars.ready_order_list = []
     ui_functions.force_order_update()
+    import RestAPI.api_main as api
+    api.send_order_update_call()
 
     location_functions.leave_location(webcam_functions.get_last_barcode())
 
@@ -236,6 +242,8 @@ def confirm_order(user_or_index, type=None):
             delete_oder(index, "index")
             import UI.ui_functions as ui_functions
             ui_functions.force_order_update()
+            import RestAPI.api_main as api
+            api.send_order_update_call()
             return True
         else:
             return False
@@ -251,6 +259,8 @@ def confirm_order(user_or_index, type=None):
             delete_oder(index, "index")
             import UI.ui_functions as ui_functions
             ui_functions.force_order_update()
+            import RestAPI.api_main as api
+            api.send_order_update_call()
             return True
         else:
             return False
