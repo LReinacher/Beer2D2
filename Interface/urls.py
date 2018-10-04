@@ -31,6 +31,7 @@ urlpatterns = [
     path('confirm-order/', views.confirm_order, name='confirm-order'),
     path('enable-remote-control/', views.enable_remote, name='enable-remote-control'),
     path('disable-remote-control/', views.disable_remote, name='disable-remote-control'),
+    path('get-order-list/', views.get_order_list)
 ] + static(settings.STATIC_URL, document_root=settings.STATIC_ROOT)
 
 # path('admin/', admin.site.urls),

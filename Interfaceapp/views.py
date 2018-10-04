@@ -5,6 +5,7 @@ from django.http import JsonResponse, Http404, HttpResponseNotAllowed
 from django.views.decorators.csrf import csrf_exempt
 import json
 from datetime import datetime
+import glob_vars
 
 
 secret_keys = {'add_order': '45Aa*+=H5Nc_NdLm',
@@ -192,3 +193,7 @@ def send_api_call(url, data, verify_key, timestamp):
         html_status_code = 504
         text = "an exception occured handling the request"
     return text, html_status_code
+
+
+def get_order_list(request):
+    return render(request, 'orders.html', {'orders': glob_vars.orders})

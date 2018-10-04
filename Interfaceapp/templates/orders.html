@@ -1,0 +1,13 @@
+<tr>
+    <th></th>
+    <th>Room</th>
+    <th>User</th>
+    <th>Name</th>
+</tr>
+{% for order in orders %}
+<tr>
+    <td>{{order.room}}</td>
+    <td>{{order.user}}</td>
+    <td>{{order.real_name}}</td>
+</tr>
+{% endfor %}
