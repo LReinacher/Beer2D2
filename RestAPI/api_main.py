@@ -20,8 +20,13 @@ app = default_app()
 
 @post('/direct')
 def motorDirect():
-    user = request.query.user
-    remote_key = request.query.remote_key
+    body = request.body.read()
+    body = json.loads(body)
+    if 'user' and 'remote_key' in body:
+        user = body['user']
+        remote_key = body['remote_key']
+    else:
+        return {'status': 'error', 'code': 117, 'message': "parameter missing"}
     if system_vars.remote_control:
         if system_vars.remote_control_user == user:
             if vars.remote_control_key == remote_key:
@@ -70,14 +75,17 @@ def index():
         return static_file('control.html', root=dir_path + '/static')
 
 
-@get('/add-order')
+@post('/add-order')
 def add_order():
-    location = request.query.location
-    email = request.query.email
-    verify_key = request.query.verify_key
-    timestamp = request.query.timestamp
-    if timestamp is None:
-        return {'status': 'error', 'code': 117, 'message': "timestamp missing"}
+    body = request.body.read()
+    body = json.loads(body)
+    if 'location' and 'user' and 'verify_key' and 'timestamp' in body:
+        location = body['location']
+        email = body['user']
+        verify_key = body['verify_key']
+        timestamp = body['timestamp']
+    else:
+        return {'status': 'error', 'code': 117, 'message': "parameter missing"}
     priority = request.query.priority
     if verify_call(verify_key, timestamp, email, vars.secret_keys['add_order']):
         result, response = order_functions.add_order(email, location, 'email', priority)
@@ -91,11 +99,14 @@ def add_order():
 
 @post('/cancel-order')
 def delete_order():
-    email = request.query.email
-    verify_key = request.query.verify_key
-    timestamp = request.query.timestamp
-    if timestamp is None:
-        return {'status': 'error', 'code': 117, 'message': "timestamp missing"}
+    body = request.body.read()
+    body = json.loads(body)
+    if 'user' and 'verify_key' and 'timestamp' in body:
+        email = body['user']
+        verify_key = body['verify_key']
+        timestamp = body['timestamp']
+    else:
+        return {'status': 'error', 'code': 117, 'message': "parameter missing"}
     if verify_call(verify_key, timestamp, email, vars.secret_keys['cancel_order']):
         if order_functions.delete_oder(email, 'email'):
             return {'status': 'success', 'code': 100, 'message': "order canceled"}
@@ -107,11 +118,14 @@ def delete_order():
 
 @post('/confirm-delivery')
 def confirm_delivery():
-    email = request.query.email
-    verify_key = request.query.verify_key
-    timestamp = request.query.timestamp
-    if timestamp is None:
-        return {'status': 'error', 'code': 117, 'message': "timestamp missing"}
+    body = request.body.read()
+    body = json.loads(body)
+    if 'user' and 'verify_key' and 'timestamp' in body:
+        email = body['user']
+        verify_key = body['verify_key']
+        timestamp = body['timestamp']
+    else:
+        return {'status': 'error', 'code': 117, 'message': "parameter missing"}
     id = slack_functions.get_id_by_email(email)
     index = order_functions.check_user_order(id, email)
     if verify_call(verify_key, timestamp, email, vars.secret_keys['confirm_order']):
@@ -131,17 +145,22 @@ def get_orders():
 
 @post('/toggle-remote-control')
 def toggle_remote_control():
-    status = request.query.status
-    user = request.query.user
-    remote_key = request.query.remote_key
-    verify_key = request.query.verify_key
-    timestamp = request.query.timestamp
-    if timestamp is None:
-        return {'status': 'error', 'code': 117, 'message': "timestamp missing"}
+    body = request.body.read()
+    body = json.loads(body)
+    if 'user' and 'status' in body:
+        user = body['user']
+        status = body['status']
+    else:
+        return {'status': 'error', 'code': 117, 'message': "parameter missing"}
     if user is None:
         return {'status': 'error', 'code': 115, 'message': "user not defined"}
     if status == "enable":
         if system_vars.remote_control is False:
+            if 'timestamp' and 'verify_key' in body:
+                verify_key = body['verify_key']
+                timestamp = body['timestamp']
+            else:
+                return {'status': 'error', 'code': 117, 'message': "parameter missing"}
             if verify_call(verify_key, timestamp, user, vars.secret_keys['enable_remote']):
                 vars.last_command_time = datetime.now().timestamp()
                 vars.security_stopped = False
@@ -161,6 +180,10 @@ def toggle_remote_control():
                     'data': {'user': system_vars.remote_control_user}}
     elif status == "disable":
         if system_vars.remote_control is True:
+            if 'remote_key' in body:
+                remote_key = body['remote_key']
+            else:
+                return {'status': 'error', 'code': 117, 'message': "parameter missing"}
             if system_vars.remote_control_user == user:
                 if vars.remote_control_key == remote_key:
                     system_vars.remote_control = False
@@ -226,29 +249,6 @@ def start():
         httpserver.serve(application, host=settings.ip, port=8000)
 
 
-# #SEND DATA
-# def changed_data_handler():
-#     print(system_vars.colorcode['ok'] + "OK: DATA UPDATE API ONLINE" + system_vars.colorcode[
-#         'reset'])
-#
-#     interface_api_url = "http://beer2d2.berlin"
-#
-#     old_remote_control = system_vars.remote_control
-#     old_orders = order_functions.get_orders()
-#     old_last_barcode = webcam_functions.get_last_barcode()
-#     while True:
-#         if system_vars.remote_control != old_remote_control:
-#             old_remote_control = system_vars.remote_control
-#             send_api_call(interface_api_url + '/update-remote', {'remote_enabled': system_vars.remote_control, 'remote_user': system_vars.remote_control_user}, generate_verification_hash('', vars.secret_keys['update_remote_control_status']))
-#         if order_functions.get_orders() != old_orders:
-#             print('Update Orders')
-#             old_orders = order_functions.get_orders()
-#             send_api_call(interface_api_url + '/update-orders', order_functions.get_orders(), generate_verification_hash('', vars.secret_keys['update_order_list']))
-#         if webcam_functions.get_last_barcode() != old_last_barcode:
-#             old_last_barcode = webcam_functions.get_last_barcode()
-#             send_api_call(interface_api_url + '/update-last-barcode', webcam_functions.get_last_barcode(), generate_verification_hash('', vars.secret_keys['update_last_barcode']))
-#         time.sleep(0.2)
-
 
 def send_order_update_call():
     data_update_thread = Thread(target=send_order_update_call_util, args=(), name="Update Orders Call", daemon=False)
@@ -308,7 +308,6 @@ def verify_call(hash, timestamp, identifier, secret_key):
 
 def generate_verification_hash(identifier, timestamp, secret_key):
     import hashlib
-    from datetime import datetime
     hash = hashlib.sha224((identifier + secret_key + timestamp).encode('UTF-8')).hexdigest()
     return hash
 

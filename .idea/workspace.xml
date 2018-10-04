@@ -1,7 +1,11 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="ChangeListManager">
-    <list default="true" id="994662ca-e502-45b2-80b9-36f7f04e1061" name="Default" comment="" />
+    <list default="true" id="994662ca-e502-45b2-80b9-36f7f04e1061" name="Default" comment="">
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Beer2D2 API.pdf" beforeDir="false" afterPath="$PROJECT_DIR$/Beer2D2 API.pdf" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/RestAPI/api_main.py" beforeDir="false" afterPath="$PROJECT_DIR$/RestAPI/api_main.py" afterDir="false" />
+    </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="TRACKING_ENABLED" value="true" />
     <option name="SHOW_DIALOG" value="false" />
@@ -50,8 +54,8 @@
       <file leaf-file-name="api_main.py" pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/RestAPI/api_main.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="453">
-              <caret line="284" column="19" lean-forward="true" selection-start-line="284" selection-start-column="19" selection-end-line="284" selection-end-column="19" />
+            <state relative-caret-position="-604">
+              <caret line="249" lean-forward="true" selection-start-line="249" selection-end-line="249" />
             </state>
           </provider>
         </entry>
@@ -242,10 +246,10 @@
       </list>
     </option>
   </component>
-  <component name="ProjectFrameBounds" extendedState="7">
-    <option name="x" value="2552" />
+  <component name="ProjectFrameBounds" extendedState="6">
+    <option name="x" value="-8" />
     <option name="y" value="-8" />
-    <option name="width" value="1936" />
+    <option name="width" value="2576" />
     <option name="height" value="1056" />
   </component>
   <component name="ProjectView">
@@ -441,18 +445,18 @@
     <servers />
   </component>
   <component name="ToolWindowManager">
-    <frame x="2552" y="-8" width="1936" height="1056" extended-state="6" />
+    <frame x="-8" y="-8" width="2576" height="1056" extended-state="6" />
     <editor active="true" />
     <layout>
-      <window_info content_ui="combo" id="Project" order="0" visible="true" weight="0.33177084" />
+      <window_info content_ui="combo" id="Project" order="0" visible="true" weight="0.24882813" />
       <window_info anchor="bottom" id="TODO" order="13" />
-      <window_info anchor="bottom" id="Event Log" order="18" sideWeight="0.50677085" side_tool="true" visible="true" weight="0.32624868" />
-      <window_info active="true" anchor="bottom" id="Run" order="4" sideWeight="0.49322918" visible="true" weight="0.32624868" />
+      <window_info anchor="bottom" id="Event Log" order="18" sideWeight="0.509375" side_tool="true" visible="true" weight="0.32624868" />
+      <window_info active="true" anchor="bottom" id="Run" order="4" sideWeight="0.490625" visible="true" weight="0.32624868" />
       <window_info anchor="bottom" id="Version Control" order="17" />
       <window_info anchor="bottom" id="Python Console" order="16" />
       <window_info id="Structure" order="1" side_tool="true" weight="0.25" />
       <window_info anchor="bottom" id="Terminal" order="15" sideWeight="0.4984375" weight="0.38894793" />
-      <window_info anchor="bottom" id="Debug" order="5" sideWeight="0.77760416" weight="0.40488842" />
+      <window_info anchor="bottom" id="Debug" order="5" sideWeight="0.7760417" weight="0.40488842" />
       <window_info id="Favorites" order="2" side_tool="true" />
       <window_info anchor="right" content_ui="combo" id="Hierarchy" order="2" weight="0.25" />
       <window_info anchor="bottom" id="Metrics" order="14" sideWeight="0.4997071" visible="true" weight="0.17031631" />
@@ -476,11 +480,46 @@
           </properties>
         </breakpoint>
       </default-breakpoints>
-      <option name="time" value="1" />
+      <option name="time" value="4" />
     </breakpoint-manager>
   </component>
   <component name="debuggerHistoryManager">
     <expressions id="evaluateExpression">
+      <expression>
+        <expression-string>json.loads(body)</expression-string>
+        <language-id>Python</language-id>
+        <evaluation-mode>EXPRESSION</evaluation-mode>
+      </expression>
+      <expression>
+        <expression-string>json.loads()</expression-string>
+        <language-id>Python</language-id>
+        <evaluation-mode>EXPRESSION</evaluation-mode>
+      </expression>
+      <expression>
+        <expression-string>body.decode('UTF-8')</expression-string>
+        <language-id>Python</language-id>
+        <evaluation-mode>EXPRESSION</evaluation-mode>
+      </expression>
+      <expression>
+        <expression-string>body.json()</expression-string>
+        <language-id>Python</language-id>
+        <evaluation-mode>EXPRESSION</evaluation-mode>
+      </expression>
+      <expression>
+        <expression-string>body.decode('UTF-8').json()</expression-string>
+        <language-id>Python</language-id>
+        <evaluation-mode>EXPRESSION</evaluation-mode>
+      </expression>
+      <expression>
+        <expression-string>json.loads(body.decode('UTF-8'))</expression-string>
+        <language-id>Python</language-id>
+        <evaluation-mode>EXPRESSION</evaluation-mode>
+      </expression>
+      <expression>
+        <expression-string>body.encode('UTF-8')</expression-string>
+        <language-id>Python</language-id>
+        <evaluation-mode>EXPRESSION</evaluation-mode>
+      </expression>
       <expression>
         <expression-string>vars.objects</expression-string>
         <language-id>Python</language-id>
@@ -493,36 +532,6 @@
       </expression>
       <expression>
         <expression-string>vars.screen_data</expression-string>
-        <language-id>Python</language-id>
-        <evaluation-mode>EXPRESSION</evaluation-mode>
-      </expression>
-      <expression>
-        <expression-string>texts</expression-string>
-        <language-id>Python</language-id>
-        <evaluation-mode>EXPRESSION</evaluation-mode>
-      </expression>
-      <expression>
-        <expression-string>touchscreen_functions.set_info_label('test')</expression-string>
-        <language-id>Python</language-id>
-        <evaluation-mode>EXPRESSION</evaluation-mode>
-      </expression>
-      <expression>
-        <expression-string>vars.order_que</expression-string>
-        <language-id>Python</language-id>
-        <evaluation-mode>EXPRESSION</evaluation-mode>
-      </expression>
-      <expression>
-        <expression-string>vars.ready_order_list</expression-string>
-        <language-id>Python</language-id>
-        <evaluation-mode>EXPRESSION</evaluation-mode>
-      </expression>
-      <expression>
-        <expression-string>'confirm_' + str(i + 1)</expression-string>
-        <language-id>Python</language-id>
-        <evaluation-mode>EXPRESSION</evaluation-mode>
-      </expression>
-      <expression>
-        <expression-string>'type' in orders[i]</expression-string>
         <language-id>Python</language-id>
         <evaluation-mode>EXPRESSION</evaluation-mode>
       </expression>
@@ -794,8 +803,8 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/RestAPI/api_main.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="453">
-          <caret line="284" column="19" lean-forward="true" selection-start-line="284" selection-start-column="19" selection-end-line="284" selection-end-column="19" />
+        <state relative-caret-position="-604">
+          <caret line="249" lean-forward="true" selection-start-line="249" selection-end-line="249" />
         </state>
       </provider>
     </entry>
