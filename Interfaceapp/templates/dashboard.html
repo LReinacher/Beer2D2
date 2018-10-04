@@ -11,6 +11,8 @@
     <link rel="stylesheet" type="text/css" href="../../static/css/styles.css" />
     <!--  </Users/leonardtonio/Desktop/beer2/Beer2D2/static/css -->
 
+    {% csrf_token %}
+
     <script>
         function writeText(txt) {
             document.getElementById("desc").innerHTML = txt;
@@ -67,13 +69,14 @@
 
         function addOrder(location) {
             $.ajax({
-                type: "GET",
-                url: "http://127.0.0.1:9000/add-order?location=" + location + "&user=" + user,
-                success: function (data) {
-                    response = data["status"];
-                    message = data["message"];
-                }
-            });
+            "type": "POST",
+            "dataType": "json",
+            "url": "/add-order/",
+            "data": {'user': 'lion.reinacher@gmail.com', 'location': 'Morty', 'csrfmiddlewaretoken': '{{ csrf_token }}'},
+            "success": function(result) {
+                console.log(result);
+            },
+        });
         }
 
         var user = 'leonard.huesgen@code.berlin'
@@ -135,6 +138,10 @@
                 // An error happened.
             });
         }
+
+
+
+
 
     </script>
 </head>

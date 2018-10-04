@@ -26,6 +26,11 @@ urlpatterns = [
     path('api/update-orders', views.update_orders, name='update-orders'),
     path('api/update-remote-control', views.update_orders, name='update-orders'),
     path('api/update-last-barcode', views.update_orders, name='update-orders'),
+    path('add-order/', views.add_order, name='add-order'),
+    path('cancel-order/', views.cancel_order, name='cancel-order'),
+    path('confirm-order/', views.confirm_order, name='confirm-order'),
+    path('enable-remote-control/', views.enable_remote, name='enable-remote-control'),
+    path('disable-remote-control/', views.disable_remote, name='disable-remote-control'),
 ] + static(settings.STATIC_URL, document_root=settings.STATIC_ROOT)
 
 # path('admin/', admin.site.urls),
