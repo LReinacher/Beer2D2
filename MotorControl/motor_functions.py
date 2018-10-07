@@ -69,7 +69,7 @@ def execute_directive(directive, type, custom_duration=None, speed=None):
                 vars.qr_directive_executing = True
             else:
                 stop_after_directive = configuration.stop_after_linetracker_directive
-                print('Speed:' + str(speed))
+                #print('Speed:' + str(speed))
                 if speed == 1:
                     speed_multiplier = configuration.tracking_min_speed / 15
                 elif speed == 2:

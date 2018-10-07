@@ -283,7 +283,10 @@ def send_last_barcode_update_call_util():
 
 def send_api_call(url, data, verify_key, timestamp):
     import requests
-    r = requests.post(url, data={'data': data, 'verify_key': verify_key, 'timestamp': timestamp})
+    try:
+        r = requests.post(url, data={'data': data, 'verify_key': verify_key, 'timestamp': timestamp})
+    except:
+        pass
 
 
 def gen_control_key():

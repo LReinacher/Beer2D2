@@ -128,44 +128,48 @@ def get_ready_order_list():
 
 
 def start_drop_off():
-    import SlackBot.slack_functions as slack_functions
-    import MotorControl.motor_functions as motor_functions
-    import LED.led_functions as led_functions
-    led_functions.set_led('green')
+    if system_vars.destination_reached is False:
+        import SlackBot.slack_functions as slack_functions
+        import MotorControl.motor_functions as motor_functions
+        import LED.led_functions as led_functions
+        led_functions.set_led('green')
+        
+        import RestAPI.api_main as api
+        api.send_last_barcode_update_call()
 
-    system_vars.destination_reached = True
-    motor_functions.stop_both()
+        system_vars.destination_reached = True
+        motor_functions.stop_both()
 
-    orders = get_destination_all_orders(get_current_destination())
-    vars.ready_order_list = orders
-    vars.drop_off_running = True
+        orders = get_destination_all_orders(get_current_destination())
+        vars.ready_order_list = orders
+        vars.drop_off_running = True
 
-    wait_time = calc_order_wait_time()
-    mins, secs = divmod(wait_time, 60)
-    timeformat = '{:02d}:{:02d}'.format(mins, secs)
-    vars.order_countdown = timeformat
+        wait_time = calc_order_wait_time()
+        mins, secs = divmod(wait_time, 60)
+        timeformat = '{:02d}:{:02d}'.format(mins, secs)
+        vars.order_countdown = timeformat
 
-    if settings.touchscreen_enabled:
-        import UI.ui_functions as ui_functions
-        ui_functions.start_drop_off()
+        if settings.touchscreen_enabled:
+            import UI.ui_functions as ui_functions
+            ui_functions.start_drop_off()
 
-    i = 0
-    import SlackBot.responses as responses
-    while i < len(orders):
-        if 'type' in orders[i]:
-            if orders[i]['type'] == 'slack':
-                slack_functions.send_dm(orders[i]['user'], responses.order_ready % vars.order_countdown)
-            else:
-                user_id = slack_functions.get_id_by_email(orders[i]['user'])
-                if user_id is not None:
+        i = 0
+        import SlackBot.responses as responses
+        while i < len(orders):
+            if 'type' in orders[i]:
+                if orders[i]['type'] == 'slack':
                     slack_functions.send_dm(orders[i]['user'], responses.order_ready % vars.order_countdown)
                 else:
-                    import mail_system
-                    mail_system.send_mail(responses.order_ready % vars.order_countdown, responses.order_ready % vars.order_countdown, orders[i]['user'])
-        i = i + 1
+                    user_id = slack_functions.get_id_by_email(orders[i]['user'])
+                    if user_id is not None:
+                        slack_functions.send_dm(orders[i]['user'], responses.order_ready % vars.order_countdown)
+                    else:
+                        import mail_system
+                        mail_system.send_mail(responses.order_ready % vars.order_countdown, responses.order_ready % vars.order_countdown, orders[i]['user'])
+            i = i + 1
 
-    order_countdown(wait_time)
-    end_drop_off()
+        order_countdown(wait_time)
+        end_drop_off()
 
 
 def end_drop_off():
