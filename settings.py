@@ -1,7 +1,7 @@
 #! /usr/bin/python3
 # -*- coding: utf-8 -*-
-ip = "192.168.2.140"
-localhost = True
+ip = "192.168.2.100"
+localhost = False
 gui_enabled = True
 touchscreen_enabled = False
 gpio_enabled = False

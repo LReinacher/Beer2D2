@@ -18,4 +18,4 @@ secret_keys = {'add_order': '45Aa*+=H5Nc_NdLm',
                'update_order_list': 'yYRJ6=P*H9e7x^nA',
                'update_last_barcode': '9qm*YAG#rQJK+fY^'}
 
-interface_api_url = "http://127.0.0.1/api"
+interface_api_url = "http://192.168.2.143:8000/api"
