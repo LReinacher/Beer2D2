@@ -21,13 +21,14 @@ def found_barcode(data):
     print(system_vars.colorcode['info'] + "INFO: BARCODE DETECTED: " + data + system_vars.colorcode['reset'])
     if data == order_functions.get_current_destination():
         vars.last_barcode = data
-        import RestAPI.api_main as api
-        api.send_last_barcode_update_call()
         destination_reached()
     else:
         split_data = data.split("-")
         branch_ident = split_data[0]
-        branch_direct_ident = split_data[1]
+        if len(split_data) > 1:
+            branch_direct_ident = split_data[1]
+        else:
+            branch_direct_ident = None
     
         if branch_ident not in vars.last_barcode:
             vars.last_barcode = branch_ident

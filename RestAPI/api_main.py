@@ -256,7 +256,7 @@ def send_order_update_call():
 
 
 def send_order_update_call_util():
-    send_api_call(vars.interface_api_url + '/update-orders/', json.dumps(order_functions.get_orders()),
+    send_api_call(vars.interface_api_url + '/update-orders', json.dumps(order_functions.get_orders()),
                   generate_verification_hash('', str(datetime.utcnow().timestamp()), vars.secret_keys['update_order_list']), str(datetime.utcnow().timestamp()))
 
 
@@ -266,7 +266,7 @@ def send_remote_control_update_call():
 
 
 def send_remote_control_update_call_util():
-    send_api_call(vars.interface_api_url + '/update-remote-control/',
+    send_api_call(vars.interface_api_url + '/update-remote-control',
                   json.dumps({'remote_enabled': system_vars.remote_control, 'remote_user': system_vars.remote_control_user}),
                   generate_verification_hash('', str(datetime.utcnow().timestamp()), vars.secret_keys['update_remote_control_status']), str(datetime.utcnow().timestamp()))
 
@@ -277,14 +277,16 @@ def send_last_barcode_update_call():
 
 
 def send_last_barcode_update_call_util():
-    send_api_call(vars.interface_api_url + '/update-last-barcode/', webcam_functions.get_last_barcode(),
+    send_api_call(vars.interface_api_url + '/update-last-barcode', webcam_functions.get_last_barcode(),
                   generate_verification_hash('', str(datetime.utcnow().timestamp()), vars.secret_keys['update_last_barcode']), str(datetime.utcnow().timestamp()))
 
 
 def send_api_call(url, data, verify_key, timestamp):
     import requests
-    r = requests.post(url, data={'data': data, 'verify_key': verify_key, 'timestamp': timestamp})
-    print(r)
+    try:
+        r = requests.post(url, data={'data': data, 'verify_key': verify_key, 'timestamp': timestamp})
+    except:
+        pass
 
 
 def gen_control_key():
